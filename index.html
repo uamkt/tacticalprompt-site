@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>TacticalPrompt — AI Tactical Prompt Blueprint Marketplace</title>
+<meta name="description" content="Military-grade AI prompt blueprints for CBRN, CAS, Intel, Cyber & Logistics. Match your mission brief to expert-designed prompt architectures. Built for GenAI.mil operators.">
+<meta name="theme-color" content="#3B82F6">
+<meta property="og:title" content="TacticalPrompt — AI Tactical Prompt Blueprint Marketplace">
+<meta property="og:description" content="Match your mission brief to expert-designed AI prompt blueprints. Built for defense & military operators.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tacticalprompt.com">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tacticalprompt.com">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3af;</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080b12;--bg2:#0B1120;--card:#111827;--card2:#1a2236;
+  --border:rgba(148,163,184,.08);--borderL:rgba(148,163,184,.15);
+  --blue:#3B82F6;--blueL:#60A5FA;--cyan:#06B6D4;--violet:#8B5CF6;
+  --amber:#F59E0B;--emerald:#10B981;--rose:#F43F5E;
+  --text:#F1F5F9;--muted:#94A3B8;--dim:#64748B;
+  --font:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --max:1200px
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:var(--blueL);text-decoration:none;transition:.2s}
+a:hover{color:var(--cyan)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.nav-logo{font-weight:900;font-size:1.1em;letter-spacing:3px;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:.85em;font-weight:600;letter-spacing:.5px}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:700;font-size:.8em;letter-spacing:.5px}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,.4)}
+.nav-menu{display:none;cursor:pointer;color:var(--muted);font-size:1.5em}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.08),transparent 70%);pointer-events:none}
+.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:4px 16px;font-size:.75em;color:var(--blueL);margin-bottom:20px;font-weight:600}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:3.5em;font-weight:900;line-height:1.08;margin-bottom:16px;letter-spacing:-1px}
+.hero h1 .grad{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-desc{font-size:1.1em;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:500px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff;padding:14px 28px;border-radius:12px;font-weight:700;font-size:.95em;letter-spacing:.5px;border:none;cursor:pointer;transition:.2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,.3);color:#fff}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--borderL);color:var(--text);padding:14px 28px;border-radius:12px;font-weight:700;font-size:.95em;cursor:pointer;transition:.2s}
+.btn-secondary:hover{border-color:var(--blue);color:var(--blueL)}
+.hero-visual{position:relative}
+.hero-card{background:var(--card);border:1px solid var(--borderL);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--rose),var(--violet))}
+.hc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.hc-title{font-size:.75em;font-weight:800;letter-spacing:2px;color:var(--amber);font-family:var(--mono)}
+.hc-badge{font-size:.65em;padding:3px 10px;border-radius:6px;background:rgba(16,185,129,.12);color:var(--emerald);font-weight:700}
+.hc-name{font-size:1.2em;font-weight:800;margin-bottom:4px}
+.hc-desc{font-size:.85em;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.hc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.hc-tag{font-size:.7em;padding:3px 10px;border-radius:6px;font-weight:600;letter-spacing:.5px}
+.hc-tag.cbrn{background:rgba(245,158,11,.1);color:var(--amber)}
+.hc-tag.mil{background:rgba(139,92,246,.1);color:var(--violet)}
+.hc-tag.ai{background:rgba(6,182,212,.1);color:var(--cyan)}
+.hc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.hc-stat{background:var(--bg2);border-radius:8px;padding:10px;text-align:center}
+.hc-stat-val{font-size:1em;font-weight:800;font-family:var(--mono);color:var(--blueL)}
+.hc-stat-label{font-size:.6em;color:var(--dim);letter-spacing:.5px;margin-top:2px}
+.hero-float{position:absolute;background:var(--card2);border:1px solid var(--borderL);border-radius:10px;padding:10px 14px;font-size:.75em;display:flex;align-items:center;gap:8px;animation:float 3s ease-in-out infinite}
+.hero-float.f1{top:-10px;right:20px;animation-delay:0s}
+.hero-float.f2{bottom:30px;left:-20px;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-float .emoji{font-size:1.2em}
+
+/* FLOW SECTION */
+.section{padding:100px 24px}
+.section-inner{max-width:var(--max);margin:0 auto}
+.section-label{font-size:.75em;font-weight:700;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-size:2.4em;font-weight:900;margin-bottom:12px;letter-spacing:-0.5px}
+.section-desc{font-size:1.05em;color:var(--muted);max-width:600px;margin-bottom:48px}
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.flow-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;transition:.3s;cursor:default}
+.flow-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.flow-step{position:absolute;top:16px;right:16px;font-size:.65em;font-weight:800;color:var(--dim);font-family:var(--mono);letter-spacing:2px}
+.flow-icon{font-size:2em;margin-bottom:12px}
+.flow-name{font-size:1.1em;font-weight:800;margin-bottom:8px}
+.flow-desc{font-size:.85em;color:var(--muted);line-height:1.6}
+.flow-time{font-size:.7em;color:var(--dim);margin-top:10px;font-family:var(--mono)}
+
+/* BLUEPRINTS SECTION */
+.blueprints-bg{background:var(--bg2)}
+.bp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:.3s}
+.bp-card:hover{border-color:var(--amber);transform:translateY(-4px)}
+.bp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.bp-card.bp-cbrn::before{background:linear-gradient(90deg,var(--amber),var(--rose))}
+.bp-card.bp-intel::before{background:linear-gradient(90deg,var(--violet),var(--blue))}
+.bp-card.bp-cyber::before{background:linear-gradient(90deg,var(--cyan),var(--emerald))}
+.bp-card.bp-cas::before{background:linear-gradient(90deg,var(--rose),var(--amber))}
+.bp-card.bp-log::before{background:linear-gradient(90deg,var(--emerald),var(--cyan))}
+.bp-card.bp-nuke::before{background:linear-gradient(90deg,var(--rose),var(--violet))}
+.bp-num{font-size:.65em;font-weight:800;color:var(--amber);letter-spacing:2px;font-family:var(--mono);margin-bottom:6px}
+.bp-title{font-size:.95em;font-weight:700;margin-bottom:6px}
+.bp-desc{font-size:.78em;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.bp-meta{display:flex;justify-content:space-between;align-items:center}
+.bp-price{font-size:.9em;font-weight:800;color:var(--emerald);font-family:var(--mono)}
+.bp-tier{font-size:.6em;padding:2px 8px;border-radius:4px;background:rgba(139,92,246,.1);color:var(--violet);font-weight:700;letter-spacing:.5px}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;transition:.3s;position:relative}
+.price-card.featured{border-color:var(--blue);box-shadow:0 0 60px rgba(59,130,246,.1)}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-size:.65em;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:1px}
+.price-name{font-size:1.3em;font-weight:800;margin-bottom:4px}
+.price-amount{font-size:2.5em;font-weight:900;font-family:var(--mono);margin:16px 0 4px}
+.price-amount .currency{font-size:.4em;color:var(--dim);vertical-align:super}
+.price-amount .period{font-size:.3em;color:var(--dim);font-weight:400}
+.price-desc{font-size:.8em;color:var(--dim);margin-bottom:20px}
+.price-features{list-style:none;text-align:left;margin-bottom:24px}
+.price-features li{font-size:.85em;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.price-features li .check{color:var(--emerald);font-weight:bold}
+.price-btn{display:block;width:100%;padding:14px;border-radius:10px;font-weight:700;font-size:.9em;border:none;cursor:pointer;transition:.2s;letter-spacing:.5px}
+.price-btn.primary{background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff}
+.price-btn.secondary{background:var(--bg2);border:1px solid var(--borderL);color:var(--text)}
+.price-btn:hover{transform:translateY(-2px)}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.05));border-top:1px solid rgba(59,130,246,.1);border-bottom:1px solid rgba(59,130,246,.1)}
+.cta-inner{text-align:center;max-width:700px;margin:0 auto}
+.cta-inner h2{font-size:2.2em;font-weight:900;margin-bottom:16px}
+.cta-inner p{font-size:1.05em;color:var(--muted);margin-bottom:32px}
+
+/* FOOTER */
+footer{padding:60px 24px;border-top:1px solid var(--border)}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand{font-weight:900;font-size:1.1em;letter-spacing:3px;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.footer-desc{font-size:.85em;color:var(--dim);line-height:1.6;max-width:300px}
+.footer-col h4{font-size:.75em;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:16px;text-transform:uppercase}
+.footer-col a{display:block;font-size:.85em;color:var(--dim);margin-bottom:10px}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{max-width:var(--max);margin:32px auto 0;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.8em;color:var(--dim)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero h1{font-size:2.5em}
+  .hero-desc{margin:0 auto 32px}
+  .hero-actions{justify-content:center}
+  .hero-visual{display:none}
+  .flow-grid,.bp-grid,.pricing-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-menu{display:block}
+  .section-title{font-size:1.8em}
+}
+@media(max-width:600px){
+  .hero h1{font-size:2em}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">TACTICALPROMPT</div>
+    <div class="nav-links">
+      <a href="#flow">How It Works</a>
+      <a href="#arsenal">Arsenal</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://cbrntactical.blogspot.com" target="_blank">Blog</a>
+      <a href="#cta" class="nav-cta">START MISSION BRIEF</a>
+    </div>
+    <div class="nav-menu" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">&#9776;</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> Now serving GenAI.mil operators</div>
+      <h1>Match Your Mission.<br><span class="grad">Fire Your Prompt.</span></h1>
+      <p class="hero-desc">Military-grade AI prompt blueprints designed by tactical prompt engineers. From CBRN analysis to CAS planning &mdash; find, test, and deploy the right prompt architecture for your mission.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">&#127919; Start Mission Brief</a>
+        <a href="#arsenal" class="btn-secondary">&#128218; Browse Arsenal</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hc-header">
+          <span class="hc-title">TPE-001</span>
+          <span class="hc-badge">VERIFIED</span>
+        </div>
+        <div class="hc-name">CBRN Contamination Classifier</div>
+        <div class="hc-desc">AI-driven chemical/biological agent classification system with NATO STANAG 2103 compliance and real-time threat assessment.</div>
+        <div class="hc-tags">
+          <span class="hc-tag cbrn">CBRN</span>
+          <span class="hc-tag mil">FM 3-11</span>
+          <span class="hc-tag ai">Claude 3.5</span>
+        </div>
+        <div class="hc-stats">
+          <div class="hc-stat"><div class="hc-stat-val">4.9</div><div class="hc-stat-label">RATING</div></div>
+          <div class="hc-stat"><div class="hc-stat-val">2.4K</div><div class="hc-stat-label">FIRES</div></div>
+          <div class="hc-stat"><div class="hc-stat-val">$29</div><div class="hc-stat-label">PRICE</div></div>
+        </div>
+      </div>
+      <div class="hero-float f1"><span class="emoji">&#9889;</span> <span style="color:var(--emerald);font-weight:700">Live Fire</span>&nbsp;ready</div>
+      <div class="hero-float f2"><span class="emoji">&#127919;</span> <span style="color:var(--amber);font-weight:700">128</span>&nbsp;Blueprints</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="flow">
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <div class="section-title">Mission Brief &#8594; AI Briefing &#8594; Fire</div>
+    <p class="section-desc">Six steps from mission requirement to deployed AI output. No prompt engineering experience required.</p>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <span class="flow-step">S1</span>
+        <div class="flow-icon">&#128203;</div>
+        <div class="flow-name">Mission Brief</div>
+        <div class="flow-desc">Select your domain, mission type, and urgency. Add a free-text description of your operational need.</div>
+        <div class="flow-time">~ 30 seconds</div>
+      </div>
+      <div class="flow-card">
+        <span class="flow-step">S2</span>
+        <div class="flow-icon">&#129302;</div>
+        <div class="flow-name">AI Briefing</div>
+        <div class="flow-desc">Semantic matching engine recommends 3-5 optimal blueprints based on your mission parameters.</div>
+        <div class="flow-time">~ 5 seconds</div>
+      </div>
+      <div class="flow-card">
+        <span class="flow-step">S3</span>
+        <div class="flow-icon">&#128270;</div>
+        <div class="flow-name">Dry Fire</div>
+        <div class="flow-desc">Review blueprint structure, variables, doctrine tags, and example outputs. Unlimited and free.</div>
+        <div class="flow-time">Unlimited &middot; Free</div>
+      </div>
+      <div class="flow-card">
+        <span class="flow-step">S4</span>
+        <div class="flow-icon">&#128293;</div>
+        <div class="flow-name">Live Fire</div>
+        <div class="flow-desc">Execute the blueprint with Claude API in our sandbox. See 50% of the output as a preview.</div>
+        <div class="flow-time">1 free per blueprint</div>
+      </div>
+      <div class="flow-card">
+        <span class="flow-step">S5</span>
+        <div class="flow-icon">&#128176;</div>
+        <div class="flow-name">Purchase</div>
+        <div class="flow-desc">Buy the full blueprint package. Get complete prompt architecture, all variables, and unlimited Live Fires.</div>
+        <div class="flow-time">From $29</div>
+      </div>
+      <div class="flow-card">
+        <span class="flow-step">S6</span>
+        <div class="flow-icon">&#127942;</div>
+        <div class="flow-name">Execute</div>
+        <div class="flow-desc">Deploy on GenAI.mil, Claude, or any LLM. Rate and review to help the community.</div>
+        <div class="flow-time">Mission Complete</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARSENAL -->
+<section class="section blueprints-bg" id="arsenal">
+  <div class="section-inner">
+    <div class="section-label">Browse Arsenal</div>
+    <div class="section-title">Tactical Prompt Blueprints</div>
+    <p class="section-desc">Expert-designed prompt architectures for military and defense AI operations. Each blueprint is verified by domain specialists.</p>
+    <div class="bp-grid">
+      <div class="bp-card bp-cbrn">
+        <div class="bp-num">TPE-001</div>
+        <div class="bp-title">CBRN Contamination Classifier</div>
+        <div class="bp-desc">AI-driven agent classification with NATO STANAG 2103 compliance and D-M-D-A-V protocol mapping.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+      </div>
+      <div class="bp-card bp-intel">
+        <div class="bp-num">TPE-002</div>
+        <div class="bp-title">Multi-Domain C4I Fusion Analyst</div>
+        <div class="bp-desc">Cross-domain intelligence fusion for joint operations. SIGINT/HUMINT/OSINT correlation engine.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">OPERATIONAL</span></div>
+      </div>
+      <div class="bp-card bp-nuke">
+        <div class="bp-num">TPE-003</div>
+        <div class="bp-title">Nuclear Fallout Dispersion Modeler</div>
+        <div class="bp-desc">Atmospheric dispersion modeling for nuclear/radiological events with evacuation zone recommendations.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">STRATEGIC</span></div>
+      </div>
+      <div class="bp-card bp-cyber">
+        <div class="bp-num">TPE-004</div>
+        <div class="bp-title">Chemical Warfare Defense Planner</div>
+        <div class="bp-desc">Protective posture optimization and decontamination sequence planning for CW scenarios.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+      </div>
+      <div class="bp-card bp-cas">
+        <div class="bp-num">TPE-005</div>
+        <div class="bp-title">Radiological Source Tracker</div>
+        <div class="bp-desc">Orphan source detection and tracking with dose rate mapping and exposure risk assessment.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">OPERATIONAL</span></div>
+      </div>
+      <div class="bp-card bp-log">
+        <div class="bp-num">TPE-006</div>
+        <div class="bp-title">Biological Threat Rapid Assessor</div>
+        <div class="bp-desc">Pathogen identification, transmission modeling, and medical countermeasure recommendation engine.</div>
+        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Choose Your Clearance Level</div>
+    <p class="section-desc">Start free. Upgrade when your mission demands it.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount"><span class="currency">$</span>0<span class="period"></span></div>
+        <div class="price-desc">Get started with the basics</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> Unlimited Mission Briefs</li>
+          <li><span class="check">&#10003;</span> Unlimited Dry Fire (structure view)</li>
+          <li><span class="check">&#10003;</span> 1 Live Fire per blueprint</li>
+          <li><span class="check">&#10003;</span> AI matching recommendations</li>
+          <li><span class="check">&#10003;</span> Community reviews access</li>
+        </ul>
+        <button class="price-btn secondary">Get Started Free</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-amount"><span class="currency">$</span>19<span class="period">.99/mo</span></div>
+        <div class="price-desc">For serious operators</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> Everything in Free</li>
+          <li><span class="check">&#10003;</span> 20 Live Fires per month</li>
+          <li><span class="check">&#10003;</span> Sonnet 4.6 model access</li>
+          <li><span class="check">&#10003;</span> Priority AI matching</li>
+          <li><span class="check">&#10003;</span> Doctrine badge system</li>
+          <li><span class="check">&#10003;</span> Export to GenAI.mil format</li>
+        </ul>
+        <button class="price-btn primary">Subscribe to Pro</button>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount"><span class="currency">$</span>Custom<span class="period"></span></div>
+        <div class="price-desc">For units &amp; organizations</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> Everything in Pro</li>
+          <li><span class="check">&#10003;</span> Unlimited Live Fires</li>
+          <li><span class="check">&#10003;</span> Custom blueprint development</li>
+          <li><span class="check">&#10003;</span> Team management &amp; SSO</li>
+          <li><span class="check">&#10003;</span> Dedicated TPE consultant</li>
+          <li><span class="check">&#10003;</span> SLA &amp; priority support</li>
+        </ul>
+        <button class="price-btn secondary">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMY BANNER -->
+<section class="section" style="padding:60px 24px;background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(6,182,212,.04));border-top:1px solid rgba(16,185,129,.1);border-bottom:1px solid rgba(16,185,129,.1)">
+  <div class="section-inner" style="text-align:center">
+    <div style="font-size:2em;margin-bottom:12px">&#127891;</div>
+    <h3 style="font-size:1.5em;font-weight:800;margin-bottom:8px">Academy Program</h3>
+    <p style="color:var(--muted);max-width:600px;margin:0 auto 20px;font-size:.95em">Military academy students and .mil/.edu email holders get <strong style="color:var(--emerald)">12 months of Pro access free</strong>. Preparing the next generation of tactical prompt engineers.</p>
+    <a href="#cta" class="btn-primary" style="display:inline-flex">&#127891; Apply with .mil/.edu Email</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="cta">
+  <div class="cta-inner">
+    <div style="font-size:2.5em;margin-bottom:16px">&#127919;</div>
+    <h2>Ready to Fire?</h2>
+    <p>Start your Mission Brief now. Match with the perfect blueprint in seconds. No credit card required.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="https://gumroad.com/tacticalprompt" target="_blank" class="btn-primary" style="display:inline-flex">&#128293; Browse on Gumroad</a>
+      <a href="https://cbrntactical.blogspot.com" target="_blank" class="btn-secondary" style="display:inline-flex">&#128214; Read Tactical Blog</a>
+    </div>
+    <p style="font-size:.8em;color:var(--dim);margin-top:24px;font-family:var(--mono)">Trusted by defense professionals. Powered by Claude AI.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">TACTICALPROMPT</div>
+      <p class="footer-desc">AI Tactical Prompt Blueprint Marketplace. Designed for military and defense AI operators. A UAM KoreaTech product.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#flow">How It Works</a>
+      <a href="#arsenal">Arsenal</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://cbrntactical.blogspot.com" target="_blank">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="https://cbrntactical.blogspot.com/p/terms-of-service.html" target="_blank">Terms of Service</a>
+      <a href="https://cbrntactical.blogspot.com/p/privacy-policy.html" target="_blank">Privacy Policy</a>
+      <a href="#">API Docs</a>
+      <a href="#">TPE Application</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">UAM KoreaTech</a>
+      <a href="#">Contact</a>
+      <a href="https://www.linkedin.com/company/uamkoreatech" target="_blank">LinkedIn</a>
+      <a href="#">Careers</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 UAM KoreaTech. All rights reserved.</span>
+    <span style="font-family:var(--mono);font-size:.75em">Patent Pending: KR 10-2025-XXXXXXX</span>
+  </div>
+</footer>
+
+</body>
+</html>
