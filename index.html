@@ -1,483 +1,1085 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <!-- Google tag (gtag.js) - GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SNXXG5VML4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SNXXG5VML4');
-    </script>
-    <meta name="google-site-verification" content="jYC6vjCtPCBContCXakN77YJwHuPBeuUYNKSUeNrtL4" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
-<title>TacticalPrompt â AI Tactical Prompt Blueprint Marketplace</title>
-<meta name="description" content="Military-grade AI prompt blueprints for CBRN, CAS, Intel, Cyber & Logistics. Match your mission brief to expert-designed prompt architectures. Built for GenAI.mil operators.">
-<meta name="theme-color" content="#3B82F6">
-<meta property="og:title" content="TacticalPrompt â AI Tactical Prompt Blueprint Marketplace">
-<meta property="og:description" content="Match your mission brief to expert-designed AI prompt blueprints. Built for defense & military operators.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://tacticalprompt.com">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://tacticalprompt.com">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3af;</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <meta name="keywords" content="CBRN defense AI, tactical prompt engineering, military AI prompts, defense technology, chemical biological radiological nuclear, AI prompt marketplace, military intelligence AI, tactical AI blueprints, defense prompt architecture, CBRN detection AI">
-    <meta name="author" content="PARK MOOJIN — CEO & Founder, UAM KoreaTech | CBRN-CADS Creator | Tactical Prompt Engineer">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta property="og:image" content="https://tacticalprompt.com/og-image.png">
-    <meta property="og:site_name" content="TacticalPrompt">
-    <meta property="og:locale" content="en_US">
-    <meta name="twitter:title" content="TacticalPrompt - AI Tactical Prompt Blueprint Marketplace">
-    <meta name="twitter:description" content="Military-grade AI prompt blueprints for CBRN, CAS, Intel, Cyber & Logistics.">
-    <meta name="twitter:image" content="https://tacticalprompt.com/og-image.png">
-    <meta name="twitter:site" content="@UamKoreaTech">
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "TacticalPrompt",
-      "url": "https://tacticalprompt.com",
-      "description": "Military-grade AI prompt blueprints for CBRN, CAS, Intel, Cyber & Logistics.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "UAM KoreaTech",
-        "url": "https://tacticalprompt.com"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://tacticalprompt.com/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TacticalPrompt — FOLLOW ME | 전술 브리핑·육성 지휘 AI 플랫폼</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#080b12;--bg2:#0B1120;--card:#111827;--card2:#1a2236;
-  --border:rgba(148,163,184,.08);--borderL:rgba(148,163,184,.15);
-  --blue:#3B82F6;--blueL:#60A5FA;--cyan:#06B6D4;--violet:#8B5CF6;
-  --amber:#F59E0B;--emerald:#10B981;--rose:#F43F5E;
-  --text:#F1F5F9;--muted:#94A3B8;--dim:#64748B;
-  --font:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
-  --max:1200px
+  --bg:#06080f;--bg2:#0a0f1a;--card:#0f1825;--card2:#141e2e;--border:rgba(255,255,255,.08);
+  --txt:#e8eef5;--sub:#7a96b0;--sub2:#9fb8cc;
+  --red:#dc2626;--red2:#ef4444;--red3:#fca5a5;
+  --gold:#c9a84c;--gold2:#f0d080;--gold3:#92400e;
+  --grn:#16a34a;--grn2:#22c55e;--grn3:#4ade80;
+  --teal:#0891b2;--blue:#2563eb;--purple:#7c3aed;
+  --grd-fm:linear-gradient(135deg,#dc2626 0%,#c9a84c 45%,#16a34a 100%);
+  --grd-red:linear-gradient(135deg,#7f1d1d,#dc2626);
+  --grd-gold:linear-gradient(135deg,#92400e,#c9a84c,#f0d080);
+  --grd-grn:linear-gradient(135deg,#14532d,#16a34a,#22c55e);
+  --grd-mil:linear-gradient(135deg,#1a2c1a,#0a1628);
 }
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-a{color:var(--blueL);text-decoration:none;transition:.2s}
-a:hover{color:var(--cyan)}
+body{font-family:'Noto Sans KR','Segoe UI',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;font-size:15px}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
-.nav-logo{font-weight:900;font-size:1.1em;letter-spacing:3px;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{color:var(--muted);font-size:.85em;font-weight:600;letter-spacing:.5px}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:700;font-size:.8em;letter-spacing:.5px}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,.4)}
-.nav-menu{display:none;cursor:pointer;color:var(--muted);font-size:1.5em}
+/* ── NAV ── */
+.nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(6,8,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(220,38,38,.2);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{cursor:pointer;display:flex;align-items:center;gap:0}
+.nav-brand{background:var(--grd-fm);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.2rem;font-weight:900;letter-spacing:-.3px}
+.nav-tagline{font-size:.65rem;color:var(--gold);font-weight:800;letter-spacing:2.5px;margin-top:1px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nl{padding:8px 13px;color:var(--sub);font-size:.79rem;font-weight:600;text-decoration:none;border-radius:6px;transition:.2s;cursor:pointer;background:none;border:none;font-family:inherit}
+.nl:hover{color:var(--txt);background:rgba(255,255,255,.05)}
+/* nl-cadet removed — Academy Program modal replaces inline cadet section */
+.nav-right{display:flex;gap:8px}
+.nav-btn{padding:8px 18px;border-radius:8px;font-size:.78rem;font-weight:800;cursor:pointer;transition:.2s;font-family:inherit;border:none}
+.nb-line{background:transparent;color:var(--sub2);border:1px solid rgba(255,255,255,.18)}
+.nb-line:hover{background:rgba(255,255,255,.06)}
+.nb-cta{background:var(--grd-fm);color:#fff}
+.nb-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(220,38,38,.3)}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 24px 80px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.08),transparent 70%);pointer-events:none}
-.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:4px 16px;font-size:.75em;color:var(--blueL);margin-bottom:20px;font-weight:600}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:3.5em;font-weight:900;line-height:1.08;margin-bottom:16px;letter-spacing:-1px}
-.hero h1 .grad{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-desc{font-size:1.1em;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:500px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff;padding:14px 28px;border-radius:12px;font-weight:700;font-size:.95em;letter-spacing:.5px;border:none;cursor:pointer;transition:.2s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,.3);color:#fff}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--borderL);color:var(--text);padding:14px 28px;border-radius:12px;font-weight:700;font-size:.95em;cursor:pointer;transition:.2s}
-.btn-secondary:hover{border-color:var(--blue);color:var(--blueL)}
-.hero-visual{position:relative}
-.hero-card{background:var(--card);border:1px solid var(--borderL);border-radius:16px;padding:24px;position:relative;overflow:hidden}
-.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--rose),var(--violet))}
-.hc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.hc-title{font-size:.75em;font-weight:800;letter-spacing:2px;color:var(--amber);font-family:var(--mono)}
-.hc-badge{font-size:.65em;padding:3px 10px;border-radius:6px;background:rgba(16,185,129,.12);color:var(--emerald);font-weight:700}
-.hc-name{font-size:1.2em;font-weight:800;margin-bottom:4px}
-.hc-desc{font-size:.85em;color:var(--muted);margin-bottom:16px;line-height:1.5}
-.hc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.hc-tag{font-size:.7em;padding:3px 10px;border-radius:6px;font-weight:600;letter-spacing:.5px}
-.hc-tag.cbrn{background:rgba(245,158,11,.1);color:var(--amber)}
-.hc-tag.mil{background:rgba(139,92,246,.1);color:var(--violet)}
-.hc-tag.ai{background:rgba(6,182,212,.1);color:var(--cyan)}
-.hc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.hc-stat{background:var(--bg2);border-radius:8px;padding:10px;text-align:center}
-.hc-stat-val{font-size:1em;font-weight:800;font-family:var(--mono);color:var(--blueL)}
-.hc-stat-label{font-size:.6em;color:var(--dim);letter-spacing:.5px;margin-top:2px}
-.hero-float{position:absolute;background:var(--card2);border:1px solid var(--borderL);border-radius:10px;padding:10px 14px;font-size:.75em;display:flex;align-items:center;gap:8px;animation:float 3s ease-in-out infinite}
-.hero-float.f1{top:-10px;right:20px;animation-delay:0s}
-.hero-float.f2{bottom:30px;left:-20px;animation-delay:1.5s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.hero-float .emoji{font-size:1.2em}
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:88px 24px 56px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(120,20,20,.25) 0%,transparent 70%),linear-gradient(180deg,#06080f 0%,#0a0c14 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(220,38,38,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(220,38,38,.04) 1px,transparent 1px);background-size:60px 60px;opacity:.6}
+.hero-inner{position:relative;z-index:1;max-width:920px}
+.hero-eyebrow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.he-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.8px}
+.het-red{background:rgba(220,38,38,.14);border:1px solid rgba(220,38,38,.35);color:var(--red2)}
+.het-gold{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold2)}
+.het-grn{background:rgba(22,163,74,.12);border:1px solid rgba(22,163,74,.3);color:var(--grn3)}
+.dot{width:6px;height:6px;border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+.dot-red{background:var(--red2)}.dot-grn{background:var(--grn3)}.dot-gold{background:var(--gold2)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-title{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;line-height:1.12;margin-bottom:10px;letter-spacing:-.5px}
+.hl-fm{background:var(--grd-fm);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hl-wh{color:#fff}
+.hero-sub-title{font-size:clamp(1.1rem,2.2vw,1.45rem);color:var(--gold2);font-weight:700;letter-spacing:1px;margin-bottom:22px}
+.hero-desc{font-size:1rem;color:var(--sub2);max-width:680px;margin:0 auto 36px;line-height:1.9}
+.hero-desc strong{color:var(--txt)}
 
-/* FLOW SECTION */
-.section{padding:100px 24px}
-.section-inner{max-width:var(--max);margin:0 auto}
-.section-label{font-size:.75em;font-weight:700;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:8px}
-.section-title{font-size:2.4em;font-weight:900;margin-bottom:12px;letter-spacing:-0.5px}
-.section-desc{font-size:1.05em;color:var(--muted);max-width:600px;margin-bottom:48px}
-.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.flow-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;transition:.3s;cursor:default}
-.flow-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.flow-step{position:absolute;top:16px;right:16px;font-size:.65em;font-weight:800;color:var(--dim);font-family:var(--mono);letter-spacing:2px}
-.flow-icon{font-size:2em;margin-bottom:12px}
-.flow-name{font-size:1.1em;font-weight:800;margin-bottom:8px}
-.flow-desc{font-size:.85em;color:var(--muted);line-height:1.6}
-.flow-time{font-size:.7em;color:var(--dim);margin-top:10px;font-family:var(--mono)}
+/* HERO DUAL CTA */
+.hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:0 auto 48px}
+.hcta{border-radius:14px;padding:20px 24px;cursor:pointer;transition:.3s;border:none;font-family:inherit;text-align:left;position:relative;overflow:hidden}
+.hcta-mil{background:linear-gradient(135deg,#0e1f0e,#162616);border:1.5px solid rgba(22,163,74,.4)}
+.hcta-mil:hover{border-color:rgba(74,222,128,.6);transform:translateY(-3px);box-shadow:0 12px 40px rgba(22,163,74,.15)}
+.hcta-game{background:linear-gradient(135deg,#1a0a0a,#1a1428);border:1.5px solid rgba(220,38,38,.35)}
+.hcta-game:hover{border-color:rgba(220,38,38,.7);transform:translateY(-3px);box-shadow:0 12px 40px rgba(220,38,38,.15)}
+.hcta-label{font-size:.68rem;font-weight:800;letter-spacing:2px;margin-bottom:8px;display:block}
+.hcta-mil .hcta-label{color:var(--grn3)}
+.hcta-game .hcta-label{color:var(--red2)}
+.hcta h3{font-size:1rem;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.3}
+.hcta p{font-size:.78rem;color:var(--sub);line-height:1.6}
+.hcta-arrow{position:absolute;right:18px;bottom:18px;font-size:.85rem;opacity:.5}
 
-/* BLUEPRINTS SECTION */
-.blueprints-bg{background:var(--bg2)}
-.bp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.bp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:.3s}
-.bp-card:hover{border-color:var(--amber);transform:translateY(-4px)}
-.bp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
-.bp-card.bp-cbrn::before{background:linear-gradient(90deg,var(--amber),var(--rose))}
-.bp-card.bp-intel::before{background:linear-gradient(90deg,var(--violet),var(--blue))}
-.bp-card.bp-cyber::before{background:linear-gradient(90deg,var(--cyan),var(--emerald))}
-.bp-card.bp-cas::before{background:linear-gradient(90deg,var(--rose),var(--amber))}
-.bp-card.bp-log::before{background:linear-gradient(90deg,var(--emerald),var(--cyan))}
-.bp-card.bp-nuke::before{background:linear-gradient(90deg,var(--rose),var(--violet))}
-.bp-num{font-size:.65em;font-weight:800;color:var(--amber);letter-spacing:2px;font-family:var(--mono);margin-bottom:6px}
-.bp-title{font-size:.95em;font-weight:700;margin-bottom:6px}
-.bp-desc{font-size:.78em;color:var(--muted);line-height:1.5;margin-bottom:10px}
-.bp-meta{display:flex;justify-content:space-between;align-items:center}
-.bp-price{font-size:.9em;font-weight:800;color:var(--emerald);font-family:var(--mono)}
-.bp-tier{font-size:.6em;padding:2px 8px;border-radius:4px;background:rgba(139,92,246,.1);color:var(--violet);font-weight:700;letter-spacing:.5px}
+/* HERO DOCTRINE STRIP */
+.doctrine-strip{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.doc-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:8px 16px;border-radius:10px;font-size:.76rem;font-weight:700}
+.doc-badge .di{font-size:.9rem;color:var(--gold)}
 
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;transition:.3s;position:relative}
-.price-card.featured{border-color:var(--blue);box-shadow:0 0 60px rgba(59,130,246,.1)}
-.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-size:.65em;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:1px}
-.price-name{font-size:1.3em;font-weight:800;margin-bottom:4px}
-.price-amount{font-size:2.5em;font-weight:900;font-family:var(--mono);margin:16px 0 4px}
-.price-amount .currency{font-size:.4em;color:var(--dim);vertical-align:super}
-.price-amount .period{font-size:.3em;color:var(--dim);font-weight:400}
-.price-desc{font-size:.8em;color:var(--dim);margin-bottom:20px}
-.price-features{list-style:none;text-align:left;margin-bottom:24px}
-.price-features li{font-size:.85em;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.price-features li .check{color:var(--emerald);font-weight:bold}
-.price-btn{display:block;width:100%;padding:14px;border-radius:10px;font-weight:700;font-size:.9em;border:none;cursor:pointer;transition:.2s;letter-spacing:.5px}
-.price-btn.primary{background:linear-gradient(135deg,var(--blue),#2563EB);color:#fff}
-.price-btn.secondary{background:var(--bg2);border:1px solid var(--borderL);color:var(--text)}
-.price-btn:hover{transform:translateY(-2px)}
+/* ── OUTPUT 3 TYPES ── */
+.output-sec{background:var(--bg2);padding:80px 24px}
+.sec-lbl{font-size:.7rem;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:12px}
+.sec-lbl.red{color:var(--red2)}.sec-lbl.gold{color:var(--gold2)}.sec-lbl.grn{color:var(--grn3)}.sec-lbl.teal{color:#22d3ee}
+.sec-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;margin-bottom:14px;line-height:1.25}
+.sec-desc{color:var(--sub2);font-size:.93rem;max-width:620px;line-height:1.9}
+.sec-head{margin-bottom:52px}
+.output-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.out-card{border-radius:18px;padding:28px;border:1px solid var(--border);transition:.35s;position:relative;overflow:hidden}
+.out-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.out-card:hover{transform:translateY(-5px)}
+.oc-voice{background:linear-gradient(160deg,rgba(220,38,38,.07),var(--card))}
+.oc-voice::before{background:var(--grd-red)}
+.oc-voice:hover{border-color:rgba(220,38,38,.35);box-shadow:0 16px 48px rgba(220,38,38,.08)}
+.oc-chat{background:linear-gradient(160deg,rgba(8,145,178,.07),var(--card))}
+.oc-chat::before{background:linear-gradient(90deg,#0891b2,#06b6d4)}
+.oc-chat:hover{border-color:rgba(8,145,178,.35);box-shadow:0 16px 48px rgba(8,145,178,.08)}
+.oc-action{background:linear-gradient(160deg,rgba(201,168,76,.07),var(--card))}
+.oc-action::before{background:var(--grd-gold)}
+.oc-action:hover{border-color:rgba(201,168,76,.35);box-shadow:0 16px 48px rgba(201,168,76,.08)}
+.oc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:18px}
+.oci-red{background:rgba(220,38,38,.15)}
+.oci-teal{background:rgba(8,145,178,.15)}
+.oci-gold{background:rgba(201,168,76,.15)}
+.out-card h3{font-size:1.05rem;font-weight:900;margin-bottom:10px}
+.out-card h3.red{color:var(--red2)}.out-card h3.teal{color:#22d3ee}.out-card h3.gold{color:var(--gold2)}
+.out-card > p{color:var(--sub);font-size:.86rem;line-height:1.8;margin-bottom:16px}
+.oc-uses{list-style:none}
+.oc-uses li{font-size:.82rem;color:var(--sub2);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:8px}
+.oc-uses li::before{content:'▸';flex-shrink:0}
+.oc-uses li:last-child{border-bottom:none}
+.oc-uses li.red::before{color:var(--red2)}.oc-uses li.teal::before{color:#22d3ee}.oc-uses li.gold::before{color:var(--gold2)}
+.oc-tag{display:inline-block;margin-top:16px;padding:4px 12px;border-radius:8px;font-size:.72rem;font-weight:800}
+.oct-red{background:rgba(220,38,38,.15);color:var(--red2)}
+.oct-teal{background:rgba(8,145,178,.15);color:#22d3ee}
+.oct-gold{background:rgba(201,168,76,.15);color:var(--gold2)}
 
-/* CTA SECTION */
-.cta-section{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.05));border-top:1px solid rgba(59,130,246,.1);border-bottom:1px solid rgba(59,130,246,.1)}
-.cta-inner{text-align:center;max-width:700px;margin:0 auto}
-.cta-inner h2{font-size:2.2em;font-weight:900;margin-bottom:16px}
-.cta-inner p{font-size:1.05em;color:var(--muted);margin-bottom:32px}
+/* ── DOCTRINE ── */
+.doctrine-sec{padding:80px 24px}
+.doctrine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.doc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:.3s;text-align:center}
+.doc-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.3)}
+.doc-emblem{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 16px;background:rgba(201,168,76,.1);border:2px solid rgba(201,168,76,.25)}
+.doc-card h3{font-size:.95rem;font-weight:900;color:var(--gold2);margin-bottom:8px}
+.doc-card p{font-size:.82rem;color:var(--sub);line-height:1.7}
+.doc-principle{margin-top:10px;font-size:.75rem;font-style:italic;color:var(--gold);opacity:.8}
 
-/* FOOTER */
-footer{padding:60px 24px;border-top:1px solid var(--border)}
-.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
-.footer-brand{font-weight:900;font-size:1.1em;letter-spacing:3px;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
-.footer-desc{font-size:.85em;color:var(--dim);line-height:1.6;max-width:300px}
-.footer-col h4{font-size:.75em;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:16px;text-transform:uppercase}
-.footer-col a{display:block;font-size:.85em;color:var(--dim);margin-bottom:10px}
-.footer-col a:hover{color:var(--text)}
-.footer-bottom{max-width:var(--max);margin:32px auto 0;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.8em;color:var(--dim)}
+/* ── DUAL AUDIENCE ── */
+.dual-sec{background:var(--bg2);padding:80px 24px}
+.dual-toggle{display:flex;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:5px;margin-bottom:40px;max-width:520px}
+.dt-btn{flex:1;padding:11px 20px;border-radius:8px;cursor:pointer;font-size:.84rem;font-weight:800;transition:.25s;border:none;font-family:inherit;background:transparent;color:var(--sub)}
+.dt-btn.on-mil{background:var(--grd-grn);color:#fff}
+.dt-btn.on-game{background:var(--grd-red);color:#fff}
+.dual-panel{display:none}.dual-panel.on{display:block}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr;text-align:center}
-  .hero h1{font-size:2.5em}
-  .hero-desc{margin:0 auto 32px}
-  .hero-actions{justify-content:center}
-  .hero-visual{display:none}
-  .flow-grid,.bp-grid,.pricing-grid{grid-template-columns:1fr}
-  .footer-inner{grid-template-columns:1fr 1fr}
-  .nav-links{display:none}
-  .nav-menu{display:block}
-  .section-title{font-size:1.8em}
+/* Mil panel */
+.mil-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.mil-card{background:linear-gradient(160deg,rgba(22,163,74,.06),var(--card));border:1px solid rgba(22,163,74,.18);border-radius:16px;padding:26px;transition:.3s}
+.mil-card:hover{border-color:rgba(74,222,128,.35);transform:translateY(-4px)}
+.mil-card .mc-ico{font-size:1.8rem;margin-bottom:14px}
+.mil-card h3{font-size:1rem;font-weight:900;color:var(--grn3);margin-bottom:10px}
+.mil-card p{font-size:.86rem;color:var(--sub);line-height:1.8}
+.mil-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(22,163,74,.12);border:1px solid rgba(22,163,74,.25);color:var(--grn3);padding:3px 10px;border-radius:8px;font-size:.7rem;font-weight:800;margin-top:10px}
+/* Game panel */
+.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.game-genre-card{background:linear-gradient(160deg,rgba(220,38,38,.05),var(--card));border:1px solid rgba(220,38,38,.14);border-radius:16px;padding:22px;transition:.3s}
+.game-genre-card:hover{border-color:rgba(220,38,38,.35);transform:translateY(-4px)}
+.ggc-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ggc-ico{font-size:1.6rem}
+.ggc-nm{font-size:.92rem;font-weight:900;color:var(--txt)}
+.ggc-role{font-size:.7rem;color:var(--red2);font-weight:700;margin-top:2px}
+.ggc-examples{font-size:.8rem;color:var(--sub);line-height:1.7;margin-bottom:12px}
+.ggc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.ggc-tag{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.18);color:#fca5a5;padding:2px 9px;border-radius:8px;font-size:.68rem;font-weight:700}
+
+/* ── HOW IT WORKS ── */
+.how-sec{padding:80px 24px}
+.flow-wrap{position:relative}
+.flow-line{position:absolute;top:44px;left:10%;right:10%;height:2px;background:var(--grd-fm);opacity:.2;z-index:0}
+.flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;z-index:1}
+.flow-step{text-align:center;padding:28px 14px}
+.fs-num{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;margin:0 auto 14px;background:var(--card2);border:2px solid rgba(220,38,38,.3);color:var(--red2)}
+.fs-num.active{background:var(--grd-fm);border-color:transparent;color:#fff;box-shadow:0 6px 20px rgba(220,38,38,.3)}
+.flow-step h3{font-size:.86rem;font-weight:800;margin-bottom:6px;color:var(--txt)}
+.flow-step p{font-size:.76rem;color:var(--sub);line-height:1.65}
+
+/* ── DEMO ── */
+.demo-sec{background:var(--bg2);padding:80px 24px}
+.demo-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.demo-tab{padding:10px 22px;border-radius:20px;cursor:pointer;font-size:.8rem;font-weight:800;transition:.25s;border:1px solid var(--border);background:var(--card);color:var(--sub);font-family:inherit}
+.demo-tab.on{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.4);color:var(--red2)}
+.demo-tab.on.t-teal{background:rgba(8,145,178,.12);border-color:rgba(8,145,178,.35);color:#22d3ee}
+.demo-tab.on.t-gold{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.35);color:var(--gold2)}
+.demo-tab.on.t-grn{background:rgba(22,163,74,.12);border-color:rgba(22,163,74,.35);color:var(--grn3)}
+.demo-content{display:none}.demo-content.on{display:block}
+.demo-meta{display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.18);border-radius:10px;margin-bottom:18px}
+.dm-ico{font-size:1.4rem}
+.dm-game{font-size:.8rem;font-weight:700;color:var(--txt)}
+.dm-sit{font-size:.72rem;color:var(--sub);margin-top:1px}
+.dm-output-type{margin-left:auto;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:8px;background:rgba(220,38,38,.15);color:var(--red2)}
+.briefing-box{border-radius:12px;padding:22px;margin-bottom:14px}
+.bb-voice{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.18)}
+.bb-voice-label{font-size:.7rem;font-weight:800;color:var(--red2);letter-spacing:1px;margin-bottom:10px}
+.bb-voice-text{font-size:.92rem;color:var(--txt);line-height:2.1;font-style:italic}
+.bb-voice-text strong{color:#fff;font-style:normal}
+.bb-chat{background:rgba(8,145,178,.06);border:1px solid rgba(8,145,178,.18)}
+.bb-chat-label{font-size:.7rem;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:10px}
+.chat-cmd{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;font-size:.84rem}
+.chat-cmd:last-child{margin-bottom:0}
+.cmd-bullet{width:22px;height:22px;border-radius:50%;background:rgba(8,145,178,.3);color:#22d3ee;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0;margin-top:1px}
+.cmd-text{color:#a5f3fc;line-height:1.7;font-family:'Courier New',monospace}
+.bb-action{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18)}
+.bb-action-label{font-size:.7rem;font-weight:800;color:var(--gold2);letter-spacing:1px;margin-bottom:12px}
+.action-steps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ast{background:rgba(201,168,76,.06);border-radius:10px;padding:14px}
+.ast-num{font-size:.66rem;color:var(--gold);font-weight:800;letter-spacing:.5px;margin-bottom:5px}
+.ast-txt{font-size:.84rem;color:#fde68a;line-height:1.6}
+.demo-note{font-size:.78rem;color:var(--sub);line-height:1.7;padding:12px 16px;background:rgba(255,255,255,.03);border-radius:8px;border-left:3px solid rgba(201,168,76,.4)}
+
+/* ── PRICING ── */
+.price-sec{padding:80px 24px}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:30px;position:relative;transition:.3s}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.feat{border-color:rgba(220,38,38,.5);box-shadow:0 0 48px rgba(220,38,38,.1)}
+.feat-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grd-fm);color:#fff;padding:4px 16px;border-radius:12px;font-size:.67rem;font-weight:900;white-space:nowrap;letter-spacing:.5px}
+.pt{font-size:.68rem;font-weight:800;letter-spacing:2.5px;margin-bottom:14px}
+.pt.free{color:var(--grn3)}.pt.prem{color:var(--red2)}.pt.clan{color:#22d3ee}.pt.pro{color:var(--gold2)}
+.pa{font-size:2.3rem;font-weight:900;margin-bottom:4px}
+.pa span{font-size:.85rem;font-weight:500;color:var(--sub)}
+.pd{font-size:.78rem;color:var(--sub);margin-bottom:22px;line-height:1.6}
+.pf{list-style:none;margin-bottom:26px}
+.pf li{font-size:.82rem;color:var(--sub);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:8px;align-items:flex-start}
+.pf li::before{content:'✓';font-weight:900;flex-shrink:0}
+.pf li.yes::before{color:var(--grn3)}
+.pf li.no::before{content:'✗';color:rgba(255,255,255,.18)}
+.pb{width:100%;padding:12px;border-radius:10px;font-size:.86rem;font-weight:800;cursor:pointer;transition:.2s;border:none;font-family:inherit}
+.pb:hover{transform:translateY(-2px)}
+.pb.free{background:rgba(22,163,74,.14);color:var(--grn3)}
+.pb.prem{background:var(--grd-fm);color:#fff}
+.pb.clan{background:rgba(8,145,178,.16);color:#22d3ee}
+.pb.pro{background:rgba(201,168,76,.16);color:var(--gold2)}
+
+/* ── ACADEMY PROGRAM (slim section) ── */
+.academy-sec{
+  padding:80px 24px;text-align:center;
+  background:linear-gradient(180deg,var(--bg) 0%,#040c0a 50%,var(--bg) 100%)
+}
+.academy-card{
+  max-width:640px;margin:0 auto;
+  background:rgba(8,24,20,.6);
+  border:1px solid rgba(22,163,74,.2);
+  border-radius:24px;padding:56px 48px
+}
+.ac-icon{font-size:2.8rem;margin-bottom:20px;filter:grayscale(.3)}
+.ac-bar{width:3px;height:36px;background:var(--red);margin:0 auto 24px;border-radius:2px}
+.ac-heading{font-size:2rem;font-weight:900;margin-bottom:18px;letter-spacing:-.3px}
+.ac-desc{color:var(--sub2);font-size:1.05rem;line-height:1.8;margin-bottom:6px}
+.ac-desc strong{color:#4ade80}
+.ac-sub{color:var(--sub);font-size:.88rem;margin-bottom:34px}
+.ac-cta{
+  padding:16px 40px;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;border:none;border-radius:40px;
+  font-size:1rem;font-weight:800;cursor:pointer;
+  transition:.3s;font-family:inherit;
+  box-shadow:0 8px 32px rgba(59,130,246,.3)
+}
+.ac-cta:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(59,130,246,.45)}
+
+/* ── ACADEMY MODAL ── */
+.academy-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
+  z-index:9999;display:none;justify-content:center;align-items:center;padding:24px
+}
+.academy-overlay.open{display:flex}
+.academy-modal{
+  background:#0c1120;border:1px solid rgba(22,163,74,.2);border-radius:20px;
+  max-width:800px;width:100%;max-height:90vh;overflow-y:auto;position:relative
+}
+.am-close{
+  position:absolute;top:14px;right:18px;background:none;border:none;
+  color:var(--sub);font-size:1.2rem;cursor:pointer;z-index:2
+}
+.am-close:hover{color:#fff}
+.am-header{text-align:center;padding:36px 32px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.am-header .am-icon{font-size:2.2rem;margin-bottom:10px}
+.am-header h2{font-size:1.5rem;font-weight:900;margin-bottom:6px}
+.am-header p{color:var(--sub);font-size:.88rem}
+.am-badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.06)}
+.am-badge{padding:4px 13px;border-radius:16px;font-size:.69rem;font-weight:800;border:1px solid}
+.am-badge.bg-grn{background:rgba(22,163,74,.14);color:#4ade80;border-color:rgba(22,163,74,.3)}
+.am-badge.bg-gold{background:rgba(201,168,76,.14);color:var(--gold2);border-color:rgba(201,168,76,.3)}
+.am-badge.bg-red{background:rgba(220,38,38,.12);color:var(--red2);border-color:rgba(220,38,38,.25)}
+.am-body{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0}
+.am-left,.am-right{padding:24px 28px}
+.am-left{border-right:1px solid rgba(255,255,255,.06)}
+.am-body h3{font-size:.82rem;font-weight:900;color:#4ade80;margin-bottom:14px;letter-spacing:.5px}
+.am-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem}
+.am-row span{color:var(--sub)}.am-row strong{color:#4ade80;font-weight:700}
+.am-progress{margin-top:14px}
+.amp-label{display:flex;justify-content:space-between;font-size:.73rem;margin-bottom:5px}
+.amp-label span{color:var(--sub)}.amp-label strong{color:#4ade80}
+.amp-bar{height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+.amp-fill{height:100%;background:linear-gradient(90deg,#16a34a,#4ade80);border-radius:4px;width:25.4%;transition:width 1s}
+.am-feat{
+  padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  font-size:.84rem;color:#d1fae5;line-height:1.6
+}
+.am-footer{
+  text-align:center;padding:22px 28px;border-top:1px solid rgba(255,255,255,.06);
+  background:rgba(22,163,74,.04)
+}
+.am-apply{
+  padding:13px 32px;background:linear-gradient(135deg,#16a34a,#4ade80);
+  color:#052e16;border:none;border-radius:10px;font-size:.92rem;font-weight:900;
+  cursor:pointer;transition:.3s;font-family:inherit;margin-bottom:10px
+}
+.am-apply:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(22,163,74,.35)}
+.am-footer p{color:var(--sub);font-size:.73rem;line-height:1.6}
+@media(max-width:640px){.am-body{grid-template-columns:1fr}.am-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}}
+
+/* ── V3 PERSONA TEASER ── */
+.persona-tease{background:var(--bg2);padding:56px 24px;text-align:center;border-top:1px solid rgba(124,58,237,.18)}
+.pt-inner{max-width:900px;margin:0 auto}
+.pt-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);color:#c4b5fd;padding:6px 16px;border-radius:20px;font-size:.74rem;font-weight:800;margin-bottom:20px}
+.pt-title{font-size:1.7rem;font-weight:900;margin-bottom:12px}
+.pt-desc{color:var(--sub);font-size:.9rem;line-height:1.9;max-width:600px;margin:0 auto 24px}
+.pt-personas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.ptp{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);padding:7px 16px;border-radius:20px;font-size:.8rem;font-weight:700;color:#c4b5fd}
+
+/* ── FAQ ── */
+.faq-sec{padding:72px 24px}
+.faq-wrap{max-width:840px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:18px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.93rem;font-weight:700;gap:16px}
+.faq-q .ico{color:var(--sub);font-size:1.2rem;transition:.25s;flex-shrink:0}
+.faq-item.open .faq-q .ico{transform:rotate(45deg);color:var(--red2)}
+.faq-a{display:none;padding:0 0 18px;color:var(--sub2);font-size:.87rem;line-height:1.85}
+.faq-item.open .faq-a{display:block}
+
+/* ── CTA FINAL ── */
+.cta-final{text-align:center;padding:80px 24px;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(120,20,20,.2),transparent),linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-top:1px solid rgba(220,38,38,.15)}
+.cta-final .sec-title{font-size:2.3rem}
+.cf-desc{color:var(--sub2);font-size:.95rem;max-width:620px;margin:0 auto 36px;line-height:1.9}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-fm{padding:15px 32px;background:var(--grd-fm);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:900;cursor:pointer;transition:.3s;font-family:inherit}
+.btn-fm:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(220,38,38,.3)}
+.btn-outline{padding:15px 32px;background:transparent;color:var(--sub2);border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-outline:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.04)}
+
+/* ── FOOTER ── */
+footer{background:var(--card);border-top:1px solid var(--border);padding:36px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.f-brand .fb{background:var(--grd-fm);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;font-size:.95rem}
+.f-brand p{font-size:.72rem;color:var(--sub);margin-top:2px}
+.f-links{display:flex;gap:20px;flex-wrap:wrap}
+.f-links a{color:var(--sub);font-size:.77rem;text-decoration:none;transition:.2s}
+.f-links a:hover{color:var(--txt)}
+.f-copy{color:var(--sub);font-size:.72rem}
+
+/* ── CONTAINER ── */
+.ctr{max-width:1200px;margin:0 auto}
+
+/* ── STATS ── */
+.stats-strip{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.15);border-bottom:1px solid rgba(220,38,38,.15);padding:26px}
+.stats-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:18px}
+.stat{text-align:center}
+.stat .sv{font-size:2.1rem;font-weight:900;background:var(--grd-fm);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .sl{font-size:.75rem;color:var(--sub);margin-top:2px}
+
+/* ── TRUST STRIP ── */
+.trust-strip{padding:24px;text-align:center;border-top:1px solid var(--border)}
+.trust-inner{max-width:1100px;margin:0 auto}
+.trust-inner p{font-size:.75rem;color:var(--sub);margin-bottom:16px;letter-spacing:.5px}
+.trust-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.trust-item{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.25);padding:5px 13px;border:1px solid rgba(255,255,255,.08);border-radius:6px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav{padding:0 20px}.nav-links{display:none}
+  .output-grid,.flow-grid{grid-template-columns:1fr}
+  .flow-line{display:none}
+  .academy-card{padding:40px 24px}
+  .hero-ctas{grid-template-columns:1fr}
+  .action-steps{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  .hero h1{font-size:2em}
-  .footer-inner{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  footer{flex-direction:column;padding:24px 20px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <div class="nav-logo">TACTICALPROMPT</div>
-    <div class="nav-links">
-      <a href="#flow">How It Works</a>
-      <a href="#arsenal">Arsenal</a>
-      <a href="#pricing">Pricing</a>
-      <a href="https://cbrntactical.blogspot.com" target="_blank">Blog</a>
-      <a href="#cta" class="nav-cta">START MISSION BRIEF</a>
+<!-- ■■ NAV ■■ -->
+<nav class="nav">
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div>
+      <div class="nav-brand">TacticalPrompt: FOLLOW ME</div>
+      <div class="nav-tagline">나를 따르라 — 전술 브리핑 AI</div>
     </div>
-    <div class="nav-menu" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">&#9776;</div>
+  </div>
+  <div class="nav-links">
+    <button class="nl" onclick="go('outputs')">브리핑 시스템</button>
+    <button class="nl" onclick="go('doctrine')">군사 교리</button>
+    <button class="nl" onclick="go('audience')">사용자 유형</button>
+    <button class="nl" onclick="go('demo')">브리핑 데모</button>
+    <button class="nl" onclick="go('pricing')">요금제</button>
+    <button class="nl" onclick="go('pricing')">요금제</button>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn nb-line" onclick="location.href='TacticalPrompt_앱_v2.html'">앱 열기</button>
+    <button class="nav-btn nb-cta" onclick="location.href='TacticalPrompt_앱_v2.html'">무료 시작</button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ■■ HERO ■■ -->
 <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge"><span class="dot"></span> Now serving GenAI.mil operators</div>
-      <h1>Match Your Mission.<br><span class="grad">Fire Your Prompt.</span></h1>
-      <p class="hero-desc">Military-grade AI prompt blueprints designed by tactical prompt engineers. From CBRN analysis to CAS planning &mdash; find, test, and deploy the right prompt architecture for your mission.</p>
-      <div class="hero-actions">
-        <a href="#cta" class="btn-primary">&#127919; Start Mission Brief</a>
-        <a href="#arsenal" class="btn-secondary">&#128218; Browse Arsenal</a>
-      </div>
+    <div class="hero-eyebrow">
+      <span class="he-tag het-red"><div class="dot dot-red"></div>세계 최초 전술 브리핑 AI</span>
+      <span class="he-tag het-gold">군사 교리 기반 자동 생성</span>
+      <span class="he-tag het-grn"><div class="dot dot-grn"></div>20+ 게임 장르 지원</span>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hc-header">
-          <span class="hc-title">TPE-001</span>
-          <span class="hc-badge">VERIFIED</span>
-        </div>
-        <div class="hc-name">CBRN Contamination Classifier</div>
-        <div class="hc-desc">AI-driven chemical/biological agent classification system with NATO STANAG 2103 compliance and real-time threat assessment.</div>
-        <div class="hc-tags">
-          <span class="hc-tag cbrn">CBRN</span>
-          <span class="hc-tag mil">FM 3-11</span>
-          <span class="hc-tag ai">Claude 3.5</span>
-        </div>
-        <div class="hc-stats">
-          <div class="hc-stat"><div class="hc-stat-val">4.9</div><div class="hc-stat-label">RATING</div></div>
-          <div class="hc-stat"><div class="hc-stat-val">2.4K</div><div class="hc-stat-label">FIRES</div></div>
-          <div class="hc-stat"><div class="hc-stat-val">$29</div><div class="hc-stat-label">PRICE</div></div>
-        </div>
-      </div>
-      <div class="hero-float f1"><span class="emoji">&#9889;</span> <span style="color:var(--emerald);font-weight:700">Live Fire</span>&nbsp;ready</div>
-      <div class="hero-float f2"><span class="emoji">&#127919;</span> <span style="color:var(--amber);font-weight:700">128</span>&nbsp;Blueprints</div>
+    <h1 class="hero-title">
+      <span class="hl-fm">FOLLOW ME</span><br>
+      <span class="hl-wh">나를 따르라</span>
+    </h1>
+    <div class="hero-sub-title">전술적 행동 · 브리핑 · 육성 지휘 AI 플랫폼</div>
+    <p class="hero-desc">
+      리더의 본질은 <strong>말로 지휘하는 것</strong>입니다. 게임 상황을 입력하면 군사 교리 기반의
+      <strong>육성 브리핑 · 채팅 지시 · 행동 요령</strong>이 즉시 자동 생성됩니다.
+      사관생도의 실전 리더십 훈련부터 게이머의 팀 전술 지휘까지 — 한 플랫폼으로 해결합니다.
+    </p>
+    <div class="hero-ctas">
+      <button class="hcta hcta-mil" onclick="location.href='TacticalPrompt_앱_v2.html'">
+        <span class="hcta-label">🎖️ 사관생도 / 군 관련자</span>
+        <h3>군사 모드 브리핑 생성하기</h3>
+        <p>PT 브리핑 · SMEAC 전술 훈련 · 지휘 보고<br>군사 교리 기반 실전 브리핑을 즉시 생성</p>
+        <span class="hcta-arrow">→</span>
+      </button>
+      <button class="hcta hcta-game" onclick="location.href='TacticalPrompt_앱_v2.html'">
+        <span class="hcta-label">🎮 게이머 / 클랜 리더</span>
+        <h3>지금 바로 브리핑 생성하기</h3>
+        <p>게임 장르를 선택하고<br>전술 브리핑을 즉시 받으세요</p>
+        <span class="hcta-arrow">→</span>
+      </button>
     </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="flow">
-  <div class="section-inner">
-    <div class="section-label">How It Works</div>
-    <div class="section-title">Mission Brief &#8594; AI Briefing &#8594; Fire</div>
-    <p class="section-desc">Six steps from mission requirement to deployed AI output. No prompt engineering experience required.</p>
-    <div class="flow-grid">
-      <div class="flow-card">
-        <span class="flow-step">S1</span>
-        <div class="flow-icon">&#128203;</div>
-        <div class="flow-name">Mission Brief</div>
-        <div class="flow-desc">Select your domain, mission type, and urgency. Add a free-text description of your operational need.</div>
-        <div class="flow-time">~ 30 seconds</div>
-      </div>
-      <div class="flow-card">
-        <span class="flow-step">S2</span>
-        <div class="flow-icon">&#129302;</div>
-        <div class="flow-name">AI Briefing</div>
-        <div class="flow-desc">Semantic matching engine recommends 3-5 optimal blueprints based on your mission parameters.</div>
-        <div class="flow-time">~ 5 seconds</div>
-      </div>
-      <div class="flow-card">
-        <span class="flow-step">S3</span>
-        <div class="flow-icon">&#128270;</div>
-        <div class="flow-name">Dry Fire</div>
-        <div class="flow-desc">Review blueprint structure, variables, doctrine tags, and example outputs. Unlimited and free.</div>
-        <div class="flow-time">Unlimited &middot; Free</div>
-      </div>
-      <div class="flow-card">
-        <span class="flow-step">S4</span>
-        <div class="flow-icon">&#128293;</div>
-        <div class="flow-name">Live Fire</div>
-        <div class="flow-desc">Execute the blueprint with Claude API in our sandbox. See 50% of the output as a preview.</div>
-        <div class="flow-time">1 free per blueprint</div>
-      </div>
-      <div class="flow-card">
-        <span class="flow-step">S5</span>
-        <div class="flow-icon">&#128176;</div>
-        <div class="flow-name">Purchase</div>
-        <div class="flow-desc">Buy the full blueprint package. Get complete prompt architecture, all variables, and unlimited Live Fires.</div>
-        <div class="flow-time">From $29</div>
-      </div>
-      <div class="flow-card">
-        <span class="flow-step">S6</span>
-        <div class="flow-icon">&#127942;</div>
-        <div class="flow-name">Execute</div>
-        <div class="flow-desc">Deploy on GenAI.mil, Claude, or any LLM. Rate and review to help the community.</div>
-        <div class="flow-time">Mission Complete</div>
-      </div>
+    <div class="doctrine-strip">
+      <div class="doc-badge"><span class="di">⚔️</span> 손자병법</div>
+      <div class="doc-badge"><span class="di">📖</span> FM 3-0 (미 야전교범)</div>
+      <div class="doc-badge"><span class="di">🔄</span> OODA Loop</div>
+      <div class="doc-badge"><span class="di">🧠</span> 클라우제비츠</div>
     </div>
   </div>
 </section>
 
-<!-- ARSENAL -->
-<section class="section blueprints-bg" id="arsenal">
-  <div class="section-inner">
-    <div class="section-label">Browse Arsenal</div>
-    <div class="section-title">Tactical Prompt Blueprints</div>
-    <p class="section-desc">Expert-designed prompt architectures for military and defense AI operations. Each blueprint is verified by domain specialists.</p>
-    <div class="bp-grid">
-      <div class="bp-card bp-cbrn">
-        <div class="bp-num">TPE-001</div>
-        <div class="bp-title">CBRN Contamination Classifier</div>
-        <div class="bp-desc">AI-driven agent classification with NATO STANAG 2103 compliance and D-M-D-A-V protocol mapping.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+<!-- ■■ STATS ■■ -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat"><div class="sv">3종</div><div class="sl">동시 출력 (육성·채팅·행동요령)</div></div>
+    <div class="stat"><div class="sv">$21B+</div><div class="sl">전략 게임 시장 규모</div></div>
+    <div class="stat"><div class="sv">5대</div><div class="sl">군사 교리 데이터베이스</div></div>
+    <div class="stat"><div class="sv">0개</div><div class="sl">세계 경쟁 플랫폼 (최초)</div></div>
+    <div class="stat"><div class="sv">20+</div><div class="sl">지원 게임 장르</div></div>
+  </div>
+</div>
+
+<!-- ■■ OUTPUT 3 TYPES ■■ -->
+<section id="outputs" class="output-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl red">FOLLOW ME ENGINE</div>
+      <h2 class="sec-title">"읽는 프롬트"에서<br><span class="hl-fm">말하는 리더십 브리핑</span>으로</h2>
+      <p class="sec-desc">v1.0의 정적 프롬트 라이브러리에서 완전히 진화했습니다. 상황을 입력하면 리더가 직접 사용할 수 있는 3가지 형태의 브리핑이 <strong style="color:var(--txt)">실시간으로 자동 생성</strong>됩니다.</p>
+    </div>
+    <div class="output-grid">
+
+      <div class="out-card oc-voice">
+        <div class="oc-icon oci-red">🎙️</div>
+        <h3 class="red">① 육성 브리핑 (Voice Briefing)</h3>
+        <p>디스코드·보이스 채팅에서 리더가 직접 읽거나 TTS로 재생하는 <strong style="color:var(--txt)">지휘 연설문</strong>. 군사 교리 기반의 권위 있는 언어로 생성됩니다.</p>
+        <ul class="oc-uses">
+          <li class="red">전투 개시 전 작전 브리핑 연설</li>
+          <li class="red">위기 순간 긴급 전환 명령</li>
+          <li class="red">패배 후 재결집 & 사기 진작</li>
+          <li class="red">공성 개시 결의 선언</li>
+          <li class="red">사관생도 PT 발표 브리핑 초안</li>
+        </ul>
+        <span class="oc-tag oct-red">말로 지휘하는 리더의 권위</span>
       </div>
-      <div class="bp-card bp-intel">
-        <div class="bp-num">TPE-002</div>
-        <div class="bp-title">Multi-Domain C4I Fusion Analyst</div>
-        <div class="bp-desc">Cross-domain intelligence fusion for joint operations. SIGINT/HUMINT/OSINT correlation engine.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">OPERATIONAL</span></div>
+
+      <div class="out-card oc-chat">
+        <div class="oc-icon oci-teal">💬</div>
+        <h3 class="teal">② 채팅 지시 (Chat Command)</h3>
+        <p>게임 내 채팅창·클랜 메시지에 <strong style="color:var(--txt)">원터치 복사+붙여넣기</strong>로 3초 만에 전술 지시를 전달합니다. 역할 분담부터 집결 명령까지.</p>
+        <ul class="oc-uses">
+          <li class="teal">역할 분담 지시 (탱커·딜러·힐러·정찰)</li>
+          <li class="teal">구역 할당 (A팀 북쪽 / B팀 남쪽)</li>
+          <li class="teal">긴급 철수·집결 포인트 지정</li>
+          <li class="teal">사격 할당 / 타겟 마킹 순서</li>
+          <li class="teal">KvK·공성 집결 명령</li>
+        </ul>
+        <span class="oc-tag oct-teal">원터치 복사 3초 전달</span>
       </div>
-      <div class="bp-card bp-nuke">
-        <div class="bp-num">TPE-003</div>
-        <div class="bp-title">Nuclear Fallout Dispersion Modeler</div>
-        <div class="bp-desc">Atmospheric dispersion modeling for nuclear/radiological events with evacuation zone recommendations.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">STRATEGIC</span></div>
+
+      <div class="out-card oc-action">
+        <div class="oc-icon oci-gold">📋</div>
+        <h3 class="gold">③ 행동 요령 (Action Card)</h3>
+        <p>팀원 각자가 참고할 수 있는 <strong style="color:var(--txt)">개인별 행동 순서 카드</strong>. If-Then 조건 분기와 금지 행동까지 포함해 스스로 판단하게 합니다.</p>
+        <ul class="oc-uses">
+          <li class="gold">역할별 행동 순서 (1→2→3 단계)</li>
+          <li class="gold">"만약 ~하면" 조건부 대응 분기</li>
+          <li class="gold">좌표·방향 기반 이동 경로</li>
+          <li class="gold">절대 금지 행동 명시</li>
+          <li class="gold">스킬 사용 순서 & 탈출 루트</li>
+        </ul>
+        <span class="oc-tag oct-gold">스스로 판단하는 개인 매뉴얼</span>
       </div>
-      <div class="bp-card bp-cyber">
-        <div class="bp-num">TPE-004</div>
-        <div class="bp-title">Chemical Warfare Defense Planner</div>
-        <div class="bp-desc">Protective posture optimization and decontamination sequence planning for CW scenarios.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ■■ MILITARY DOCTRINE ■■ -->
+<section id="doctrine" class="doctrine-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl gold">MILITARY DOCTRINE BASIS</div>
+      <h2 class="sec-title">5대 군사 교리가<br>브리핑의 뼈대가 된다</h2>
+      <p class="sec-desc">TacticalPrompt의 AI는 인터넷 게임 팁이 아닌, 수천 년의 전쟁 역사에서 검증된 군사 교리 데이터베이스를 기반으로 브리핑을 생성합니다.</p>
+    </div>
+    <div class="doctrine-grid">
+      <div class="doc-card">
+        <div class="doc-emblem">☯️</div>
+        <h3>손자병법 (孫子兵法)</h3>
+        <p>지피지기 백전불태. 13편의 전략 원칙을 기반으로 상황 분석과 적 대응 로직에 적용합니다.</p>
+        <p class="doc-principle">"병자궤도야 — 전쟁은 속임의 도다"</p>
       </div>
-      <div class="bp-card bp-cas">
-        <div class="bp-num">TPE-005</div>
-        <div class="bp-title">Radiological Source Tracker</div>
-        <div class="bp-desc">Orphan source detection and tracking with dose rate mapping and exposure risk assessment.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">OPERATIONAL</span></div>
+      <div class="doc-card">
+        <div class="doc-emblem">🇺🇸</div>
+        <h3>FM 3-0 (미 육군 야전교범)</h3>
+        <p>현대 미 육군의 작전 교리. 공격·방어·안정화 작전의 원칙과 전술 수행 프레임워크를 활용합니다.</p>
+        <p class="doc-principle">"Mission command — 임무형 지휘의 원칙"</p>
       </div>
-      <div class="bp-card bp-log">
-        <div class="bp-num">TPE-006</div>
-        <div class="bp-title">Biological Threat Rapid Assessor</div>
-        <div class="bp-desc">Pathogen identification, transmission modeling, and medical countermeasure recommendation engine.</div>
-        <div class="bp-meta"><span class="bp-price">$29</span><span class="bp-tier">TACTICAL</span></div>
+      <div class="doc-card">
+        <div class="doc-emblem">🔄</div>
+        <h3>OODA Loop</h3>
+        <p>Observe → Orient → Decide → Act. 존 보이드의 공군 전술 사이클을 게임 상황 판단 로직에 적용합니다.</p>
+        <p class="doc-principle">"적보다 빠른 의사결정이 승리다"</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-emblem">📖</div>
+        <h3>클라우제비츠 (Clausewitz)</h3>
+        <p>"전쟁은 다른 수단에 의한 정치의 연속." 중심(Schwerpunkt) 이론으로 핵심 타격 방향을 결정합니다.</p>
+        <p class="doc-principle">"전쟁의 안개와 마찰을 극복하라"</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-emblem">🎖️</div>
+        <h3>한국 합동교리 METT-TC</h3>
+        <p>임무·적·지형·부대·가용시간·민간 고려. 한국군 전술 판단 6요소를 상황 분석 프레임으로 활용합니다.</p>
+        <p class="doc-principle">"상황 판단의 6요소로 최적 전술 도출"</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;padding:18px 24px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;max-width:680px;margin:32px auto 0">
+      <p style="color:var(--gold2);font-size:.88rem;font-weight:700">⚠️ TacticalPrompt는 "게임 팁 앱"이 아닙니다</p>
+      <p style="color:var(--sub);font-size:.83rem;margin-top:6px">검증된 군사 교리를 게임 상황에 맞게 번역·적용하는 브리핑 엔진입니다.<br>이것이 일반 전술 팁 콘텐츠와의 결정적 차이입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ■■ DUAL AUDIENCE ■■ -->
+<section id="audience" class="dual-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl teal">WHO USES IT</div>
+      <h2 class="sec-title">두 개의 세계, 하나의 플랫폼</h2>
+      <p class="sec-desc">같은 FOLLOW ME 엔진이지만 사용하는 목적과 방식이 다릅니다. 어느 트랙에 해당하시나요?</p>
+    </div>
+    <div class="dual-toggle">
+      <button class="dt-btn on-mil" id="dtMil" onclick="switchAudience('mil')">🎖️ 사관생도 / 군 관련자</button>
+      <button class="dt-btn" id="dtGame" onclick="switchAudience('game')">🎮 게이머 / 클랜 리더</button>
+    </div>
+
+    <!-- MIL PANEL -->
+    <div class="dual-panel on" id="dpMil">
+      <div style="background:rgba(22,163,74,.05);border:1px solid rgba(22,163,74,.18);border-radius:14px;padding:18px 22px;margin-bottom:24px">
+        <p style="color:var(--grn3);font-size:.88rem;font-weight:700">🎖️ 핵심 메시지 — "실전 장교가 사용하는 전술 브리핑 앱"</p>
+        <p style="color:var(--sub);font-size:.83rem;margin-top:6px">사관생도가 실제로 FOLLOW ME 브리핑을 훈련에 사용한다는 사실 자체가 플랫폼의 신뢰도를 증명합니다. 리더십 개발, PT 브리핑, 상황 판단 훈련에 직결됩니다.</p>
+      </div>
+      <div class="mil-grid">
+        <div class="mil-card">
+          <div class="mc-ico">📣</div>
+          <h3>육성 지휘 & 브리핑 역량 강화</h3>
+          <p>부하 장병 앞에서 명확하고 권위 있게 브리핑하는 능력은 장교의 핵심 역량입니다. FOLLOW ME는 군사 교리 기반의 구조화된 브리핑 문장을 제공하여 발성 연습과 지휘 문구 학습을 돕습니다.</p>
+          <span class="mil-badge">✓ PT 발표 준비</span>
+          <span class="mil-badge">✓ 작전 브리핑 초안</span>
+        </div>
+        <div class="mil-card">
+          <div class="mc-ico">🧠</div>
+          <h3>OODA Loop 기반 상황 판단 훈련</h3>
+          <p>전술 상황을 입력하고 AI의 분석 결과를 보며 METT-TC 6요소, OODA Loop 적용 방식을 체험합니다. 교관의 피드백을 대기하지 않고 스스로 반복 훈련이 가능한 시뮬레이션 도구입니다.</p>
+          <span class="mil-badge">✓ METT-TC 적용</span>
+          <span class="mil-badge">✓ 반복 훈련</span>
+        </div>
+        <div class="mil-card">
+          <div class="mc-ico">🤝</div>
+          <h3>소부대 지휘 리더십 실습</h3>
+          <p>분대·소대급 전술 상황을 입력하면 역할 분담 지시와 행동 요령이 생성됩니다. 팀원(동기)과 함께 워게임처럼 활용하면 리더십 역할 분담 훈련에 효과적입니다.</p>
+          <span class="mil-badge">✓ 소부대 지휘</span>
+          <span class="mil-badge">✓ 역할 분담 지시</span>
+        </div>
+        <div class="mil-card">
+          <div class="mc-ico">📚</div>
+          <h3>교리 학습 + 실전 적용 연습</h3>
+          <p>손자병법, FM 3-0, 클라우제비츠의 원칙이 어떻게 실제 전술 상황에 적용되는지 브리핑 생성 결과로 확인합니다. 이론 → 실전 연결의 이해를 AI가 돕습니다.</p>
+          <span class="mil-badge">✓ 교리 적용 학습</span>
+          <span class="mil-badge">✓ 이론-실전 연결</span>
+        </div>
+        <div class="mil-card">
+          <div class="mc-ico">🏆</div>
+          <h3>모의 전술 경연 & 팀 훈련</h3>
+          <p>사관학교 내 팀 전술 경연, 리더십 평가 준비에 활용합니다. 시나리오를 입력하고 생성된 브리핑을 팀과 공유하며 전술 토론을 진행하는 구조로 교육 효과를 극대화합니다.</p>
+          <span class="mil-badge">✓ 전술 경연 준비</span>
+          <span class="mil-badge">✓ 팀 공유</span>
+        </div>
+        <div class="mil-card">
+          <div class="mc-ico">🎯</div>
+          <h3>실전과 게임의 교차 학습</h3>
+          <p>전략 게임(삼국지·Total War 등)을 교육 매체로 활용하는 방식은 세계 군사 교육에서 이미 검증됐습니다. FOLLOW ME는 게임을 통해 실전 교리를 체험하는 교량 역할을 합니다.</p>
+          <span class="mil-badge">✓ 게임 기반 교육</span>
+          <span class="mil-badge">✓ 교리 체험</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME PANEL -->
+    <div class="dual-panel" id="dpGame">
+      <div style="background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.15);border-radius:14px;padding:18px 22px;margin-bottom:24px">
+        <p style="color:var(--red2);font-size:.88rem;font-weight:700">🎮 게이머 트랙 — 게임 내 팀 지휘를 진짜 전술로 바꾼다</p>
+        <p style="color:var(--sub);font-size:.83rem;margin-top:6px">클랜장·레이드장·스쿼드 리더에게 필요한 건 감각이 아니라 구조화된 지시입니다. FOLLOW ME는 게임 상황을 입력하면 즉시 사용 가능한 채팅 명령과 행동 요령을 제공합니다.</p>
+      </div>
+      <div class="game-grid">
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">🏹</div>
+            <div><div class="ggc-nm">모바일 정복 전략</div><div class="ggc-role">동맹장 (R5) · 부동맹장 (R4)</div></div>
+          </div>
+          <p class="ggc-examples">Rise of Kingdoms, 클래시 오브 클랜, 씨앤씨 모바일<br>KvK 개전 연설, 집결 명령, 자원 이송 지시, 동맹 결속 호소</p>
+          <div class="ggc-tags"><span class="ggc-tag">KvK</span><span class="ggc-tag">집결 명령</span><span class="ggc-tag">수비 배치</span></div>
+        </div>
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">🗡️</div>
+            <div><div class="ggc-nm">MMORPG 공성·레이드</div><div class="ggc-role">혈맹장 · 레이드장</div></div>
+          </div>
+          <p class="ggc-examples">리니지W, 아이온, 블레이드앤소울<br>공성 개시 연설, 팀별 진입 순서, 힐러 배치, 재돌격 결집</p>
+          <div class="ggc-tags"><span class="ggc-tag">공성전</span><span class="ggc-tag">역할 분담</span><span class="ggc-tag">레이드</span></div>
+        </div>
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">🎯</div>
+            <div><div class="ggc-nm">FPS / 배틀로얄</div><div class="ggc-role">스쿼드 리더</div></div>
+          </div>
+          <p class="ggc-examples">PUBG, 배틀필드, 콜오브듀티, Hell Let Loose<br>라운드 시작 전 작전 브리핑, 사격 구역 할당, 후퇴 조건</p>
+          <div class="ggc-tags"><span class="ggc-tag">ROE 설정</span><span class="ggc-tag">이동 경로</span><span class="ggc-tag">타겟 콜</span></div>
+        </div>
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">🗺️</div>
+            <div><div class="ggc-nm">역사 전략 시뮬</div><div class="ggc-role">군주 · 사령관</div></div>
+          </div>
+          <p class="ggc-examples">삼국지, Age of Empires, Total War, Hearts of Iron<br>전쟁 선포 연설, 다전선 우선순위, 장수 배치 명령</p>
+          <div class="ggc-tags"><span class="ggc-tag">전쟁 선포</span><span class="ggc-tag">외교 멘트</span><span class="ggc-tag">보급 체크</span></div>
+        </div>
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">⚡</div>
+            <div><div class="ggc-nm">실시간 전략 (RTS)</div><div class="ggc-role">팀 리더</div></div>
+          </div>
+          <p class="ggc-examples">스타크래프트, Company of Heroes, 워크래프트<br>게임 시작 전 전략 공유, 빌드 역할 분담, 공격 타이밍 동기화</p>
+          <div class="ggc-tags"><span class="ggc-tag">빌드 오더</span><span class="ggc-tag">타이밍 공격</span><span class="ggc-tag">카운터</span></div>
+        </div>
+        <div class="game-genre-card">
+          <div class="ggc-top">
+            <div class="ggc-ico">🏰</div>
+            <div><div class="ggc-nm">정복·건설 게임</div><div class="ggc-role">동맹 지도자</div></div>
+          </div>
+          <p class="ggc-examples">Civilization, Crusader Kings, Total War<br>외교 제안, 전략 동맹 설득, 전쟁 이유 선언</p>
+          <div class="ggc-tags"><span class="ggc-tag">외교 전략</span><span class="ggc-tag">동맹 결성</span><span class="ggc-tag">정복 선언</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="section" id="pricing">
-  <div class="section-inner">
-    <div class="section-label">Pricing</div>
-    <div class="section-title">Choose Your Clearance Level</div>
-    <p class="section-desc">Start free. Upgrade when your mission demands it.</p>
-    <div class="pricing-grid">
+<!-- ■■ HOW IT WORKS ■■ -->
+<section id="howitworks" class="how-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl red">AI ENGINE FLOW</div>
+      <h2 class="sec-title">5단계로 완성되는<br>군사 교리 기반 브리핑</h2>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow-line"></div>
+      <div class="flow-grid">
+        <div class="flow-step">
+          <div class="fs-num active">🎮</div>
+          <h3>게임·장르 선택</h3>
+          <p>어떤 게임인지 선택<br>(RoK, PUBG, 리니지 등)</p>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num">⚠️</div>
+          <h3>상황 입력</h3>
+          <p>현재 전술 상황을<br>텍스트 or 선택지로 입력</p>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num">🧠</div>
+          <h3>AI 교리 매칭</h3>
+          <p>손자병법·FM 3-0<br>OODA Loop 자동 매칭</p>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num">🎙️</div>
+          <h3>3종 브리핑 생성</h3>
+          <p>육성·채팅·행동요령<br>동시 자동 출력</p>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num">📋</div>
+          <h3>복사 / TTS 재생</h3>
+          <p>원터치 채팅 복사<br>음성 TTS 읽기</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px;max-width:800px">
+      <div style="background:var(--card2);border:1px solid rgba(220,38,38,.2);border-radius:14px;padding:20px">
+        <h3 style="font-size:.9rem;font-weight:900;color:var(--red2);margin-bottom:10px">⚡ Quick Mode — 초보 리더</h3>
+        <p style="font-size:.82rem;color:var(--sub);line-height:1.7">게임 장르 → 상황 유형 → 현재 국면을 3단계 선택만으로 브리핑 생성. 게임 중에도 빠르게 사용 가능.</p>
+      </div>
+      <div style="background:var(--card2);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:20px">
+        <h3 style="font-size:.9rem;font-weight:900;color:var(--gold2);margin-bottom:10px">📝 Pro Mode — 숙련 리더</h3>
+        <p style="font-size:.82rem;color:var(--sub);line-height:1.7">현재 상황을 자유 텍스트로 상세 입력. 더 맞춤화된 브리핑과 전문가 전술 분석 코멘트까지 함께 생성.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ■■ DEMO ■■ -->
+<section id="demo" class="demo-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl gold">LIVE DEMO</div>
+      <h2 class="sec-title">실제 브리핑 출력 예시<br>4가지 상황을 확인하세요</h2>
+      <p class="sec-desc">탭을 클릭해 각 상황별 브리핑 3종 출력을 확인하세요</p>
+    </div>
+    <div class="demo-tabs">
+      <button class="demo-tab on" onclick="switchDemo(0)">🏹 모바일 정복 · KvK 개전</button>
+      <button class="demo-tab t-teal" onclick="switchDemo(1)">⚔️ MMORPG · 공성전 돌격</button>
+      <button class="demo-tab t-gold" onclick="switchDemo(2)">🎯 FPS · 불리한 2대1 상황</button>
+      <button class="demo-tab t-grn" onclick="switchDemo(3)">🎖️ 사관생도 · PT 브리핑</button>
+    </div>
+
+    <!-- DEMO 0: 모바일 -->
+    <div class="demo-content on" id="dc0">
+      <div class="demo-meta">
+        <div class="dm-ico">🏹</div>
+        <div><div class="dm-game">Rise of Kingdoms — 동맹장 (R5) KvK 7일차</div><div class="dm-sit">적 동맹 주력이 성문 앞 집결, 아군 T5 부족 상황</div></div>
+        <div class="dm-output-type">🎙️ 육성 브리핑</div>
+      </div>
+      <div class="briefing-box bb-voice">
+        <div class="bb-voice-label">🎙️ 육성 브리핑 — 동맹장 전달 문구</div>
+        <div class="bb-voice-text">"동맹원 여러분, 집중하세요. 지금 성문 앞에 적 주력이 모였습니다. 우리의 T5가 부족한 건 맞습니다. 그러나 <strong>병력의 수보다 의지와 배치가 전투를 결정합니다.</strong><br><br>제1진은 즉시 성벽 인근 집결지로 이동하십시오. 제2진은 적 후방 자원지대를 압박해 전선을 분산시킵니다. 방어 중심 멤버는 성문 수비 포지션을 유지하되, 적이 진입하면 즉시 집중 공세로 전환하십시오.<br><br><strong>오늘 이 싸움이 우리 동맹의 이름을 결정합니다. FOLLOW ME!</strong>"</div>
+      </div>
+      <div class="briefing-box bb-chat">
+        <div class="bb-chat-label">💬 채팅 지시 — 복사해서 동맹 채팅에 붙여넣기</div>
+        <div class="chat-cmd"><div class="cmd-bullet">1</div><div class="cmd-text">[R5 명령] 제1진 — 성문 집결지 즉시 이동. 응답 필수</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">2</div><div class="cmd-text">제2진 B팀 — 적 후방 자원지대 압박 시작. 전선 분산 목적</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">3</div><div class="cmd-text">방어 멤버 — 성문 수비 유지. 적 진입 시 집중 공세 전환</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">4</div><div class="cmd-text">T5 미보유자 — 배후 자원 이송 우선. 직접 교전 금지</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">5</div><div class="cmd-text">[체크] 현재 위치 확인 후 담당 역할 채팅 답장</div></div>
+      </div>
+    </div>
+
+    <!-- DEMO 1: MMORPG -->
+    <div class="demo-content" id="dc1">
+      <div class="demo-meta" style="background:rgba(8,145,178,.06);border-color:rgba(8,145,178,.2)">
+        <div class="dm-ico">⚔️</div>
+        <div><div class="dm-game">리니지W — 혈맹장 공성전 2차 돌격</div><div class="dm-sit">1차 돌격 실패 후 재결집, 적 힐러 위치 파악됨</div></div>
+        <div class="dm-output-type" style="background:rgba(8,145,178,.15);color:#22d3ee">💬 채팅 지시</div>
+      </div>
+      <div class="briefing-box bb-chat">
+        <div class="bb-chat-label">💬 채팅 지시 — 2차 돌격 전 복사 전달</div>
+        <div class="chat-cmd"><div class="cmd-bullet">1</div><div class="cmd-text">[혈맹장] 전원 A 집결 포인트 후퇴. 포션 보충 30초</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">2</div><div class="cmd-text">CC딜러 우선임무 — 적 힐러 3명 타겟 지정. 힐러 먼저</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">3</div><div class="cmd-text">탱커진 — 힐러 CC 확인 후 주력 진입. 타이밍 엄수</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">4</div><div class="cmd-text">힐러팀 — 탱커 후방 1칸 유지. 절대 선봉 금지</div></div>
+        <div class="chat-cmd"><div class="cmd-bullet">5</div><div class="cmd-text">2차 돌격 개시 시간: 카운트 3에 동시 진입. 준비 O/X 답장</div></div>
+      </div>
+      <div class="briefing-box bb-action">
+        <div class="bb-action-label">📋 행동 요령 — 역할별 개인 행동 순서</div>
+        <div class="action-steps">
+          <div class="ast"><div class="ast-num">탱커 STEP</div><div class="ast-txt">① 집결지 복귀 → ② 포션 보충 → ③ 힐러 CC 신호 확인 → ④ 동시 진입</div></div>
+          <div class="ast"><div class="ast-num">딜러 STEP</div><div class="ast-txt">① 적 힐러 3명 타겟 설정 → ② 탱커 진입과 동시 CC 스킬 사용 → ③ 힐러 처리 후 주력 딜</div></div>
+          <div class="ast"><div class="ast-num">힐러 STEP</div><div class="ast-txt">① 탱커 후방 1칸 유지 → ② 탱커 HP 50% 이하 시 힐 우선 → ③ 선봉 이탈 절대 금지</div></div>
+          <div class="ast"><div class="ast-num">금지 행동</div><div class="ast-txt">신호 전 단독 진입 금지 / 힐러가 선봉 금지 / CC 없이 탱커 진입 금지</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO 2: FPS -->
+    <div class="demo-content" id="dc2">
+      <div class="demo-meta" style="background:rgba(201,168,76,.05);border-color:rgba(201,168,76,.18)">
+        <div class="dm-ico">🎯</div>
+        <div><div class="dm-game">PUBG — 스쿼드 리더 / 파이널 서클 2대1 열세</div><div class="dm-sit">4명 대비 아군 2명 생존, 적 위치 확인됨, 자원 우세</div></div>
+        <div class="dm-output-type" style="background:rgba(201,168,76,.12);color:var(--gold2)">📋 행동 요령</div>
+      </div>
+      <div class="briefing-box bb-voice">
+        <div class="bb-voice-label">🎙️ 육성 브리핑 — 팀원에게 전달</div>
+        <div class="bb-voice-text">"침착하게 들어. 우리가 2대4지만 <strong>지형과 자원은 우리가 앞서 있다.</strong> 이건 불리한 싸움이 아니야.<br><br>건물 2층 엄폐 유지. 내가 소음기 저격으로 선공하면 너는 반대 각도에서 동시 압박해. 한 명 다운되는 순간 나머지 3명의 시선이 분산된다. 그때 우리가 치고 들어간다. 절대 무리하지 마 — <strong>첫 다운이 핵심이야.</strong>"</div>
+      </div>
+      <div class="briefing-box bb-action">
+        <div class="bb-action-label">📋 행동 요령 — 2명 협공 순서</div>
+        <div class="action-steps">
+          <div class="ast"><div class="ast-num">STEP 1</div><div class="ast-txt">건물 2층 엄폐 위치 확보. 창문 각도 2방향 분리</div></div>
+          <div class="ast"><div class="ast-num">STEP 2</div><div class="ast-txt">A: 저격 선공 / B: 반대 각도 동시 압박 (신호 후 동시)</div></div>
+          <div class="ast"><div class="ast-num">STEP 3</div><div class="ast-txt">적 1명 다운 확인 → 즉시 어그로 분산 유도 후 진입</div></div>
+          <div class="ast"><div class="ast-num">금지 행동</div><div class="ast-txt">단독 노출 금지 / 신호 없이 먼저 움직이지 말 것</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO 3: CADET -->
+    <div class="demo-content" id="dc3">
+      <div class="demo-meta" style="background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2)">
+        <div class="dm-ico">🎖️</div>
+        <div><div class="dm-game">사관생도 — PT 발표용 작전 브리핑 초안</div><div class="dm-sit">소대 야간 수색 작전 상황 보고 브리핑</div></div>
+        <div class="dm-output-type" style="background:rgba(22,163,74,.14);color:var(--grn3)">🎙️ PT 브리핑 초안</div>
+      </div>
+      <div class="briefing-box bb-voice" style="background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.18)">
+        <div class="bb-voice-label" style="color:var(--grn3)">🎖️ PT 발표 브리핑 초안 — 직접 읽을 수 있는 형식</div>
+        <div class="bb-voice-text" style="color:var(--txt)">"<strong>보고 드리겠습니다.</strong> 금야 작전 상황을 요약합니다.<br><br>현재 적 소규모 부대가 북방 3킬로미터 지점 능선 이면에 위치한 것으로 판단됩니다. 아군 소대는 2개 분대로 분리, A분대는 주접근로 감시를 담당하고 B분대는 측방 포위 기동을 실시합니다.<br><br><strong>핵심 판단 근거는 세 가지입니다.</strong> 첫째, METT-TC 상황 분석 결과 지형이 우리에게 유리합니다. 둘째, 적 이동 속도 고려 시 접촉 예상 시간은 0230입니다. 셋째, 현 배치로 교전 시 화력 우위가 확보됩니다.<br><br><strong>이상입니다.</strong>"</div>
+      </div>
+      <div class="demo-note">
+        💡 <strong>사관생도 활용 팁:</strong> 위 브리핑 구조(상황 → 판단 근거 3가지 → 결론)는 SMEAC 브리핑 포맷과 METT-TC를 결합한 형식입니다. 상황을 바꿔 입력하면 매번 다른 훈련 브리핑 초안이 생성됩니다. PT 발표 준비, 리더십 평가, 교관 피드백 전 초안 검토에 활용하세요.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ■■ PRICING ■■ -->
+<section id="pricing" class="price-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl red">PRICING</div>
+      <h2 class="sec-title">나에게 맞는 플랜으로<br>지휘를 시작하세요</h2>
+      <p class="sec-desc">무료 플랜으로 즉시 시작하고, 더 많은 기능이 필요하면 언제든 업그레이드하세요.</p>
+    </div>
+    <div class="price-grid">
       <div class="price-card">
-        <div class="price-name">Free</div>
-        <div class="price-amount"><span class="currency">$</span>0<span class="period"></span></div>
-        <div class="price-desc">Get started with the basics</div>
-        <ul class="price-features">
-          <li><span class="check">&#10003;</span> Unlimited Mission Briefs</li>
-          <li><span class="check">&#10003;</span> Unlimited Dry Fire (structure view)</li>
-          <li><span class="check">&#10003;</span> 1 Live Fire per blueprint</li>
-          <li><span class="check">&#10003;</span> AI matching recommendations</li>
-          <li><span class="check">&#10003;</span> Community reviews access</li>
+        <div class="pt free">FREE</div>
+        <div class="pa">₩0<span>/월</span></div>
+        <div class="pd">기본 브리핑 체험</div>
+        <ul class="pf">
+          <li class="yes">3종 출력 (육성·채팅·행동요령)</li>
+          <li class="yes">5개 게임 장르</li>
+          <li class="yes">Quick Mode (선택지 입력)</li>
+          <li class="yes">일 5회 브리핑</li>
+          <li class="no">전술 전문가 코멘트</li>
+          <li class="no">Pro Mode (자유 텍스트)</li>
+          <li class="no">클랜 공유 기능</li>
         </ul>
-        <button class="price-btn secondary">Get Started Free</button>
+        <button class="pb free" onclick="location.href='TacticalPrompt_앱_v2.html'">무료로 시작 →</button>
       </div>
-      <div class="price-card featured">
-        <div class="price-name">Pro</div>
-        <div class="price-amount"><span class="currency">$</span>19<span class="period">.99/mo</span></div>
-        <div class="price-desc">For serious operators</div>
-        <ul class="price-features">
-          <li><span class="check">&#10003;</span> Everything in Free</li>
-          <li><span class="check">&#10003;</span> 20 Live Fires per month</li>
-          <li><span class="check">&#10003;</span> Sonnet 4.6 model access</li>
-          <li><span class="check">&#10003;</span> Priority AI matching</li>
-          <li><span class="check">&#10003;</span> Doctrine badge system</li>
-          <li><span class="check">&#10003;</span> Export to GenAI.mil format</li>
+      <div class="price-card feat">
+        <div class="feat-badge">✦ 추천 플랜</div>
+        <div class="pt prem">PREMIUM</div>
+        <div class="pa">₩5,900<span>/월</span></div>
+        <div class="pd">개인 지휘관 완전 무장</div>
+        <ul class="pf">
+          <li class="yes">3종 출력 무제한</li>
+          <li class="yes">20개+ 게임 장르 전체</li>
+          <li class="yes">Quick + Pro Mode 모두</li>
+          <li class="yes">전술 전문가 코멘트 포함</li>
+          <li class="yes">위인 페르소나 v3.0 (롬멜 등)</li>
+          <li class="yes">브리핑 저장 히스토리 30일</li>
+          <li class="no">클랜 공유 기능</li>
         </ul>
-        <button class="price-btn primary">Subscribe to Pro</button>
+        <button class="pb prem">Premium 구독하기 →</button>
       </div>
       <div class="price-card">
-        <div class="price-name">Enterprise</div>
-        <div class="price-amount"><span class="currency">$</span>Custom<span class="period"></span></div>
-        <div class="price-desc">For units &amp; organizations</div>
-        <ul class="price-features">
-          <li><span class="check">&#10003;</span> Everything in Pro</li>
-          <li><span class="check">&#10003;</span> Unlimited Live Fires</li>
-          <li><span class="check">&#10003;</span> Custom blueprint development</li>
-          <li><span class="check">&#10003;</span> Team management &amp; SSO</li>
-          <li><span class="check">&#10003;</span> Dedicated TPE consultant</li>
-          <li><span class="check">&#10003;</span> SLA &amp; priority support</li>
+        <div class="pt clan">CLAN PACK 10</div>
+        <div class="pa">₩35,000<span>/월</span></div>
+        <div class="pd">10인 클랜 팀 플랜</div>
+        <ul class="pf">
+          <li class="yes">Premium 기능 × 10명</li>
+          <li class="yes">클랜 전용 브리핑 공유</li>
+          <li class="yes">클랜 히스토리 90일</li>
+          <li class="yes">팀 전술 프리셋 저장</li>
+          <li class="yes">클랜장 관리 대시보드</li>
+          <li class="no">50인 대규모 지원</li>
         </ul>
-        <button class="price-btn secondary">Contact Sales</button>
+        <button class="pb clan">Clan 10 구독 →</button>
+      </div>
+      <div class="price-card">
+        <div class="pt pro">CLAN PACK 50</div>
+        <div class="pa">₩119,000<span>/월</span></div>
+        <div class="pd">50인 대형 클랜 & e스포츠</div>
+        <ul class="pf">
+          <li class="yes">Premium 기능 × 50명</li>
+          <li class="yes">전용 채널 + API 연동</li>
+          <li class="yes">커스텀 브리핑 템플릿</li>
+          <li class="yes">e스포츠 팀 전술 코치 월 1회</li>
+          <li class="yes">연간 계약 20% 할인</li>
+          <li class="yes">전술 코치 1:1 컨설팅</li>
+        </ul>
+        <button class="pb pro">Clan 50 구독 →</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ACADEMY BANNER -->
-<section class="section" style="padding:60px 24px;background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(6,182,212,.04));border-top:1px solid rgba(16,185,129,.1);border-bottom:1px solid rgba(16,185,129,.1)">
-  <div class="section-inner" style="text-align:center">
-    <div style="font-size:2em;margin-bottom:12px">&#127891;</div>
-    <h3 style="font-size:1.5em;font-weight:800;margin-bottom:8px">Academy Program</h3>
-    <p style="color:var(--muted);max-width:600px;margin:0 auto 20px;font-size:.95em">Military academy students and .mil/.edu email holders get <strong style="color:var(--emerald)">12 months of Pro access free</strong>. Preparing the next generation of tactical prompt engineers.</p>
-    <a href="#cta" class="btn-primary" style="display:inline-flex">&#127891; Apply with .mil/.edu Email</a>
-  </div>
-</section>
+<!-- (Cadet section moved to Academy Program at bottom) -->
 
-<!-- CTA -->
-<section class="section cta-section" id="cta">
-  <div class="cta-inner">
-    <div style="font-size:2.5em;margin-bottom:16px">&#127919;</div>
-    <h2>Ready to Fire?</h2>
-    <p>Start your Mission Brief now. Match with the perfect blueprint in seconds. No credit card required.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="https://gumroad.com/tacticalprompt" target="_blank" class="btn-primary" style="display:inline-flex">&#128293; Browse on Gumroad</a>
-      <a href="https://cbrntactical.blogspot.com" target="_blank" class="btn-secondary" style="display:inline-flex">&#128214; Read Tactical Blog</a>
+<!-- ■■ PERSONA TEASER ■■ -->
+<div class="persona-tease">
+  <div class="pt-inner">
+    <div class="pt-badge">🏛️ v3.0 PERSONA UPDATE — 추가 기능 (선택)</div>
+    <h2 class="pt-title">+ 역사 속 명장 페르소나 <span style="color:#c4b5fd">선택 가능</span></h2>
+    <p class="pt-desc">FOLLOW ME 핵심 엔진 위에 역사적 위인 페르소나를 레이어로 추가할 수 있습니다. 롬멜의 전격전 스타일로, 이순신의 결의로, 조조의 모략으로 브리핑 어조를 변환합니다. Premium 플랜에서 선택 가능.</p>
+    <div class="pt-personas">
+      <span class="ptp">🦊 롬멜</span><span class="ptp">⭐ 패튼</span><span class="ptp">🐉 조조</span>
+      <span class="ptp">🏹 칭기스칸</span><span class="ptp">🌊 이순신</span><span class="ptp">🎖️ 아이젠하워</span>
     </div>
-    <p style="font-size:.8em;color:var(--dim);margin-top:24px;font-family:var(--mono)">Trusted by defense professionals. Powered by Claude AI.</p>
+    <p style="font-size:.78rem;color:var(--sub)">※ 페르소나는 브리핑 스타일을 변환하는 선택 기능입니다. FOLLOW ME 핵심 엔진(전술 내용)은 동일하게 작동합니다.</p>
+  </div>
+</div>
+
+<!-- ■■ FAQ ■■ -->
+<section id="faq" class="faq-sec">
+  <div class="ctr">
+    <div class="sec-head">
+      <div class="sec-lbl gold">FAQ</div>
+      <h2 class="sec-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="faq(this)">TacticalPrompt는 게임 팁 앱인가요, 군사 교육 앱인가요? <span class="ico">+</span></div>
+        <div class="faq-a">둘 다입니다. 하나의 FOLLOW ME 엔진이 게임 내 전술 지휘와 실제 군사 리더십 훈련 양쪽에 동시 적용됩니다. 게임을 통해 군사 교리를 체험하거나, 군사 교리를 게임 전술에 적용하는 방식입니다. 사관생도에게는 PT 브리핑·소부대 지휘 훈련 도구로, 게이머에게는 팀 전술 지시 생성 도구로 사용됩니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">v3.0 페르소나(롬멜, 패튼 등)는 핵심 기능인가요? <span class="ico">+</span></div>
+        <div class="faq-a">아닙니다. 페르소나는 FOLLOW ME 브리핑 엔진 위에 추가되는 선택적 스타일 레이어입니다. 핵심은 군사 교리 기반의 전술적 브리핑(육성·채팅·행동요령) 자동 생성이며, 페르소나는 그 어조를 롬멜 스타일 또는 이순신 스타일로 바꾸는 옵션 기능입니다. Premium 플랜에서 선택적으로 사용 가능합니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Academy Program(사관생도 무료)은 어떻게 신청하나요? <span class="ico">+</span></div>
+        <div class="faq-a">각 사관학교 공식 이메일(ac.kr, mil.kr 도메인)로 본인 인증 후 신청하시면 됩니다. 소대/중대 단위 그룹 신청도 가능합니다. 신청 후 24시간 내 Premium 계정이 자동 활성화됩니다. 이벤트는 2026년 4월~12월, 선착순 500명 한정입니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">군사 교리 기반이라고 하는데, 실제로 어떻게 적용되나요? <span class="ico">+</span></div>
+        <div class="faq-a">예를 들어, "적이 북쪽 통로를 막고 있는 불리한 상황"을 입력하면 AI가 손자병법의 '우회 기동' 원칙, FM 3-0의 '화력 집중' 원리, OODA Loop의 '적보다 빠른 결정'을 조합해 해당 상황에 최적화된 브리핑 문장을 생성합니다. 단순 팁이 아니라 교리의 논리가 브리핑 구조에 녹아있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">어떤 게임 장르를 지원하나요? <span class="ico">+</span></div>
+        <div class="faq-a">모바일 정복 전략(RoK, 클래시), MMORPG 공성전(리니지W, 아이온), FPS/배틀로얄(PUBG, Battlefield), 역사 전략 시뮬(삼국지, AoE, Total War), RTS(스타크래프트, CoH), 정복·건설(Civilization, CK3) 등 20개 이상의 장르를 지원합니다. 추가 장르는 지속 업데이트됩니다.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ■■ TRUST STRIP ■■ -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <p>SUPPORTED GAMES & PLATFORMS</p>
+    <div class="trust-row">
+      <span class="trust-item">Rise of Kingdoms</span><span class="trust-item">리니지W</span>
+      <span class="trust-item">PUBG</span><span class="trust-item">삼국지 시리즈</span>
+      <span class="trust-item">Civilization VI</span><span class="trust-item">Age of Empires IV</span>
+      <span class="trust-item">Total War</span><span class="trust-item">Hearts of Iron IV</span>
+    </div>
+  </div>
+</div>
+
+<!-- ■■ CTA FINAL ■■ -->
+<section class="cta-final">
+  <div class="ctr">
+    <div class="sec-lbl red" style="text-align:center">FOLLOW ME</div>
+    <h2 class="sec-title" style="text-align:center">리더가 말하는 순간<br>게임과 훈련이 바뀐다</h2>
+    <p class="cf-desc">전투의 시작은 항상 리더의 한마디입니다. FOLLOW ME는 그 한마디를 군사 교리 기반으로 즉시 생성해드립니다. 지금 바로 시작하세요.</p>
+    <div class="cta-btns">
+      <button class="btn-fm" onclick="location.href='TacticalPrompt_앱_v2.html'">🎙️ 지금 브리핑 생성하기 (무료)</button>
+      <button class="btn-outline" onclick="go('pricing')">💎 요금제 보기</button>
+    </div>
+  </div>
+</section>
+
+<!-- ■■ ACADEMY PROGRAM ■■ -->
+<section id="academy" class="academy-sec">
+  <div class="academy-card">
+    <div class="ac-icon">🎓</div>
+    <div class="ac-bar"></div>
+    <h2 class="ac-heading">Academy Program</h2>
+    <p class="ac-desc">Military academy students and .mil/.edu email holders get <strong>12 months of Pro access free</strong>.</p>
+    <p class="ac-sub">Preparing the next generation of tactical prompt engineers.</p>
+    <button class="ac-cta" onclick="openAcademyModal()">🎖️ Apply with .mil/.edu Email</button>
+  </div>
+</section>
+
+<!-- ■ ACADEMY MODAL ■ -->
+<div class="academy-overlay" id="academyOverlay" onclick="if(event.target===this)closeAcademyModal()">
+  <div class="academy-modal">
+    <button class="am-close" onclick="closeAcademyModal()">✕</button>
+    <div class="am-header">
+      <div class="am-icon">🎖️</div>
+      <h2>사관생도 Academy Program</h2>
+      <p>리더십 & 브리핑 향상 무료 프로그램</p>
+    </div>
+    <div class="am-badges">
+      <span class="am-badge bg-grn">🆓 Premium 1년 무료</span>
+      <span class="am-badge bg-gold">📅 2026.04 ~ 2026.12</span>
+      <span class="am-badge bg-red">🏫 사관학교 인증 필수</span>
+    </div>
+    <div class="am-body">
+      <div class="am-left">
+        <h3>혜택 상세</h3>
+        <div class="am-row"><span>플랜 등급</span><strong>Premium (₩5,900/월 상당)</strong></div>
+        <div class="am-row"><span>제공 기간</span><strong>2026년 12월까지 (약 9개월)</strong></div>
+        <div class="am-row"><span>대상</span><strong>육·해·공·국방·경찰 사관생도</strong></div>
+        <div class="am-row"><span>신청 방법</span><strong>사관학교 공식 이메일 인증</strong></div>
+        <div class="am-row"><span>그룹 신청</span><strong>소대/중대 단위 가능</strong></div>
+        <div class="am-row"><span>선착순</span><strong>500명 한정</strong></div>
+        <div class="am-progress">
+          <div class="amp-label"><span>신청 현황</span><strong id="cadCnt">127 / 500명</strong></div>
+          <div class="amp-bar"><div class="amp-fill" id="cadBar"></div></div>
+        </div>
+      </div>
+      <div class="am-right">
+        <h3>프로그램 내용</h3>
+        <div class="am-feat">🎙️ 육성 지휘 & 브리핑 역량 강화</div>
+        <div class="am-feat">🧠 OODA Loop · METT-TC AI 훈련 모듈</div>
+        <div class="am-feat">📚 손자병법·FM 3-0 교리 실전 적용</div>
+        <div class="am-feat">🏫 사관학교별 그룹 플랜 지원</div>
+        <div class="am-feat">🏆 소부대 지휘 시뮬레이션 워게임</div>
+        <div class="am-feat">🎁 후기 제출 시 1:1 전문가 코멘트</div>
+      </div>
+    </div>
+    <div class="am-footer">
+      <button class="am-apply">🎖️ 사관생도 무료 신청하기</button>
+      <p>📌 신청 후 24시간 내 Premium 계정 자동 활성화 · 소대 단위(10인+) 신청 시 클랜 팩 추가 제공</p>
+    </div>
+  </div>
+</div>
+
+<!-- ■■ FOOTER ■■ -->
 <footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">TACTICALPROMPT</div>
-      <p class="footer-desc">AI Tactical Prompt Blueprint Marketplace. Designed for military and defense AI operators. A UAM KoreaTech product.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <a href="#flow">How It Works</a>
-      <a href="#arsenal">Arsenal</a>
-      <a href="#pricing">Pricing</a>
-      <a href="https://cbrntactical.blogspot.com" target="_blank">Blog</a>
-    </div>
-    <div class="footer-col">
-      <h4>Resources</h4>
-      <a href="https://cbrntactical.blogspot.com/p/terms-of-service.html" target="_blank">Terms of Service</a>
-      <a href="https://cbrntactical.blogspot.com/p/privacy-policy.html" target="_blank">Privacy Policy</a>
-      <a href="#">API Docs</a>
-      <a href="#">TPE Application</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="#">UAM KoreaTech</a>
-      <a href="#">Contact</a>
-      <a href="https://www.linkedin.com/company/uamkoreatech" target="_blank">LinkedIn</a>
-      <a href="#">Careers</a>
-    </div>
+  <div class="f-brand">
+    <div class="fb">TacticalPrompt: FOLLOW ME</div>
+    <p>나를 따르라 — 전술 브리핑·육성 지휘 AI 플랫폼 v2.0</p>
   </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 UAM KoreaTech. All rights reserved.</span>
-    <span style="font-family:var(--mono);font-size:.75em">Patent Pending: KR 10-2025-XXXXXXX</span>
+  <div class="f-links">
+    <a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">고객지원</a>
+    <a href="#" onclick="openAcademyModal();return false">Academy Program</a><a href="#">파트너십 문의</a>
+    <a href="TacticalPrompt_앱_v2.html">앱 바로가기</a>
   </div>
+  <div class="f-copy">© 2026 UAMKoreaTech · All rights reserved.</div>
+</footer>
 
-            <!-- Founder Profile -->
-            <div style="text-align:center;padding:20px 0 10px;border-top:1px solid rgba(0,255,136,0.15);margin-top:15px">
-                <p style="font-size:13px;color:#00ff88;font-weight:600;margin:0 0 4px">PARK MOOJIN</p>
-                <p style="font-size:11px;color:#888;margin:0 0 3px">CEO & Founder, UAM KoreaTech | CBRN-CADS Creator | Tactical Prompt Engineer</p>
-                <p style="font-size:11px;color:#666;margin:0">CBRN-CADS 설계자 · BLIS-D 건식제독 원천기술 발명자</p>
-            </div>
-        </footer>
-
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function faq(el){el.parentElement.classList.toggle('open')}
+function switchDemo(i){
+  document.querySelectorAll('.demo-tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.demo-content').forEach((c,j)=>c.classList.toggle('on',i===j));
+}
+function switchAudience(t){
+  const isMil = t==='mil';
+  document.getElementById('dtMil').className='dt-btn'+(isMil?' on-mil':'');
+  document.getElementById('dtGame').className='dt-btn'+(!isMil?' on-game':'');
+  document.getElementById('dpMil').className='dual-panel'+(isMil?' on':'');
+  document.getElementById('dpGame').className='dual-panel'+(!isMil?' on':'');
+}
+// Academy modal
+function openAcademyModal(){
+  const ov=document.getElementById('academyOverlay');
+  ov.classList.add('open');
+  document.body.style.overflow='hidden';
+  // animate progress bar
+  setTimeout(()=>{
+    const bar=document.getElementById('cadBar');
+    if(bar) bar.style.width='25.4%';
+  },400);
+  // counter animation
+  let cc=100;
+  const el=document.getElementById('cadCnt');
+  const timer=setInterval(()=>{
+    if(cc<127){cc++;if(el)el.textContent=cc+' / 500명';}
+    else clearInterval(timer);
+  },20);
+}
+function closeAcademyModal(){
+  document.getElementById('academyOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+</script>
 </body>
 </html>
