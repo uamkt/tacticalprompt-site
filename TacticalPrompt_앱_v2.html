@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TacticalPrompt APP v2.0 — FOLLOW ME 육성 지휘 브리핑</title>
+<style>
+:root{
+  --bg:#0a0e1a;--sb:#0c1120;--card:#111827;--card2:#1a2335;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.05);
+  --txt:#f1f5f9;--sub:#64748b;--sub2:#94a3b8;
+  --red:#dc2626;--gold:#c9a84c;--grn:#16a34a;
+  --red2:#fca5a5;--gold2:#fde68a;--grn2:#86efac;
+  --grd-fm:linear-gradient(135deg,#dc2626 0%,#c9a84c 45%,#16a34a 100%);
+  --grd-rd:linear-gradient(135deg,#dc2626,#b91c1c);
+  --grd-gd:linear-gradient(135deg,#c9a84c,#a37c28);
+  --grd-gn:linear-gradient(135deg,#16a34a,#0d7940);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Noto Sans KR','Segoe UI',sans-serif;background:var(--bg);color:var(--txt);font-size:14px}
+
+/* ── HEADER ── */
+.app-header{
+  height:56px;background:rgba(12,17,32,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;
+  justify-content:space-between;padding:0 18px;flex-shrink:0;
+  position:fixed;top:0;width:100%;z-index:200
+}
+.ah-brand{display:flex;align-items:center;gap:10px}
+.ah-logo{
+  font-size:1.05rem;font-weight:900;letter-spacing:-0.3px;
+  background:var(--grd-fm);-webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+.ah-ver{font-size:.6rem;color:var(--gold);font-weight:800;letter-spacing:2px;margin-top:1px}
+.ah-right{display:flex;align-items:center;gap:8px}
+.mode-pill{
+  display:flex;background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:20px;overflow:hidden
+}
+.mode-btn{
+  padding:5px 14px;font-size:.72rem;font-weight:800;cursor:pointer;transition:.2s;
+  background:transparent;border:none;color:var(--sub);font-family:inherit
+}
+.mode-btn.on-mil{background:rgba(220,38,38,.18);color:#fca5a5}
+.mode-btn.on-game{background:rgba(22,163,74,.18);color:#86efac}
+.ah-plan{
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);
+  color:var(--gold);padding:4px 10px;border-radius:12px;font-size:.68rem;font-weight:800
+}
+.ah-btn{
+  padding:6px 14px;background:transparent;border:1px solid var(--border);
+  color:var(--sub2);border-radius:7px;font-size:.72rem;font-weight:700;
+  cursor:pointer;transition:.2s;font-family:inherit
+}
+.ah-btn:hover{background:rgba(255,255,255,.06)}
+.ah-site{
+  background:var(--grd-fm);color:#fff;border:none;
+  font-size:.72rem;padding:6px 14px
+}
+.ah-site:hover{opacity:.85}
+
+/* ── LAYOUT ── */
+.app-body{display:flex;height:100vh;padding-top:56px}
+.sidebar{
+  width:290px;background:var(--sb);border-right:1px solid var(--border);
+  overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+.main{flex:1;overflow-y:auto;background:var(--bg)}
+.main::-webkit-scrollbar{width:5px}
+.main::-webkit-scrollbar-thumb{background:rgba(255,255,255,.07);border-radius:3px}
+
+/* ── SIDEBAR SECTIONS ── */
+.sb-sec{padding:14px;border-bottom:1px solid var(--border)}
+.sb-title{
+  font-size:.65rem;font-weight:800;color:var(--sub);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:11px;display:flex;align-items:center;gap:6px
+}
+.sb-badge{
+  width:18px;height:18px;border-radius:50%;background:var(--grd-fm);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;flex-shrink:0
+}
+.sb-note{font-size:.65rem;color:var(--sub);background:rgba(255,255,255,.03);border-radius:7px;padding:5px 8px;line-height:1.6}
+
+/* ── SITUATION TYPE GRID ── */
+.sit-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sit-type{
+  background:var(--card);border:1px solid var(--border);border-radius:9px;
+  padding:9px 7px;cursor:pointer;transition:.22s;text-align:center;font-family:inherit
+}
+.sit-type:hover{border-color:rgba(201,168,76,.3);background:var(--card2)}
+.sit-type.sel{border-color:var(--gold);background:rgba(201,168,76,.09);box-shadow:0 0 0 1px rgba(201,168,76,.2)}
+.sit-type.sel-mil{border-color:var(--red);background:rgba(220,38,38,.09);box-shadow:0 0 0 1px rgba(220,38,38,.18)}
+.st-ic{font-size:1.25rem;display:block;margin-bottom:4px}
+.st-nm{font-size:.7rem;font-weight:700;color:var(--txt);line-height:1.3}
+.st-dc{font-size:.6rem;color:var(--sub);margin-top:2px}
+
+/* ── PERSONA (OPTIONAL) ── */
+.opt-toggle{
+  background:none;border:none;cursor:pointer;font-family:inherit;color:var(--sub2);
+  font-size:.73rem;font-weight:700;display:flex;align-items:center;gap:5px;
+  width:100%;text-align:left;padding:2px 0;margin-bottom:8px
+}
+.opt-toggle .ot-arrow{transition:.2s;font-size:.7rem}
+.opt-toggle.open .ot-arrow{transform:rotate(90deg)}
+.persona-panel{display:none}.persona-panel.open{display:flex;flex-direction:column;gap:5px}
+.p-btn{
+  background:var(--card);border:1px solid var(--border);border-radius:9px;
+  padding:9px 11px;cursor:pointer;transition:.22s;display:flex;align-items:center;gap:9px;
+  font-family:inherit;width:100%
+}
+.p-btn:hover{border-color:rgba(201,168,76,.25);background:var(--card2)}
+.p-btn.sel{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.p-btn.none-btn.sel{border-color:var(--grn);background:rgba(22,163,74,.08)}
+.p-btn.disabled{opacity:.35;cursor:default}
+.pav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.pnm{font-size:.77rem;font-weight:800;text-align:left}
+.pttl{font-size:.62rem;color:var(--sub);text-align:left;margin-top:1px}
+.plock{margin-left:auto;font-size:.62rem;color:var(--sub)}
+.p-badge-opt{
+  margin-left:auto;font-size:.58rem;background:rgba(201,168,76,.15);
+  color:var(--gold);padding:2px 6px;border-radius:6px;font-weight:800
+}
+
+/* ── HISTORY BAR ── */
+.hist-bar{padding:12px 14px;border-top:1px solid var(--border);background:var(--sb);margin-top:auto}
+.hist-title{font-size:.62rem;color:var(--sub);font-weight:800;letter-spacing:1.5px;margin-bottom:7px}
+.hist-list{display:flex;flex-direction:column;gap:4px}
+.hist-item{
+  background:var(--card);border:1px solid var(--border2);border-radius:6px;
+  padding:6px 9px;font-size:.7rem;cursor:pointer;transition:.18s;color:var(--sub2)
+}
+.hist-item:hover{background:var(--card2);color:var(--txt)}
+.hist-item .hi{font-weight:700;color:var(--txt)}
+
+/* ── MAIN CONTENT ── */
+.main-inner{max-width:860px;margin:0 auto;padding:24px 22px}
+
+/* MODE BANNER */
+.mode-banner{
+  display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:12px;
+  margin-bottom:20px;border:1px solid;transition:.3s
+}
+.mode-banner.mil{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.2)}
+.mode-banner.game{background:rgba(22,163,74,.07);border-color:rgba(22,163,74,.2)}
+.mb-icon{font-size:1.6rem}
+.mb-title{font-size:.9rem;font-weight:900}
+.mb-sub{font-size:.75rem;color:var(--sub);margin-top:2px;line-height:1.5}
+.mb-switch{
+  margin-left:auto;padding:6px 14px;border:1px solid var(--border);border-radius:8px;
+  background:transparent;color:var(--sub2);font-size:.72rem;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:.2s
+}
+.mb-switch:hover{background:rgba(255,255,255,.06)}
+
+/* CADET BANNER */
+.cadet-banner{
+  background:linear-gradient(135deg,rgba(22,163,74,.08),rgba(6,182,212,.08));
+  border:1px solid rgba(22,163,74,.2);border-radius:11px;
+  padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:18px
+}
+.cadet-banner .cbi{font-size:1.4rem}
+.cadet-banner p{font-size:.75rem;color:#d1fae5;line-height:1.6}
+.cadet-banner strong{color:#86efac}
+.cadet-banner a{color:#67e8f9;font-weight:700;text-decoration:underline;cursor:pointer}
+
+/* SITUATION INPUT BOX */
+.sit-box{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px;margin-bottom:18px
+}
+.sit-box h3{font-size:.82rem;font-weight:800;margin-bottom:11px;color:var(--sub2);display:flex;align-items:center;gap:7px}
+.sit-label{
+  display:inline-block;padding:2px 8px;border-radius:5px;font-size:.6rem;font-weight:900;
+  letter-spacing:.5px;margin-left:4px
+}
+.sit-label.mil{background:rgba(220,38,38,.15);color:#fca5a5}
+.sit-label.game{background:rgba(22,163,74,.15);color:#86efac}
+.preset-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.preset{
+  background:var(--card2);border:1px solid var(--border);border-radius:18px;
+  padding:5px 12px;font-size:.72rem;font-weight:600;cursor:pointer;transition:.18s;
+  color:var(--sub2);font-family:inherit
+}
+.preset:hover{border-color:rgba(201,168,76,.35);color:var(--gold)}
+textarea#situation{
+  width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:9px;padding:13px;color:var(--txt);font-size:.86rem;line-height:1.85;
+  resize:vertical;min-height:88px;font-family:inherit;transition:.2s
+}
+textarea#situation:focus{outline:none;border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.02)}
+textarea#situation::placeholder{color:var(--sub)}
+
+/* DOCTRINE TAGS */
+.doctrine-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.doc-tag{
+  font-size:.63rem;font-weight:700;padding:3px 9px;border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  color:var(--sub2);cursor:default;letter-spacing:.2px
+}
+.doc-tag.active{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gold2)}
+
+/* GENERATE ROW */
+.gen-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--border2)
+}
+.gen-info{font-size:.73rem;color:var(--sub);line-height:1.6}
+.gen-info .gi-accent{color:var(--gold);font-weight:700}
+.gen-info .gi-persona{color:var(--grn2);font-weight:700}
+.btn-gen{
+  padding:12px 28px;background:var(--grd-fm);color:#fff;border:none;border-radius:10px;
+  font-size:.9rem;font-weight:900;cursor:pointer;transition:.28s;font-family:inherit;
+  display:flex;align-items:center;gap:7px
+}
+.btn-gen:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,168,76,.3)}
+.btn-gen:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* LOADING */
+.loading{display:none;text-align:center;padding:44px 24px}
+.loading.show{display:block}
+.load-spinner{
+  width:48px;height:48px;border:3px solid rgba(201,168,76,.15);
+  border-top:3px solid var(--gold);border-radius:50%;
+  animation:spin .75s linear infinite;margin:0 auto 16px
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-steps{display:flex;flex-direction:column;gap:6px;max-width:320px;margin:0 auto}
+.load-step{
+  font-size:.75rem;color:var(--sub);display:flex;align-items:center;gap:8px;
+  opacity:.4;transition:.4s
+}
+.load-step.active{opacity:1;color:var(--gold2)}
+.load-step .ls-dot{width:6px;height:6px;border-radius:50%;background:var(--sub);flex-shrink:0}
+.load-step.active .ls-dot{background:var(--gold)}
+
+/* WELCOME */
+.welcome{padding:44px 24px;text-align:center}
+.welcome .wicon{font-size:3.2rem;margin-bottom:16px}
+.welcome h2{font-size:1.4rem;font-weight:900;margin-bottom:10px}
+.welcome p{color:var(--sub);font-size:.87rem;line-height:1.95;max-width:460px;margin:0 auto}
+.welcome .wflow{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  flex-wrap:wrap;margin-top:22px
+}
+.wf-step{
+  background:var(--card);border:1px solid var(--border);border-radius:9px;
+  padding:8px 14px;font-size:.74rem;color:var(--sub2)
+}
+.wf-step strong{display:block;font-size:.8rem;color:var(--txt);margin-bottom:2px}
+.wf-arr{color:var(--sub);font-size:1rem}
+
+/* OUTPUT AREA */
+.output-area{display:none}.output-area.show{display:block}
+.out-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;flex-wrap:wrap;gap:10px
+}
+.out-info{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);
+  border-radius:11px;padding:9px 14px
+}
+.out-ic{font-size:1.4rem}
+.out-nm{font-size:.86rem;font-weight:900}
+.out-detail{font-size:.68rem;color:var(--sub);margin-top:1px}
+.out-actions{display:flex;gap:7px}
+.out-btn{
+  padding:6px 13px;background:var(--card);border:1px solid var(--border);
+  border-radius:7px;font-size:.72rem;font-weight:700;cursor:pointer;color:var(--sub2);
+  transition:.18s;font-family:inherit
+}
+.out-btn:hover{background:var(--card2);color:var(--txt)}
+
+/* OUTPUT TABS */
+.out-tabs{
+  display:flex;gap:0;border-radius:11px 11px 0 0;overflow:hidden;
+  border:1px solid var(--border);border-bottom:none
+}
+.out-tab{
+  flex:1;padding:12px 8px;text-align:center;cursor:pointer;
+  font-size:.73rem;font-weight:800;background:var(--card);color:var(--sub);
+  transition:.18s;border-right:1px solid var(--border)
+}
+.out-tab:last-child{border-right:none}
+.out-tab.on.t0{background:rgba(220,38,38,.1);color:#fca5a5}
+.out-tab.on.t1{background:rgba(6,182,212,.1);color:#a5f3fc}
+.out-tab.on.t2{background:rgba(201,168,76,.1);color:#fde68a}
+.out-wrap{
+  background:var(--card);border:1px solid var(--border);border-radius:0 0 13px 13px;
+  padding:22px
+}
+.out-panel{display:none}.out-panel.on{display:block}
+
+/* PANEL 0 — 육성 브리핑 */
+.speech-box{
+  background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.18);
+  border-radius:11px;padding:18px;position:relative;font-size:.88rem;
+  line-height:2.1;color:#fca5a5
+}
+.copy-btn{
+  position:absolute;top:10px;right:10px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 9px;
+  font-size:.65rem;color:var(--sub2);cursor:pointer;transition:.18s;font-family:inherit
+}
+.copy-btn:hover{background:rgba(255,255,255,.13);color:var(--txt)}
+.copy-btn.ok{background:rgba(22,163,74,.18);border-color:var(--grn);color:var(--grn2)}
+.speech-smeac{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.smeac-card{
+  background:rgba(220,38,38,.04);border:1px solid rgba(220,38,38,.12);
+  border-radius:8px;padding:11px 13px
+}
+.smeac-lbl{font-size:.62rem;font-weight:900;letter-spacing:.8px;color:#fca5a5;margin-bottom:4px}
+.smeac-txt{font-size:.78rem;color:var(--red2);line-height:1.65}
+
+/* PANEL 1 — 채팅 지시 */
+.chat-box{
+  background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.18);
+  border-radius:11px;padding:18px;position:relative
+}
+.chat-intro{font-size:.75rem;color:#94a3b8;margin-bottom:14px;padding-bottom:11px;border-bottom:1px solid rgba(255,255,255,.05)}
+.cmd-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px}
+.cmd-row:last-child{margin-bottom:0}
+.cmd-num{
+  width:22px;height:22px;border-radius:50%;background:rgba(6,182,212,.25);color:#a5f3fc;
+  display:flex;align-items:center;justify-content:center;font-size:.64rem;font-weight:900;
+  flex-shrink:0;margin-top:1px
+}
+.cmd-txt{color:#a5f3fc;line-height:1.75;font-size:.83rem}
+.cmd-tag{
+  display:inline-block;padding:1px 7px;border-radius:10px;font-size:.63rem;font-weight:800;margin-right:5px
+}
+.cmd-tag.atk{background:rgba(220,38,38,.2);color:#fca5a5}
+.cmd-tag.def{background:rgba(6,182,212,.2);color:#a5f3fc}
+.cmd-tag.mov{background:rgba(22,163,74,.2);color:#86efac}
+.cmd-tag.sup{background:rgba(201,168,76,.2);color:#fde68a}
+
+/* PANEL 2 — 행동 요령 */
+.action-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative
+}
+.action-card{
+  background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);
+  border-radius:11px;padding:15px
+}
+.ac-role{font-size:.63rem;font-weight:900;letter-spacing:.5px;color:var(--gold);margin-bottom:5px}
+.ac-title{font-size:.84rem;font-weight:800;color:var(--gold2);margin-bottom:8px}
+.ac-steps{font-size:.78rem;color:#fef3c7;line-height:1.7}
+.ac-if{
+  margin-top:8px;padding-top:7px;border-top:1px solid rgba(201,168,76,.12);
+  font-size:.72rem;color:var(--sub2);line-height:1.6
+}
+.ac-if span{color:var(--gold2);font-weight:700}
+
+/* DOCTRINE CARD in output */
+.doctrine-banner{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;margin-top:14px;
+  display:flex;align-items:center;gap:10px
+}
+.db-ic{font-size:1.1rem}
+.db-nm{font-size:.75rem;font-weight:800;color:var(--gold2)}
+.db-quote{font-size:.72rem;color:var(--sub2);margin-top:2px;font-style:italic;line-height:1.55}
+
+/* UPGRADE BANNER */
+.upgrade-banner{
+  background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(22,163,74,.08));
+  border:1px solid rgba(201,168,76,.2);border-radius:11px;
+  padding:13px 16px;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:18px;flex-wrap:wrap
+}
+.ub-txt h4{font-size:.82rem;font-weight:800;color:var(--gold);margin-bottom:2px}
+.ub-txt p{font-size:.73rem;color:var(--sub)}
+.ub-btn{
+  padding:7px 16px;background:var(--grd-gd);color:#1a0a00;border:none;
+  border-radius:7px;font-size:.75rem;font-weight:900;cursor:pointer;
+  white-space:nowrap;font-family:inherit;flex-shrink:0
+}
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  html,body{overflow:auto}
+  .app-body{flex-direction:column;height:auto}
+  .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border)}
+  .action-grid,.speech-smeac{grid-template-columns:1fr}
+  .mode-pill{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="app-header">
+  <div class="ah-brand">
+    <div>
+      <div class="ah-logo">TacticalPrompt</div>
+      <div class="ah-ver">FOLLOW ME ENGINE v2.0</div>
+    </div>
+  </div>
+  <div class="ah-right">
+    <div class="mode-pill">
+      <button class="mode-btn on-mil" id="hdrMil" onclick="setMode('mil')">🎖️ 군사 모드</button>
+      <button class="mode-btn" id="hdrGame" onclick="setMode('game')">🎮 게임 모드</button>
+    </div>
+    <div class="ah-plan" id="planBadge">FREE</div>
+    <button class="ah-btn" onclick="location.href='TacticalPrompt_사이트_v2.html'">← 사이트로</button>
+    <button class="ah-btn ah-site" onclick="location.href='TacticalPrompt_사이트_v2.html#pricing'">Premium ↑</button>
+  </div>
+</header>
+
+<!-- ══════════ BODY ══════════ -->
+<div class="app-body">
+
+  <!-- ■■ SIDEBAR ■■ -->
+  <aside class="sidebar">
+
+    <!-- STEP 1: 상황 유형 -->
+    <div class="sb-sec">
+      <div class="sb-title">
+        <div class="sb-badge">1</div>
+        <span id="step1title">상황 유형 선택</span>
+      </div>
+
+      <!-- 군사 모드 상황 유형 -->
+      <div class="sit-grid" id="milSitGrid">
+        <button class="sit-type" onclick="selectSitType(this,'mil','pt','PT 브리핑','🏃')">
+          <span class="st-ic">🏃</span>
+          <div class="st-nm">PT 브리핑</div>
+          <div class="st-dc">체력단련 지휘</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'mil','tactical','전술 훈련','⚔️')">
+          <span class="st-ic">⚔️</span>
+          <div class="st-nm">전술 훈련</div>
+          <div class="st-dc">임무수행 상황</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'mil','report','지휘 보고','📋')">
+          <span class="st-ic">📋</span>
+          <div class="st-nm">지휘 보고</div>
+          <div class="st-dc">상급자 신고</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'mil','crisis','위기 대응','🚨')">
+          <span class="st-ic">🚨</span>
+          <div class="st-nm">위기 대응</div>
+          <div class="st-dc">돌발상황 처치</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'mil','leadership','리더십 교육','🎓')">
+          <span class="st-ic">🎓</span>
+          <div class="st-nm">리더십 교육</div>
+          <div class="st-dc">분대원 육성</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'mil','operation','작전 계획','🗺️')">
+          <span class="st-ic">🗺️</span>
+          <div class="st-nm">작전 계획</div>
+          <div class="st-dc">MDMP 브리핑</div>
+        </button>
+      </div>
+
+      <!-- 게임 모드 상황 유형 (hidden initially) -->
+      <div class="sit-grid" id="gameSitGrid" style="display:none">
+        <button class="sit-type" onclick="selectSitType(this,'game','mobile','모바일 전략','📱')">
+          <span class="st-ic">📱</span>
+          <div class="st-nm">모바일 전략</div>
+          <div class="st-dc">RoK · 클래시</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'game','mmorpg','MMORPG 공성','⚔️')">
+          <span class="st-ic">⚔️</span>
+          <div class="st-nm">MMORPG 공성</div>
+          <div class="st-dc">리니지 · 아이온</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'game','fps','FPS 슈터','🎯')">
+          <span class="st-ic">🎯</span>
+          <div class="st-nm">FPS 슈터</div>
+          <div class="st-dc">PUBG · BF</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'game','tank','전차 게임','🔫')">
+          <span class="st-ic">🔫</span>
+          <div class="st-nm">전차 게임</div>
+          <div class="st-dc">WoT · War Thunder</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'game','strategy','전략 시뮬','🗺️')">
+          <span class="st-ic">🗺️</span>
+          <div class="st-nm">전략 시뮬</div>
+          <div class="st-dc">문명 · 스타크래프트</div>
+        </button>
+        <button class="sit-type" onclick="selectSitType(this,'game','conquest','정복·건설','🏰')">
+          <span class="st-ic">🏰</span>
+          <div class="st-nm">정복·건설</div>
+          <div class="st-dc">Total War · Civ</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: 전술 스타일 (선택 사항) -->
+    <div class="sb-sec">
+      <div class="sb-title">
+        <div class="sb-badge" style="background:rgba(201,168,76,.3);color:var(--gold)">2</div>
+        전술 스타일 <span style="font-size:.58rem;font-weight:600;color:var(--sub);text-transform:none;letter-spacing:0;margin-left:4px">(선택 사항)</span>
+      </div>
+      <button class="opt-toggle" id="personaToggle" onclick="togglePersona()">
+        <span class="ot-arrow">▶</span> v3.0 페르소나 스타일 적용
+      </button>
+      <div class="persona-panel" id="personaPanel">
+        <button class="p-btn none-btn sel" onclick="selectPersona(this,'none')" id="pNone">
+          <div class="pav" style="background:rgba(22,163,74,.2);font-size:1rem">⚡</div>
+          <div><div class="pnm">기본 FOLLOW ME</div><div class="pttl">순수 전술 브리핑</div></div>
+          <span class="p-badge-opt" style="background:rgba(22,163,74,.15);color:#86efac">기본값</span>
+        </button>
+        <button class="p-btn" onclick="selectPersona(this,'rommel')">
+          <div class="pav" style="background:linear-gradient(135deg,#92400e,#f59e0b)">🦊</div>
+          <div><div class="pnm">롬멜 스타일</div><div class="pttl">전격전 · 속도 우선</div></div>
+        </button>
+        <button class="p-btn" onclick="selectPersona(this,'patton')">
+          <div class="pav" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)">⭐</div>
+          <div><div class="pnm">패튼 스타일</div><div class="pttl">공세 · 사기 강조</div></div>
+        </button>
+        <button class="p-btn" onclick="selectPersona(this,'yss')">
+          <div class="pav" style="background:linear-gradient(135deg,#0e4158,#0fb5c2)">🌊</div>
+          <div><div class="pnm">이순신 스타일</div><div class="pttl">진형 · 역전 발상</div></div>
+        </button>
+        <button class="p-btn disabled" onclick="showUpgrade()">
+          <div class="pav" style="background:linear-gradient(135deg,#7f1d1d,#dc2626)">🐉</div>
+          <div><div class="pnm">조조 스타일</div><div class="pttl">모략 · 심리전</div></div>
+          <span class="plock">🔒</span>
+        </button>
+        <button class="p-btn disabled" onclick="showUpgrade()">
+          <div class="pav" style="background:linear-gradient(135deg,#78350f,#d97706)">☀️</div>
+          <div><div class="pnm">손자 스타일</div><div class="pttl">병법 원칙 적용</div></div>
+          <span class="plock">🔒</span>
+        </button>
+        <button class="p-btn disabled" onclick="showUpgrade()">
+          <div class="pav" style="background:linear-gradient(135deg,#14532d,#22c55e)">🏹</div>
+          <div><div class="pnm">칭기스칸 스타일</div><div class="pttl">기동 · 포위</div></div>
+          <span class="plock">🔒</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="hist-bar">
+      <div class="hist-title">최근 브리핑 이력</div>
+      <div class="hist-list" id="histList">
+        <div class="hist-item"><span class="hi">🎖️ PT 브리핑</span> — 구보 2km 지휘 브리핑</div>
+        <div class="hist-item"><span class="hi">🎮 FPS 슈터</span> — 최종 라운드 반격 작전</div>
+        <div class="hist-item"><span class="hi">🎖️ 전술훈련</span> — 방어진지 구축 명령</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ■■ MAIN ■■ -->
+  <main class="main">
+    <div class="main-inner">
+
+      <!-- MODE BANNER -->
+      <div class="mode-banner mil" id="modeBanner">
+        <div class="mb-icon">🎖️</div>
+        <div>
+          <div class="mb-title" id="modeBannerTitle">군사 모드 — 지휘관 브리핑 생성기</div>
+          <div class="mb-sub" id="modeBannerSub">SMEAC 형식 육성 브리핑 · 군 공식 보고 형식 · 분대원 행동 요령</div>
+        </div>
+        <button class="mb-switch" onclick="setMode(currentMode==='mil'?'game':'mil')" id="modeSwitchBtn">🎮 게임 모드로 →</button>
+      </div>
+
+      <!-- ACADEMY LINK (군사 모드 전용, slim) -->
+      <div class="cadet-banner" id="cadetBanner" style="cursor:pointer" onclick="location.href='TacticalPrompt_사이트_v2.html#academy'">
+        <div class="cbi">🎓</div>
+        <p><strong>Academy Program</strong> — 사관생도 .mil/.edu 이메일 인증 시 Pro 12개월 무료 <a style="color:#67e8f9;font-weight:700">자세히 보기 →</a></p>
+      </div>
+
+      <!-- UPGRADE BANNER (locked persona 클릭 시) -->
+      <div class="upgrade-banner" id="upgradeBanner" style="display:none">
+        <div class="ub-txt">
+          <h4>🔒 Premium 전용 페르소나 스타일</h4>
+          <p>손자·조조·칭기스칸·나폴레옹 스타일 + 확장 브리핑 포맷 잠금 해제</p>
+        </div>
+        <button class="ub-btn" onclick="document.getElementById('upgradeBanner').style.display='none';location.href='TacticalPrompt_사이트_v2.html#pricing'">₩5,900/월 →</button>
+      </div>
+
+      <!-- SITUATION INPUT -->
+      <div class="sit-box">
+        <h3>
+          ⚔️ 전황 / 상황을 입력하세요
+          <span class="sit-label mil" id="modeLabel">군사 모드</span>
+        </h3>
+        <div class="preset-row" id="presetRow">
+          <button class="preset" onclick="setPreset('소대 구보 2km 실시 전, 대원 12명 집합 완료. 낙오 방지 및 사기 유지가 핵심 과제입니다.')">PT 구보 브리핑</button>
+          <button class="preset" onclick="setPreset('적 소부대가 북쪽 능선을 점령하고 있습니다. 아군 병력은 8명, 무기는 K2/K201입니다.')">전술 훈련 상황</button>
+          <button class="preset" onclick="setPreset('분대원 3명이 규정 위반으로 기강이 흐트러진 상황입니다. 단결력 회복이 필요합니다.')">기강 리더십</button>
+          <button class="preset" onclick="setPreset('대대장 주관 작전 지휘 브리핑. 5개 중대 지휘관 참석. 방어작전 시 지역 책임 배분 발표 필요.')">작전 브리핑</button>
+        </div>
+        <textarea id="situation" rows="3" placeholder="예) 소대 구보 2km 실시 전, 대원 12명 집합 완료. 선두 유지와 낙오 방지가 핵심 과제입니다. 날씨는 흐림, 기온 8도..."></textarea>
+        <div class="doctrine-row">
+          <span class="doc-tag" id="docSun">손자병법</span>
+          <span class="doc-tag" id="docFM">FM 3-0</span>
+          <span class="doc-tag" id="docOODA">OODA Loop</span>
+          <span class="doc-tag" id="docMETT">METT-TC</span>
+          <span class="doc-tag" id="docCLAU">클라우제비츠</span>
+        </div>
+        <div class="gen-row">
+          <div class="gen-info">
+            <span id="selInfoTxt">상황 유형을 먼저 선택해 주세요</span><br>
+            오늘 남은 생성: <span class="gi-accent" id="remaining">5회</span>
+          </div>
+          <button class="btn-gen" id="genBtn" onclick="generateBriefing()" disabled>
+            ⚡ FOLLOW ME 브리핑 생성
+          </button>
+        </div>
+      </div>
+
+      <!-- LOADING -->
+      <div class="loading" id="loadingArea">
+        <div class="load-spinner"></div>
+        <div class="load-steps">
+          <div class="load-step active" id="ls0"><div class="ls-dot"></div>상황 분석 · 전술 교리 매핑 중...</div>
+          <div class="load-step" id="ls1"><div class="ls-dot"></div>🎙️ 육성 브리핑 생성 중...</div>
+          <div class="load-step" id="ls2"><div class="ls-dot"></div>💬 채팅 지시 최적화 중...</div>
+          <div class="load-step" id="ls3"><div class="ls-dot"></div>📋 역할별 행동 요령 구성 중...</div>
+        </div>
+      </div>
+
+      <!-- WELCOME (default) -->
+      <div class="welcome" id="welcomeArea">
+        <div class="wicon">🎖️</div>
+        <h2>FOLLOW ME 엔진을 시작하세요</h2>
+        <p>상황 유형을 선택하고 전황을 입력하면<br>
+        즉시 사용 가능한 <strong>3종 브리핑</strong>이 생성됩니다.<br>
+        Discord 음성 방송 · 게임 채팅 복붙 · 역할별 행동 요령</p>
+        <div class="wflow">
+          <div class="wf-step"><strong>① 상황 유형</strong>사이드바에서 선택</div>
+          <div class="wf-arr">→</div>
+          <div class="wf-step"><strong>② 상황 입력</strong>전황 / 임무 기술</div>
+          <div class="wf-arr">→</div>
+          <div class="wf-step"><strong>③ 생성 클릭</strong>3종 브리핑 즉시 완성</div>
+        </div>
+      </div>
+
+      <!-- OUTPUT AREA -->
+      <div class="output-area" id="outputArea">
+        <div class="out-header">
+          <div class="out-info">
+            <div class="out-ic" id="outIc">⚔️</div>
+            <div>
+              <div class="out-nm" id="outNm">전술 훈련 · FOLLOW ME 브리핑</div>
+              <div class="out-detail" id="outDetail">군사 모드 · 교리 기반 분석 완료</div>
+            </div>
+          </div>
+          <div class="out-actions">
+            <button class="out-btn" onclick="copyAll()">📋 전체 복사</button>
+            <button class="out-btn" onclick="resetAll()">🔄 새 브리핑</button>
+          </div>
+        </div>
+
+        <div class="out-tabs">
+          <div class="out-tab on t0" id="ot0" onclick="switchTab(0)">🎙️ 육성 브리핑</div>
+          <div class="out-tab t1" id="ot1" onclick="switchTab(1)">💬 채팅 지시</div>
+          <div class="out-tab t2" id="ot2" onclick="switchTab(2)">📋 행동 요령</div>
+        </div>
+        <div class="out-wrap">
+
+          <!-- PANEL 0: 육성 브리핑 -->
+          <div class="out-panel on" id="op0">
+            <div class="speech-box" id="speechContent">
+              <button class="copy-btn" onclick="copyPanel('speechContent')">복사</button>
+              <div id="speechText"></div>
+              <div class="speech-smeac" id="smeacGrid"></div>
+            </div>
+            <div class="doctrine-banner" id="doctrineBanner0"></div>
+          </div>
+
+          <!-- PANEL 1: 채팅 지시 -->
+          <div class="out-panel" id="op1">
+            <div class="chat-box" id="chatContent">
+              <button class="copy-btn" onclick="copyPanel('chatContent')">복사</button>
+              <div class="chat-intro" id="chatIntro"></div>
+              <div id="chatCmds"></div>
+            </div>
+            <div class="doctrine-banner" id="doctrineBanner1"></div>
+          </div>
+
+          <!-- PANEL 2: 행동 요령 -->
+          <div class="out-panel" id="op2">
+            <div class="action-grid" id="actionContent"></div>
+            <div class="doctrine-banner" id="doctrineBanner2"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /main-inner -->
+  </main>
+
+</div><!-- /app-body -->
+
+<script>
+/* ══════════ STATE ══════════ */
+let currentMode = 'mil';       // 'mil' | 'game'
+let currentSitKey = null;      // e.g. 'pt', 'fps'
+let currentSitLabel = '';      // e.g. 'PT 브리핑'
+let currentSitIcon = '⚔️';
+let currentPersona = 'none';   // 'none' | 'rommel' | 'patton' | 'yss'
+let remaining = 5;
+let currentOutput = null;
+let personaOpen = false;
+
+/* ══════════ MODE ══════════ */
+function setMode(m){
+  currentMode = m;
+  const isMil = m === 'mil';
+  // header pills
+  document.getElementById('hdrMil').className = 'mode-btn' + (isMil?' on-mil':'');
+  document.getElementById('hdrGame').className = 'mode-btn' + (!isMil?' on-game':'');
+  // sidebar grids
+  document.getElementById('milSitGrid').style.display = isMil?'grid':'none';
+  document.getElementById('gameSitGrid').style.display = !isMil?'grid':'none';
+  // deselect sit type
+  currentSitKey = null; currentSitLabel = ''; currentSitIcon = isMil?'⚔️':'🎮';
+  document.querySelectorAll('.sit-type').forEach(b=>b.className='sit-type');
+  // mode banner
+  const banner = document.getElementById('modeBanner');
+  banner.className = 'mode-banner ' + (isMil?'mil':'game');
+  document.getElementById('modeBannerTitle').textContent = isMil
+    ? '군사 모드 — 지휘관 브리핑 생성기'
+    : '게임 모드 — 클랜·파티 전술 지휘 브리핑';
+  document.getElementById('modeBannerSub').textContent = isMil
+    ? 'SMEAC 형식 육성 브리핑 · 군 공식 보고 형식 · 분대원 행동 요령'
+    : '게임 채팅 즉시 복붙 · Discord 음성 브리핑 · 역할별 액션 카드';
+  document.getElementById('modeSwitchBtn').textContent = isMil?'🎮 게임 모드로 →':'🎖️ 군사 모드로 →';
+  // cadet banner
+  document.getElementById('cadetBanner').style.display = isMil?'flex':'none';
+  // label
+  const lbl = document.getElementById('modeLabel');
+  lbl.textContent = isMil?'군사 모드':'게임 모드';
+  lbl.className = 'sit-label '+(isMil?'mil':'game');
+  // presets
+  updatePresets();
+  updateGenBtn();
+  document.getElementById('step1title').textContent = isMil?'상황 유형 선택':'게임 장르 선택';
+}
+
+function updatePresets(){
+  const isMil = currentMode==='mil';
+  const row = document.getElementById('presetRow');
+  if(isMil){
+    row.innerHTML = `
+      <button class="preset" onclick="setPreset('소대 구보 2km 실시 전, 대원 12명 집합 완료. 낙오 방지 및 사기 유지가 핵심 과제입니다.')">PT 구보 브리핑</button>
+      <button class="preset" onclick="setPreset('적 소부대가 북쪽 능선을 점령하고 있습니다. 아군 병력은 8명, 무기는 K2/K201입니다.')">전술 훈련 상황</button>
+      <button class="preset" onclick="setPreset('분대원 3명이 규정 위반으로 기강이 흐트러진 상황입니다. 단결력 회복이 필요합니다.')">기강 리더십</button>
+      <button class="preset" onclick="setPreset('대대장 주관 작전 지휘 브리핑. 5개 중대 지휘관 참석. 방어작전 지역 책임 배분 발표.')">작전 브리핑</button>`;
+    document.getElementById('situation').placeholder = '예) 소대 구보 2km 실시 전, 대원 12명 집합 완료. 선두 유지와 낙오 방지가 핵심 과제입니다. 날씨는 흐림, 기온 8도...';
+  } else {
+    row.innerHTML = `
+      <button class="preset" onclick="setPreset('적이 북쪽에 집결해 있고 우리 병력은 2:1로 불리한 상황입니다. 자원이 부족하고 시간이 없습니다.')">병력 열세 상황</button>
+      <button class="preset" onclick="setPreset('아군 베이스가 공격받고 있고 메인 부대는 멀리 있습니다. 수비와 반격을 동시에 해야 합니다.')">베이스 위기</button>
+      <button class="preset" onclick="setPreset('결승전 마지막 라운드, 2점 뒤지고 있습니다. 남은 시간 5분, 전원 집결 가능합니다.')">결승 막판 역전</button>
+      <button class="preset" onclick="setPreset('적 방어선이 견고하고 정면 돌파가 3번 실패한 상황입니다. 새로운 접근이 필요합니다.')">방어선 돌파 실패</button>`;
+    document.getElementById('situation').placeholder = '예) 적 전차 부대가 E4 지점에 집결했고, 아군 측면이 노출된 상태입니다. 정면 돌파는 3번 실패했습니다...';
+  }
+}
+
+function setPreset(t){ document.getElementById('situation').value=t; updateGenBtn(); }
+
+/* ══════════ SITUATION TYPE ══════════ */
+function selectSitType(el, mode, key, label, icon){
+  // deselect all in current grid
+  const gridId = mode==='mil'?'milSitGrid':'gameSitGrid';
+  document.querySelectorAll('#'+gridId+' .sit-type').forEach(b=>{
+    b.className='sit-type';
+  });
+  el.className = 'sit-type sel'+(mode==='mil'?' sel-mil':'');
+  currentSitKey = key;
+  currentSitLabel = label;
+  currentSitIcon = icon;
+  updateGenBtn();
+  updateDoctrineHighlight(mode, key);
+  // update sel info
+  updateSelInfo();
+}
+
+function updateDoctrineHighlight(mode, key){
+  // reset all
+  ['docSun','docFM','docOODA','docMETT','docCLAU'].forEach(id=>{
+    document.getElementById(id).className='doc-tag';
+  });
+  if(mode==='mil'){
+    if(key==='pt' || key==='leadership') document.getElementById('docFM').className='doc-tag active';
+    if(key==='tactical' || key==='operation') {document.getElementById('docFM').className='doc-tag active'; document.getElementById('docMETT').className='doc-tag active';}
+    if(key==='crisis') {document.getElementById('docOODA').className='doc-tag active';}
+    if(key==='report') document.getElementById('docFM').className='doc-tag active';
+  } else {
+    if(key==='strategy' || key==='conquest') document.getElementById('docSun').className='doc-tag active';
+    if(key==='fps' || key==='tank') {document.getElementById('docOODA').className='doc-tag active';}
+    if(key==='mmorpg') document.getElementById('docCLAU').className='doc-tag active';
+    if(key==='mobile') document.getElementById('docSun').className='doc-tag active';
+  }
+}
+
+function updateSelInfo(){
+  const sel = document.getElementById('selInfoTxt');
+  if(currentSitKey){
+    sel.innerHTML = `<span class="gi-persona">✔ ${currentSitLabel}</span>${currentPersona!=='none'?' · 🎭 '+getPersonaName(currentPersona):''}`;
+  } else {
+    sel.textContent = '상황 유형을 먼저 선택해 주세요';
+  }
+}
+
+/* ══════════ PERSONA ══════════ */
+function togglePersona(){
+  personaOpen = !personaOpen;
+  const toggle = document.getElementById('personaToggle');
+  const panel = document.getElementById('personaPanel');
+  toggle.className = 'opt-toggle'+(personaOpen?' open':'');
+  panel.className = 'persona-panel'+(personaOpen?' open':'');
+}
+
+function selectPersona(el, key){
+  if(el.classList.contains('disabled')) return;
+  document.querySelectorAll('.persona-panel .p-btn').forEach(b=>{
+    b.classList.remove('sel');
+    b.classList.remove('none-btn');
+  });
+  el.classList.add('sel');
+  currentPersona = key;
+  updateSelInfo();
+  updateGenBtn();
+}
+
+function getPersonaName(k){
+  return {none:'기본 FOLLOW ME',rommel:'롬멜',patton:'패튼',yss:'이순신',조조:'조조',손자:'손자'}[k]||k;
+}
+
+function showUpgrade(){
+  const b = document.getElementById('upgradeBanner');
+  b.style.display = (b.style.display==='none'?'flex':'none');
+}
+
+/* ══════════ GEN BUTTON ══════════ */
+function updateGenBtn(){
+  const btn = document.getElementById('genBtn');
+  const hasInput = document.getElementById('situation').value.trim().length > 5;
+  btn.disabled = !(currentSitKey && hasInput);
+}
+document.getElementById('situation').addEventListener('input', updateGenBtn);
+
+/* ══════════ GENERATE ══════════ */
+function generateBriefing(){
+  if(!currentSitKey || remaining<=0) return;
+  const sitText = document.getElementById('situation').value.trim();
+  if(!sitText || sitText.length < 5) return;
+
+  // UI: hide welcome, show loading
+  document.getElementById('welcomeArea').style.display='none';
+  document.getElementById('outputArea').className='output-area';
+  document.getElementById('loadingArea').className='loading show';
+  document.getElementById('genBtn').disabled=true;
+
+  // animate load steps
+  let step=0;
+  const steps = ['ls0','ls1','ls2','ls3'];
+  steps.forEach(id=>document.getElementById(id).className='load-step');
+  document.getElementById(steps[0]).className='load-step active';
+  const stepTimer = setInterval(()=>{
+    step++;
+    if(step<steps.length){
+      document.getElementById(steps[step-1]).className='load-step';
+      document.getElementById(steps[step]).className='load-step active';
+    }
+  },550);
+
+  setTimeout(()=>{
+    clearInterval(stepTimer);
+    document.getElementById('loadingArea').className='loading';
+    const output = buildOutput(currentMode, currentSitKey, currentPersona, sitText);
+    currentOutput = output;
+    renderOutput(output);
+    remaining--;
+    document.getElementById('remaining').textContent = remaining+'회';
+    addHistory(currentSitIcon, currentSitLabel, sitText);
+    updateGenBtn();
+  },2400);
+}
+
+/* ══════════ BUILD OUTPUT ══════════ */
+function buildOutput(mode, sitKey, persona, sitText){
+  const personaStr = persona !== 'none' ? getPersonaName(persona)+' 스타일 ' : '';
+
+  if(mode === 'mil'){
+    return buildMilOutput(sitKey, persona, personaStr, sitText);
+  } else {
+    return buildGameOutput(sitKey, persona, personaStr, sitText);
+  }
+}
+
+/* ── 군사 모드 출력 ── */
+function buildMilOutput(sitKey, persona, pStr, sitText){
+  const situationShort = sitText.substring(0,60)+(sitText.length>60?'...':'');
+  const isSMEAC = ['tactical','operation','crisis','pt'].includes(sitKey);
+
+  const speech = {
+    text: `[${getPersonaName(persona)} 브리핑 개시]<br><br>`+
+          (sitKey==='pt'
+            ? `지금부터 체력단련 브리핑 실시합니다.<br>오늘 임무: 구보 2km, 팀 단결 완주.<br><br>` +
+              `집합 완료 상태를 확인했습니다.<br>오늘 낙오자는 없습니다. 단 하나의 목표로 움직입니다.<br><br>` +
+              `<strong>선두 조</strong>: 페이스 유지, 급격한 속도 변화 금지.<br>` +
+              `<strong>후미 조</strong>: 낙오 징조 즉시 보고, 사이 유지 3보.<br><br>` +
+              `우리는 하나의 부대로 완주합니다. 이상 없으면 출발!`
+            : sitKey==='crisis'
+            ? `[긴급 상황 브리핑]<br><br>현재 상황을 OODA 루프로 분석합니다.<br><br>`+
+              `<strong>Observe</strong>: ${situationShort}<br>`+
+              `<strong>Orient</strong>: 우선순위 위협 식별 완료.<br>`+
+              `<strong>Decide</strong>: 즉각 대응 행동 발령.<br>`+
+              `<strong>Act</strong>: 지금부터 아래 행동 개시!`
+            : `[${sitKey==='operation'?'작전':'전술훈련'} 브리핑 개시]<br><br>`+
+              `상황: ${situationShort}<br><br>`+
+              `<strong>주요 판단</strong>: METT-TC 분석 기반 즉각 행동 발령.<br>`+
+              `전 대원 임무 집중, 통신 유지, 이탈 금지.`),
+    smeac: isSMEAC ? [
+      {lbl:'S — 상황', txt: situationShort},
+      {lbl:'M — 임무', txt: sitKey==='pt'?'낙오 없이 구보 2km 완주, 단체 귀환':sitKey==='crisis'?'즉각 대응 및 피해 최소화':'임무 목표 달성, 전술 우위 확보'},
+      {lbl:'E — 실행', txt: pStr+'교리 기반 단계별 행동 개시. 지휘관 명령 우선.'},
+      {lbl:'A/C — 지원', txt: '이웃 부대 협조, 통신망 유지, 의무 지원 대기'},
+      {lbl:'C — 지휘통제', txt: '지휘소: 현 위치. 보고: 5분 주기. 식별표지: 확인'},
+    ] : null,
+    doctrine: {
+      icon:'📖',
+      name: sitKey==='crisis'?'OODA Loop (John Boyd)':sitKey==='pt'||sitKey==='leadership'?'FM 3-0 미 육군 야전 교범':'METT-TC 한국군 합동 교리',
+      quote: sitKey==='crisis'?'"빠른 관찰-판단-결심-행동 사이클이 위기를 선점한다."':sitKey==='pt'?'"지휘관의 존재감이 부대의 사기를 결정한다."':'"임무·적·지형·가용부대·시간·민간인 요소를 종합 분석한다."'
+    }
+  };
+
+  const chat = {
+    intro: `📣 [${sitKey==='pt'?'PT 지휘':sitKey==='operation'?'작전 명령':'전술 명령'} — COPY & PASTE 준비완료]`,
+    cmds:[
+      {tag:'atk',txt: sitKey==='pt'?'[구보 출발] 전체 정렬 — 선두 1열, 후미 지정조. 출발 신호 대기.':'[접근 기동] 2개조 분산이동 — α조 좌측, β조 우측 동시 전개'},
+      {tag:'def',txt: sitKey==='pt'?'[낙오 방지] 후미조장 → 매 500m 이상 보고. 속도 급변 금지.':'[진지 확보] 제1열 사격진지 구축, 제2열 후방 예비 대기'},
+      {tag:'mov',txt: sitKey==='pt'?'[최종 구간] 전원 가속 — 일렬 유지, 선두 선착순 금지.':'[화력 지원] 기관총조 우측 고지 점령 → 양측 압박 동시 개시'},
+      {tag:'sup',txt: sitKey==='pt'?'[귀환 후] 전원 집합 → 총원 보고 → 냉각 준비.':'[통신 유지] 모든 조 5분 주기 상황 보고 — 침묵은 이상 신호'},
+    ],
+    doctrine: {icon:'💬',name:'채팅 지시 포맷',quote:'"명확하고 간결한 명령이 혼란을 없애고 실행 속도를 높인다." — FM 6-22'}
+  };
+
+  const actions = [
+    {role:'지휘관 (자신)', title: sitKey==='pt'?'페이스 세터 역할':'선두 기동 지휘',
+      steps: sitKey==='pt'?'1. 대열 정면 위치\n2. 일정 페이스 유지\n3. 구호 선창 사기 진작':'1. 지형 관찰 우선\n2. 2개 기동로 확보\n3. 행동 신호 발령',
+      ifText:'이탈자 발생 시', ifAction:'즉시 정지, 의무 호출'},
+    {role:'선임 분대원', title: sitKey==='pt'?'낙오 방지 후미 통제':'우측 기동 엄호',
+      steps: sitKey==='pt'?'1. 후미 5보 내 위치\n2. 낙오징조 즉보\n3. 사기 유지 격려':'1. 우측 고지 선점\n2. 사격 엄호 개시\n3. 이동 완료 보고',
+      ifText:'연락 두절 시', ifAction:'마지막 위치로 복귀'},
+    {role:'분대원 A', title: sitKey==='pt'?'속도 유지':'좌측 기동 돌파',
+      steps: sitKey==='pt'?'1. 선두 보폭 맞춤\n2. 호흡 일치\n3. 구령 복창':'1. 연막 활용\n2. 빠른 기동\n3. 진지 확보 보고',
+      ifText:'체력 저하 시', ifAction:'자진 보고 후 속도 조절'},
+    {role:'분대원 B', title: sitKey==='pt'?'통신 및 기록':'화력 지원 예비',
+      steps: sitKey==='pt'?'1. 구간별 시간 기록\n2. 총원 확인\n3. 완주 집합 관리':'1. 후방 감시\n2. 우발상황 대비\n3. 예비 진지 준비',
+      ifText:'돌발 위협 시', ifAction:'즉시 보고 → 지시 대기'},
+  ];
+
+  return {speech, chat, actions};
+}
+
+/* ── 게임 모드 출력 ── */
+function buildGameOutput(sitKey, persona, pStr, sitText){
+  const situationShort = sitText.substring(0,55)+(sitText.length>55?'...':'');
+
+  const gameNames = {mobile:'모바일 전략',mmorpg:'MMORPG 공성',fps:'FPS 슈터',tank:'전차 게임',strategy:'전략 시뮬',conquest:'정복·건설'};
+  const gameName = gameNames[sitKey]||sitKey;
+
+  const speech = {
+    text: `[${pStr}${gameName} 브리핑 개시]<br><br>`+
+      (sitKey==='fps'
+        ? `현재 전황: ${situationShort}<br><br>`+
+          `OODA 분석 완료 — <strong>즉각 실행!</strong><br><br>`+
+          `<strong>Observe</strong>: 적 위치 + 우리 병력 상태 재확인.<br>`+
+          `<strong>Orient</strong>: 우측 우회로 열려 있음 — 이것이 돌파구.<br>`+
+          `<strong>Decide</strong>: 연막 투척 후 우측 강습.<br>`+
+          `<strong>Act</strong>: 3초 후 전진!`
+        : sitKey==='mmorpg'
+        ? `성문 브리핑 시작합니다.<br><br>현 상황 — ${situationShort}<br><br>`+
+          `손자병법 제6편 허실: <strong>"적이 지키는 곳을 공격하지 말고, 지키지 않는 곳을 공격하라."</strong><br><br>`+
+          `좌측 성벽 수비가 약합니다. 전 클랜 좌측 집중!`
+        : `[${gameName} — ${pStr}FOLLOW ME 브리핑]<br><br>`+
+          `상황 요약: ${situationShort}<br><br>`+
+          `전술 원칙 적용: 분산 기동 + 화력 집중.<br>`+
+          `명령을 따르면 이깁니다. 출발!`),
+    smeac: null,
+    doctrine:{
+      icon: sitKey==='mmorpg'||sitKey==='strategy'?'📜':'⚡',
+      name: sitKey==='mmorpg'||sitKey==='strategy'?'손자병법 허실편':sitKey==='fps'||sitKey==='tank'?'OODA Loop':'클라우제비츠 전쟁론',
+      quote: sitKey==='mmorpg'?'"허한 곳을 공격하고, 실한 곳을 피하라."':sitKey==='fps'?'"행동 속도가 승패를 결정한다."':'"전쟁의 본질은 마찰과 불확실성을 극복하는 것이다."'
+    }
+  };
+
+  const chat = {
+    intro:`🎮 [${gameName} 전술 명령 — DISCORD/게임채팅 복붙]`,
+    cmds:[
+      {tag:'atk',txt: sitKey==='fps'?'[돌격 개시] @all 우측 연막 → 강습 동시. 카운트 3-2-1-GO!':sitKey==='mmorpg'?'[성벽 공격] 궁수조 12시 방향 집중 → 탱커조 성문 돌진':sitKey==='mobile'?'[자원 쟁탈] A팀 북부 광산, B팀 남부 석재장 동시 출발':'[전진] 전체 기동 명령 — 대형 유지, 통신 열어!'},
+      {tag:'def',txt: sitKey==='fps'?'[커버] 2명 후방 감시 — 측면 flanking 차단. 절대 고개 들지 마':sitKey==='mmorpg'?'[힐러 위치] 힐러 전원 후방 3줄 유지 — 적 타깃 되면 즉시 보고':sitKey==='mobile'?'[방어] 성 외벽 수비조 2명 남기고 이동. 공격 감지 즉시 전체 알림':'[방어 대형] 2조 측면 감시, 주력 집중'},
+      {tag:'mov',txt: sitKey==='fps'?'[우회] 2조 우측 건물 경유 → 적 배후 나타나면 동시 압박':sitKey==='mmorpg'?'[진격] 3파 동시 공격 — 탱커 선두, DPS 중간, 힐러 후방 각자 자리':sitKey==='mobile'?'[병력 이동] 예비 병력 A거점 이동 — 이동시간 4분. 자원 아끼며 행군':'[포위] 양익 기동 — 적이 둘로 나뉘면 각개격파'},
+      {tag:'sup',txt: sitKey==='fps'?'[탄약/키트] 키트 보유조 중앙 집결지서 보급 — 30초 안에 완료':sitKey==='mmorpg'?'[버프 타이밍] 스킬 쿨 확인 — 대장 신호 후 전원 버프 동시 발동':sitKey==='mobile'?'[외교] 동맹 길드에 지원 요청 — 현재 좌표 공유, ETA 확인':'[보급 연결] 후방 보급선 확보 → 전진 중단 금지'},
+    ],
+    doctrine:{icon:'💬',name:'채팅 지시 포맷',quote:'"복잡한 전술보다 명확한 한 줄 명령이 팀을 움직인다."'}
+  };
+
+  const roles = sitKey==='fps'
+    ? ['어썰트 (공격)','스나이퍼 (저격)','메딕 (치료)','서포트 (지원)']
+    : sitKey==='mmorpg'
+    ? ['탱커 (선봉)','딜러 DPS','힐러 (치료)','레인지 (원거리)']
+    : ['공격대','방어대','기동대','지원대'];
+
+  const roleTitles = sitKey==='fps'
+    ? ['연막 투척 후 돌입','엄호 사격 유지','아군 위치 우선 힐','탄약·키트 보급']
+    : sitKey==='mmorpg'
+    ? ['성문 파괴 선봉','집중 화력 폭딜','힐·버프 타이밍','원거리 저격 지원']
+    : ['목표 점령','진지 수비','측면 우회','물자 보급'];
+
+  const roleSteps = [
+    '1. 연막/연기 선투척\n2. 신호 후 돌입\n3. 클리어 즉시 보고',
+    '1. 고지 점령\n2. 교전 지원\n3. 탄약 관리',
+    '1. 아군 체력 모니터\n2. 위험 시 즉각 투입\n3. 자신 생존 우선',
+    '1. 측방 감시\n2. 보급 연결\n3. 철수 경로 확보'
+  ];
+
+  const actions = roles.map((r,i)=>({
+    role:r, title:roleTitles[i], steps:roleSteps[i],
+    ifText:'예상 외 상황 시', ifAction:'즉시 채팅 보고 → 명령 대기'
+  }));
+
+  return {speech, chat, actions};
+}
+
+/* ══════════ RENDER OUTPUT ══════════ */
+function renderOutput(o){
+  // header info
+  document.getElementById('outIc').textContent = currentSitIcon;
+  document.getElementById('outNm').textContent = currentSitLabel + ' · FOLLOW ME 브리핑';
+  document.getElementById('outDetail').textContent =
+    (currentMode==='mil'?'군사 모드':'게임 모드') +
+    (currentPersona!=='none'?' · '+getPersonaName(currentPersona)+' 스타일':'') +
+    ' · 교리 기반 분석 완료';
+
+  // PANEL 0 — 육성 브리핑
+  document.getElementById('speechText').innerHTML = o.speech.text;
+  const sg = document.getElementById('smeacGrid');
+  if(o.speech.smeac){
+    sg.innerHTML = o.speech.smeac.map(s=>`
+      <div class="smeac-card">
+        <div class="smeac-lbl">${s.lbl}</div>
+        <div class="smeac-txt">${s.txt}</div>
+      </div>`).join('');
+    sg.style.display='grid';
+  } else {
+    sg.innerHTML=''; sg.style.display='none';
+  }
+  renderDoctrine('doctrineBanner0', o.speech.doctrine);
+
+  // PANEL 1 — 채팅 지시
+  document.getElementById('chatIntro').textContent = o.chat.intro;
+  document.getElementById('chatCmds').innerHTML = o.chat.cmds.map((c,i)=>`
+    <div class="cmd-row">
+      <div class="cmd-num">${i+1}</div>
+      <div class="cmd-txt"><span class="cmd-tag ${c.tag}">${
+        c.tag==='atk'?'ATK':c.tag==='def'?'DEF':c.tag==='mov'?'MOV':'SUP'
+      }</span>${c.txt}</div>
+    </div>`).join('');
+  renderDoctrine('doctrineBanner1', o.chat.doctrine);
+
+  // PANEL 2 — 행동 요령
+  document.getElementById('actionContent').innerHTML = o.actions.map(a=>`
+    <div class="action-card">
+      <div class="ac-role">${a.role}</div>
+      <div class="ac-title">${a.title}</div>
+      <div class="ac-steps">${a.steps.replace(/\n/g,'<br>')}</div>
+      <div class="ac-if"><span>If: ${a.ifText}</span> → ${a.ifAction}</div>
+    </div>`).join('');
+  renderDoctrine('doctrineBanner2', o.speech.doctrine);
+
+  document.getElementById('outputArea').className='output-area show';
+  switchTab(0);
+}
+
+function renderDoctrine(id, d){
+  document.getElementById(id).innerHTML = `
+    <div class="db-ic">${d.icon}</div>
+    <div>
+      <div class="db-nm">적용 교리: ${d.name}</div>
+      <div class="db-quote">${d.quote}</div>
+    </div>`;
+}
+
+/* ══════════ TAB ══════════ */
+function switchTab(n){
+  for(let i=0;i<3;i++){
+    document.getElementById('ot'+i).className='out-tab t'+i+(i===n?' on':'');
+    document.getElementById('op'+i).className='out-panel'+(i===n?' on':'');
+  }
+}
+
+/* ══════════ COPY ══════════ */
+function copyPanel(id){
+  const el=document.getElementById(id);
+  const txt = el.innerText||el.textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btns=el.querySelectorAll('.copy-btn');
+    btns.forEach(b=>{b.textContent='✔ 복사됨';b.className='copy-btn ok';});
+    setTimeout(()=>btns.forEach(b=>{b.textContent='복사';b.className='copy-btn';}),2000);
+  }).catch(()=>{
+    const r=document.createRange();r.selectNode(el);
+    window.getSelection().removeAllRanges();window.getSelection().addRange(r);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+  });
+}
+
+function copyAll(){
+  if(!currentOutput) return;
+  const all = [
+    '=== 🎙️ 육성 브리핑 ===',
+    document.getElementById('speechContent').innerText,
+    '\n=== 💬 채팅 지시 ===',
+    document.getElementById('chatContent').innerText,
+    '\n=== 📋 행동 요령 ===',
+    document.getElementById('actionContent').innerText
+  ].join('\n');
+  navigator.clipboard.writeText(all).catch(()=>{});
+  const btn = document.querySelector('.out-btn');
+  btn.textContent='✔ 복사완료';
+  setTimeout(()=>btn.textContent='📋 전체 복사',2000);
+}
+
+/* ══════════ RESET & HISTORY ══════════ */
+function resetAll(){
+  document.getElementById('outputArea').className='output-area';
+  document.getElementById('welcomeArea').style.display='block';
+  document.getElementById('situation').value='';
+  currentOutput=null;
+  updateGenBtn();
+}
+
+function addHistory(icon, label, sitText){
+  const hl=document.getElementById('histList');
+  const short=sitText.substring(0,20)+(sitText.length>20?'...':'');
+  const item=document.createElement('div');
+  item.className='hist-item';
+  item.innerHTML=`<span class="hi">${icon} ${label}</span> — ${short}`;
+  hl.insertBefore(item,hl.firstChild);
+  if(hl.children.length>4) hl.removeChild(hl.lastChild);
+}
+
+/* ══════════ INIT ══════════ */
+setMode('mil');
+// default select persona "none"
+document.getElementById('pNone').classList.add('sel','none-btn');
+</script>
+</body>
+</html>
