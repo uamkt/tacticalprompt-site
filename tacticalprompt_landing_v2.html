@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TP-IQ — AI 아키텍처 기반 전술지능 진단. 60문항·3분·12가지 지휘관 아키타입. WLEP 6-Layer Architecture × TIP-9 Framework. tacticalprompt.com">
+<meta name="keywords" content="TP-IQ, tactical intelligence, TIP-9, WLEP, commander archetype, military leadership, 전술지능, 지휘관 유형">
+<meta property="og:title" content="TP-IQ · 전술지능 진단 — tacticalprompt.com">
+<meta property="og:description" content="AI 아키텍처로 측정하는 전술지능. 60문항·3분·12가지 지휘관 아키타입. 세계 최초의 전술지능 프레임워크.">
+<meta property="og:url" content="https://tacticalprompt.com/">
+<link rel="canonical" href="https://tacticalprompt.com/">
+<title>TP-IQ · 전술지능 진단 — tacticalprompt.com</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #1A3A5C;
+    --navy-dark: #0E2239;
+    --gold: #C8A84B;
+    --gold-dark: #A68A2F;
+    --steel: #4A6E8A;
+    --light: #E8F0F7;
+    --cream: #F6F2E8;
+    --dark: #1C2B3A;
+    --green: #2E7D32;
+    --red: #C62828;
+    --amber: #F57F17;
+    --grey: #F0F4F8;
+    --border: #D6DEE7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Calibri', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--dark);
+    line-height: 1.65;
+    background: #FDFCF8;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ============ NAV ============ */
+  nav.topnav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14, 34, 57, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 168, 75, 0.25);
+    padding: 16px 0;
+  }
+  .nav-inner {
+    max-width: 1180px; margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font-size: 17px; font-weight: 700; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .brand span { color: #fff; letter-spacing: 0; text-transform: none; margin-left: 10px; font-weight: 400; font-size: 14px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    color: #E8F0F7; text-decoration: none; font-size: 13px;
+    letter-spacing: 0.5px; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  /* ============ HERO ============ */
+  .hero {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #24466B 100%);
+    color: #fff;
+    padding: 120px 32px 140px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 30%, rgba(200,168,75,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(200,168,75,0.06) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1180px; margin: 0 auto; position: relative; }
+  .hero .eyebrow {
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 58px; font-weight: 700; line-height: 1.1;
+    margin-bottom: 20px; letter-spacing: -1px;
+    max-width: 820px;
+  }
+  .hero .subline {
+    font-size: 22px; line-height: 1.5; color: #C8D6E5;
+    margin-bottom: 40px; max-width: 700px; font-weight: 300;
+  }
+  .hero .subline em { color: var(--gold); font-style: normal; font-weight: 500; }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy-dark);
+    padding: 18px 36px; font-size: 15px; font-weight: 700;
+    border: none; cursor: pointer; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #E0BE5A; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: #fff; padding: 17px 34px;
+    font-size: 15px; font-weight: 500; letter-spacing: 0.5px;
+    border: 1px solid rgba(255,255,255,0.3); cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-quote {
+    margin-top: 80px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    max-width: 680px;
+  }
+  .hero-quote p { font-style: italic; font-size: 15px; color: #B8C8D8; line-height: 1.7; }
+  .hero-quote cite { font-style: normal; font-size: 12px; color: var(--gold); letter-spacing: 1px; margin-top: 10px; display: block; }
+  /* ============ SECTION ============ */
+  section.block {
+    padding: 100px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  section.block.dark { max-width: none; background: var(--navy-dark); color: #fff; }
+  section.block.cream { max-width: none; background: var(--cream); }
+  section.block.dark .inner, section.block.cream .inner {
+    max-width: 1180px; margin: 0 auto;
+  }
+  .eyebrow-block {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 16px;
+  }
+  h2.section-title {
+    font-size: 42px; font-weight: 700; line-height: 1.15;
+    margin-bottom: 22px; letter-spacing: -0.5px; color: var(--navy);
+  }
+  .dark h2.section-title { color: #fff; }
+  .section-lead {
+    font-size: 18px; line-height: 1.7; color: var(--steel);
+    max-width: 720px; margin-bottom: 56px;
+  }
+  .dark .section-lead { color: #B8C8D8; }
+  /* ============ 6-LAYER STACK ============ */
+  .layer-stack {
+    display: flex; flex-direction: column; gap: 10px;
+    max-width: 920px; margin: 0 auto;
+  }
+  .layer {
+    background: #fff; border: 1px solid var(--border);
+    padding: 22px 28px; display: grid;
+    grid-template-columns: 80px 220px 1fr 220px;
+    align-items: center; gap: 24px;
+    transition: all 0.2s;
+  }
+  .layer:hover { border-color: var(--gold); transform: translateX(4px); }
+  .layer.l6 {
+    background: linear-gradient(90deg, #FFF8E7 0%, #FDF4D8 100%);
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(200,168,75,0.15);
+  }
+  .layer-num {
+    font-size: 32px; font-weight: 700; color: var(--navy);
+    font-family: 'Georgia', serif;
+  }
+  .layer.l6 .layer-num { color: var(--gold-dark); }
+  .layer-name { font-weight: 700; font-size: 16px; color: var(--navy); }
+  .layer-name .en { display: block; font-size: 12px; color: var(--steel); font-weight: 400; margin-top: 3px; }
+  .layer-desc { font-size: 14px; color: var(--dark); line-height: 1.55; }
+  .layer-tech {
+    font-family: 'Consolas', 'Monaco', monospace; font-size: 11px;
+    color: var(--steel); background: var(--grey); padding: 6px 10px;
+    text-align: center; letter-spacing: 0.3px;
+  }
+  .layer.l6 .layer-tech { background: var(--gold); color: var(--navy-dark); font-weight: 700; }
+  .integration-eq {
+    background: var(--navy-dark); color: #E8F0F7;
+    padding: 32px 40px; margin-top: 50px;
+    font-family: 'Consolas', 'Monaco', monospace; font-size: 14px;
+    line-height: 1.9; border-left: 4px solid var(--gold);
+  }
+  .integration-eq .c { color: var(--gold); }
+  .integration-eq .comment { color: #7A92A8; }
+  /* ============ TIP-9 GRID ============ */
+  .tip9-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 40px;
+  }
+  .tip9-card {
+    background: #fff; border: 1px solid var(--border);
+    padding: 28px; transition: all 0.2s;
+    border-top: 4px solid var(--steel);
+  }
+  .tip9-card.cluster-cb { border-top-color: var(--navy); }
+  .tip9-card.cluster-ho { border-top-color: var(--gold); }
+  .tip9-card.cluster-sn { border-top-color: var(--steel); }
+  .tip9-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,58,92,0.08); }
+  .tip9-card .code {
+    font-family: 'Georgia', serif; font-size: 14px; font-weight: 700;
+    color: var(--gold-dark); letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .tip9-card .name { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .tip9-card .en { font-size: 12px; color: var(--steel); margin-bottom: 16px; font-style: italic; }
+  .tip9-card .question {
+    font-size: 13px; color: var(--dark); line-height: 1.55;
+    padding: 12px 0; border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); margin-bottom: 12px;
+  }
+  .tip9-card .exemplar {
+    font-size: 12px; color: var(--steel); line-height: 1.5;
+  }
+  .tip9-card .exemplar strong { color: var(--navy); }
+  /* ============ YI SUN-SIN DOSSIER ============ */
+  .dossier {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: start;
+  }
+  .dossier-left .era {
+    font-size: 12px; letter-spacing: 2px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .dossier-left h3 {
+    font-size: 42px; color: #fff; line-height: 1.1;
+    margin-bottom: 8px; letter-spacing: -1px;
+  }
+  .dossier-left .romanized {
+    font-size: 16px; color: #B8C8D8; font-style: italic;
+    margin-bottom: 30px;
+  }
+  .dossier-composite {
+    background: rgba(200,168,75,0.08); border: 1px solid var(--gold);
+    padding: 24px; margin-bottom: 24px;
+  }
+  .dossier-composite .score-num {
+    font-size: 58px; font-weight: 700; color: var(--gold);
+    line-height: 1; font-family: 'Georgia', serif;
+  }
+  .dossier-composite .score-label { font-size: 12px; color: #B8C8D8; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+  .dossier-composite .profile-type { font-size: 14px; color: #fff; margin-top: 16px; font-weight: 600; }
+  .dossier-composite .critical-gap {
+    font-size: 13px; color: #FFB3B3; margin-top: 8px;
+    padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .dossier-right .score-bars > div { margin-bottom: 14px; }
+  .score-bar-label {
+    display: flex; justify-content: space-between; font-size: 13px;
+    margin-bottom: 5px; color: #E8F0F7;
+  }
+  .score-bar-label .dim { font-weight: 600; }
+  .score-bar-label .val { font-family: 'Georgia', serif; font-weight: 700; }
+  .score-bar-track {
+    height: 8px; background: rgba(255,255,255,0.08);
+    position: relative; overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%; transition: width 1s ease-out;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+  }
+  .score-bar-fill.high { background: linear-gradient(90deg, #2E7D32, #66BB6A); }
+  .score-bar-fill.mid { background: linear-gradient(90deg, #F57F17, #FFB74D); }
+  .score-bar-fill.low { background: linear-gradient(90deg, #B71C1C, #E57373); }
+
+  /* Evidence section */
+  .evidence-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin-top: 60px; padding-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .evidence-card {
+    background: rgba(255,255,255,0.04); padding: 22px;
+    border-left: 3px solid var(--gold);
+  }
+  .evidence-card .dim-code { font-size: 11px; letter-spacing: 1px; color: var(--gold); font-weight: 700; }
+  .evidence-card .ev-title { font-size: 15px; color: #fff; font-weight: 700; margin: 6px 0 10px; }
+  .evidence-card .ev-body { font-size: 12px; color: #B8C8D8; line-height: 1.6; }
+  .evidence-card .ev-source { font-size: 10px; color: var(--steel); margin-top: 10px; font-style: italic; }
+
+  /* ============ ASSESSMENT ============ */
+  .assess-wrap {
+    background: #fff; border: 1px solid var(--border);
+    padding: 50px; margin-top: 40px; max-width: 860px; margin-left: auto; margin-right: auto;
+  }
+  .assess-header {
+    text-align: center; padding-bottom: 30px;
+    border-bottom: 1px solid var(--border); margin-bottom: 30px;
+  }
+  .assess-header h3 { font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+  .assess-header p { font-size: 14px; color: var(--steel); }
+  .progress-wrap {
+    display: flex; align-items: center; gap: 14px; margin-top: 18px;
+    font-size: 12px; color: var(--steel);
+  }
+  .progress-bar { flex: 1; height: 4px; background: var(--grey); position: relative; }
+  .progress-fill {
+    height: 100%; background: var(--gold); width: 0%;
+    transition: width 0.3s ease-out;
+  }
+  .question-panel {
+    min-height: 260px; display: flex; flex-direction: column;
+    justify-content: center; padding: 20px 0;
+  }
+  .q-meta { font-size: 11px; letter-spacing: 2px; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
+  .q-text { font-size: 19px; color: var(--dark); line-height: 1.5; margin-bottom: 30px; font-weight: 500; }
+  .likert {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 10px; margin-bottom: 20px;
+  }
+  .likert button {
+    background: #fff; border: 1.5px solid var(--border);
+    padding: 16px 8px; cursor: pointer; transition: all 0.15s;
+    font-size: 12px; color: var(--dark); font-weight: 600;
+    line-height: 1.3;
+  }
+  .likert button:hover { border-color: var(--gold); background: #FDF8E8; }
+  .likert button.selected { background: var(--navy); color: #fff; border-color: var(--navy); transform: scale(1.04); }
+  .likert button .num { display: block; font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--gold); }
+  .likert button.selected .num { color: var(--gold); }
+  .assess-nav { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .assess-nav button {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--steel); padding: 12px 24px; font-size: 13px;
+    cursor: pointer; letter-spacing: 0.5px;
+  }
+  .assess-nav button:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); }
+  .assess-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+  .assess-nav button.next { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .assess-nav button.next:hover:not(:disabled) { background: var(--navy-dark); }
+  /* Results panel */
+  #assessResults { display: none; text-align: center; }
+  #assessResults h3 { font-size: 26px; color: var(--navy); margin-bottom: 8px; }
+  #assessResults .sub { font-size: 14px; color: var(--steel); margin-bottom: 30px; }
+  .radar-wrap { max-width: 480px; margin: 0 auto 30px; }
+  .result-scores { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 20px; }
+  .rs { background: var(--grey); padding: 14px; text-align: left; }
+  .rs .rs-code { font-size: 10px; color: var(--gold-dark); letter-spacing: 1px; font-weight: 700; }
+  .rs .rs-name { font-size: 12px; color: var(--navy); font-weight: 600; margin: 2px 0; }
+  .rs .rs-score { font-size: 24px; color: var(--navy); font-weight: 700; font-family: 'Georgia', serif; }
+  .twin-panel { margin-top: 30px; padding: 20px; background: var(--cream); border-left: 3px solid var(--gold); text-align: left; }
+  .twin-panel h4 { font-size: 14px; color: var(--navy); margin-bottom: 8px; }
+  .twin-panel p { font-size: 13px; color: var(--dark); line-height: 1.6; }
+
+  /* ============ ARCHETYPE FULLSCREEN REVEAL ============ */
+  #archetypeReveal {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: radial-gradient(ellipse at center, #1A3A5C 0%, #0A1A2A 70%, #000 100%);
+    color: #fff;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  #archetypeReveal.active { display: flex; animation: revealFade 0.6s ease-out; }
+  @keyframes revealFade { from { opacity: 0; } to { opacity: 1; } }
+  #archetypeReveal::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(200,168,75,0.15) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(200,168,75,0.10) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .reveal-inner {
+    position: relative; text-align: center; padding: 40px;
+    max-width: 900px;
+  }
+  .reveal-eyebrow {
+    font-size: 12px; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 30px;
+    opacity: 0; animation: revealUp 0.8s ease-out 0.3s forwards;
+  }
+  .reveal-prefix {
+    font-size: 26px; color: #C8D6E5; font-weight: 300;
+    margin-bottom: 18px; letter-spacing: 1px;
+    opacity: 0; animation: revealUp 0.8s ease-out 0.6s forwards;
+  }
+  .reveal-archetype {
+    font-size: 68px; font-weight: 700; color: #fff;
+    line-height: 1.05; letter-spacing: -2px;
+    margin-bottom: 22px;
+    opacity: 0; animation: revealUp 1s ease-out 0.9s forwards;
+    text-shadow: 0 4px 30px rgba(200,168,75,0.3);
+  }
+  .reveal-archetype .gold { color: var(--gold); }
+  .reveal-twin {
+    font-size: 22px; color: #B8C8D8; font-style: italic;
+    margin-bottom: 50px; font-weight: 300;
+    opacity: 0; animation: revealUp 0.8s ease-out 1.4s forwards;
+  }
+  .reveal-twin strong { color: var(--gold); font-style: normal; font-weight: 600; }
+  .reveal-tagline {
+    font-size: 15px; color: #8A9DB0; line-height: 1.7;
+    max-width: 580px; margin: 0 auto 50px;
+    padding: 24px 0; border-top: 1px solid rgba(200,168,75,0.2);
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+    opacity: 0; animation: revealUp 0.8s ease-out 1.8s forwards;
+  }
+  .reveal-cta {
+    background: var(--gold); color: var(--navy-dark);
+    padding: 20px 50px; font-size: 14px; font-weight: 700;
+    border: none; cursor: pointer; letter-spacing: 2px;
+    text-transform: uppercase; transition: all 0.2s;
+    opacity: 0; animation: revealUp 0.8s ease-out 2.2s forwards;
+  }
+  .reveal-cta:hover { background: #E0BE5A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,168,75,0.3); }
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 720px) {
+    .reveal-archetype { font-size: 38px; }
+    .reveal-prefix { font-size: 18px; }
+    .reveal-twin { font-size: 16px; }
+  }
+
+  /* ============ TACTICAL PROMPT BOARD ============ */
+  .prompt-board {
+    margin-top: 50px; padding: 36px;
+    background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 100%);
+    color: #fff; text-align: left;
+    border-left: 4px solid var(--gold);
+  }
+  .prompt-board .pb-eyebrow {
+    font-size: 11px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; font-weight: 700; margin-bottom: 10px;
+  }
+  .prompt-board h4 {
+    font-size: 24px; color: #fff; margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .prompt-board .pb-lead {
+    font-size: 13px; color: #B8C8D8; line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .prompt-options {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 22px;
+  }
+  .prompt-options button {
+    background: rgba(255,255,255,0.04); color: #E8F0F7;
+    border: 1px solid rgba(200,168,75,0.3);
+    padding: 14px 12px; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; line-height: 1.4;
+    text-align: left;
+  }
+  .prompt-options button:hover { background: rgba(200,168,75,0.12); border-color: var(--gold); }
+  .prompt-options button.active { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
+  .prompt-context {
+    background: rgba(0,0,0,0.25); border: 1px solid rgba(200,168,75,0.2);
+    padding: 14px 16px; margin-bottom: 16px;
+  }
+  .prompt-context label {
+    display: block; font-size: 11px; letter-spacing: 1.5px;
+    color: var(--gold); text-transform: uppercase; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .prompt-context textarea {
+    width: 100%; background: transparent; border: none; outline: none;
+    color: #fff; font-family: inherit; font-size: 13px;
+    line-height: 1.6; resize: vertical; min-height: 56px;
+  }
+  .prompt-context textarea::placeholder { color: #5A7088; }
+  .pb-actions { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pb-actions button {
+    background: var(--gold); color: var(--navy-dark);
+    border: none; padding: 14px 28px; font-size: 13px; font-weight: 700;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .pb-actions button:hover { background: #E0BE5A; }
+  .pb-actions .btn-copy {
+    background: transparent; color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .pb-actions .btn-copy:hover { background: rgba(200,168,75,0.1); }
+  #promptOutput {
+    display: none;
+    background: #0A1A2A; border: 1px solid var(--gold);
+    padding: 22px; font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12.5px; line-height: 1.75; color: #E8F0F7;
+    white-space: pre-wrap; word-break: break-word;
+    max-height: 520px; overflow-y: auto;
+  }
+  #promptOutput.active { display: block; }
+  @media (max-width: 720px) {
+    .prompt-options { grid-template-columns: 1fr; }
+    .prompt-board { padding: 24px 18px; }
+  }
+
+
+  /* ============ ARCHETYPE GALLERY (TLC Color-Coded) ============ */
+  .gallery-intro {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    margin-bottom: 50px; align-items: center;
+  }
+  .gallery-intro .gi-left h3 { font-size: 28px; color: var(--navy); margin-bottom: 14px; letter-spacing: -0.3px; line-height: 1.25; }
+  .gallery-intro .gi-left p { font-size: 15px; color: var(--steel); line-height: 1.7; }
+  .gallery-intro .gi-right {
+    background: var(--navy-dark); color: #fff; padding: 28px;
+    border-left: 4px solid var(--gold);
+  }
+  .gallery-intro .gi-right .label { font-size: 11px; letter-spacing: 3px; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+  .gallery-intro .gi-right .stat { font-size: 42px; color: var(--gold); font-family: 'Georgia', serif; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .gallery-intro .gi-right .desc { font-size: 13px; color: #B8C8D8; line-height: 1.6; }
+
+  .tlc-legend {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin: 30px 0 40px; padding: 18px; background: var(--grey);
+  }
+  .tlc-legend .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; color: var(--navy);
+    padding: 6px 14px; background: #fff; border: 1px solid var(--border);
+  }
+  .tlc-legend .chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .archetype-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .arche-card {
+    background: #fff; border: 1px solid var(--border);
+    padding: 26px 22px 22px; position: relative;
+    transition: all 0.25s;
+    display: flex; flex-direction: column;
+    min-height: 260px;
+  }
+  .arche-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 5px; background: var(--arche-color, var(--steel));
+  }
+  .arche-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,58,92,0.12); border-color: var(--arche-color); }
+  .arche-card .tlc-code {
+    font-family: 'Consolas', monospace; font-size: 10px;
+    letter-spacing: 2px; color: var(--arche-color, var(--steel));
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .arche-card .tlc-badge {
+    display: inline-block; font-size: 9px; letter-spacing: 1.5px;
+    padding: 3px 8px; background: var(--arche-color); color: #fff;
+    font-weight: 700; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .arche-card h4 {
+    font-size: 18px; color: var(--navy); font-weight: 700;
+    margin-bottom: 4px; letter-spacing: -0.2px; line-height: 1.25;
+  }
+  .arche-card .arche-en {
+    font-size: 11px; color: var(--steel); font-style: italic;
+    margin-bottom: 12px;
+  }
+  .arche-card .arche-desc {
+    font-size: 12.5px; color: var(--dark); line-height: 1.6;
+    padding-top: 12px; border-top: 1px dashed var(--border);
+    flex: 1;
+  }
+  .arche-card .arche-twin {
+    font-size: 11px; color: var(--arche-color); font-weight: 700;
+    margin-top: 12px; letter-spacing: 0.3px;
+  }
+  /* Color variants */
+  .arche-card.tlc-red    { --arche-color: #C62828; }
+  .arche-card.tlc-gold   { --arche-color: #C8A84B; }
+  .arche-card.tlc-blue   { --arche-color: #1565C0; }
+  .arche-card.tlc-purple { --arche-color: #6A1B9A; }
+  .arche-card.tlc-green  { --arche-color: #2E7D32; }
+  .arche-card.tlc-steel  { --arche-color: #546E7A; }
+
+  /* Step indicators for page flow */
+  .step-nav {
+    display: flex; justify-content: center; gap: 0;
+    margin: 0 auto 40px; max-width: 900px;
+    border: 1px solid var(--border); background: #fff;
+  }
+  .step-nav .step {
+    flex: 1; padding: 18px 14px; text-align: center;
+    font-size: 12px; color: var(--steel); font-weight: 600;
+    border-right: 1px solid var(--border); position: relative;
+  }
+  .step-nav .step:last-child { border-right: none; }
+  .step-nav .step .num {
+    display: inline-block; width: 24px; height: 24px; line-height: 24px;
+    background: var(--grey); color: var(--steel); border-radius: 50%;
+    font-weight: 700; margin-right: 8px;
+  }
+  .step-nav .step.active { background: var(--navy); color: #fff; }
+  .step-nav .step.active .num { background: var(--gold); color: var(--navy-dark); }
+
+  @media (max-width: 860px) {
+    .gallery-intro { grid-template-columns: 1fr; gap: 24px; }
+    .archetype-grid { grid-template-columns: 1fr; }
+    .step-nav { flex-direction: column; }
+    .step-nav .step { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ============ TIER TABLE ============ */
+  .tier-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 40px;
+  }
+  .tier-card {
+    background: #fff; border: 1px solid var(--border); padding: 30px 24px;
+    position: relative;
+  }
+  .tier-card.featured { border: 2px solid var(--gold); background: #FFFCF4; }
+  .tier-card .tier-no { font-size: 11px; letter-spacing: 2px; color: var(--steel); font-weight: 700; text-transform: uppercase; }
+  .tier-card h4 { font-size: 20px; color: var(--navy); margin: 6px 0 4px; }
+  .tier-card .audience { font-size: 12px; color: var(--steel); margin-bottom: 18px; }
+  .tier-card .price { font-size: 26px; color: var(--navy); font-weight: 700; font-family: 'Georgia', serif; margin-bottom: 20px; }
+  .tier-card .price small { font-size: 12px; color: var(--steel); font-weight: 400; }
+  .tier-card ul { list-style: none; font-size: 12px; line-height: 1.7; color: var(--dark); }
+  .tier-card ul li { padding: 4px 0; border-bottom: 1px dashed var(--border); }
+  .tier-card ul li:last-child { border: 0; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #0A1A2A; color: #8A9DB0;
+    padding: 70px 32px 40px; text-align: center;
+  }
+  footer .brand-foot {
+    font-size: 16px; font-weight: 700; color: var(--gold);
+    letter-spacing: 3px; margin-bottom: 14px;
+  }
+  footer .tagline {
+    font-size: 13px; font-style: italic; color: #B8C8D8;
+    max-width: 620px; margin: 0 auto 30px; line-height: 1.7;
+  }
+  footer .copy { font-size: 11px; color: #5A6F85; letter-spacing: 0.5px; }
+
+  /* ============ RESPONSIVE SYSTEM ============ */
+
+  /* ── Tablet (≤ 1024px) ── */
+  @media (max-width: 1024px) {
+    .nav-inner { padding: 0 24px; }
+    .hero { padding: 100px 24px 120px; }
+    .hero-inner { padding: 0 !important; }
+    .hero h1 { font-size: 50px; }
+    section.block { padding: 80px 24px; }
+    .layer { grid-template-columns: 60px 180px 1fr; gap: 18px; }
+    .layer-tech { grid-column: 1 / -1; }
+    .tier-grid { grid-template-columns: repeat(2, 1fr); }
+    .tip9-grid { grid-template-columns: repeat(2, 1fr); }
+    .dossier { gap: 40px; }
+  }
+
+  /* ── Mobile (≤ 768px) ── */
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav-links { display: none; }
+    .nav-inner { padding: 0 20px; }
+    .brand { font-size: 14px; }
+
+    /* Hero */
+    .hero { padding: 80px 20px 100px; }
+    .hero-inner { padding: 0 !important; max-width: 100% !important; }
+    .hero .eyebrow { font-size: 10px; letter-spacing: 2.5px; margin-bottom: 16px; }
+    .hero h1 { font-size: 36px !important; line-height: 1.15 !important; margin-bottom: 24px !important; letter-spacing: -0.5px !important; }
+    .hero p { font-size: 15px !important; line-height: 1.7 !important; }
+    .hero-ctas { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 16px 20px; font-size: 14px; }
+
+    /* Sections */
+    section.block { padding: 60px 20px; }
+    section.block.dark, section.block.cream { padding: 60px 0; }
+    section.block.dark .inner, section.block.cream .inner { padding: 0 20px; }
+    h2.section-title { font-size: 28px; letter-spacing: -0.3px; }
+    .section-lead { font-size: 16px; margin-bottom: 40px; }
+    .eyebrow-block { font-size: 10px; }
+
+    /* Layers */
+    .layer { grid-template-columns: 48px 1fr; gap: 14px; padding: 16px 18px; }
+    .layer-desc, .layer-tech { grid-column: 1 / -1; }
+    .layer-num { font-size: 24px; }
+    .layer-name { font-size: 14px; }
+
+    /* TIP-9 */
+    .tip9-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    /* Dossier */
+    .dossier { grid-template-columns: 1fr; gap: 32px; }
+    .dossier-left h3 { font-size: 32px; }
+    .dossier-composite .score-num { font-size: 44px; }
+    .evidence-grid { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Gallery */
+    .gallery-intro { grid-template-columns: 1fr; gap: 20px; }
+
+    /* TLC Wheel */
+    .tlc-wheel-wrap { height: 560px !important; }
+    .tlc-node { width: 82px !important; height: 82px !important; font-size: 9px !important; }
+
+    /* Tier */
+    .tier-grid { grid-template-columns: 1fr; gap: 14px; }
+    .tier-card { padding: 24px 18px; }
+
+    /* Assessment */
+    .assess-wrap { padding: 24px 16px; margin: 20px 0; }
+    .q-text { font-size: 16px; }
+    .likert { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .likert button { padding: 12px 4px; font-size: 10px; }
+    .result-scores { grid-template-columns: repeat(2, 1fr); }
+
+    /* Prompt board */
+    .prompt-options { grid-template-columns: 1fr; }
+    .prompt-board { padding: 22px 16px; }
+
+    /* Academy promo */
+    .academy-grid { grid-template-columns: 1fr !important; }
+
+    /* Step nav */
+    .step-nav { flex-direction: column; }
+    .step-nav .step { border-right: none; border-bottom: 1px solid var(--border); padding: 14px 12px; }
+
+    /* Archetype wheel */
+    .archetype-grid { grid-template-columns: 1fr; }
+
+    /* Footer */
+    footer { padding: 50px 20px 30px; }
+  }
+
+  /* ── Small Mobile (≤ 480px) ── */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 30px !important; }
+    .hero .eyebrow { letter-spacing: 1.5px; }
+    h2.section-title { font-size: 24px; }
+    .dossier-left h3 { font-size: 26px; }
+    .tlc-wheel-wrap { height: 420px !important; }
+    .tlc-node { width: 68px !important; height: 68px !important; font-size: 8px !important; }
+    .reveal-archetype { font-size: 30px; }
+    .likert { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+    .likert button { padding: 10px 2px; font-size: 9px; }
+    .result-scores { grid-template-columns: 1fr 1fr; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .assess-wrap { margin: 0; border-radius: 0; }
+  }
+
+  /* ── Large Desktop (≥ 1400px) ── */
+  @media (min-width: 1400px) {
+    .hero-inner { max-width: 1200px !important; }
+    .hero h1 { font-size: 68px !important; }
+    section.block { max-width: 1280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="https://tacticalprompt.com/" style="text-decoration:none">
+      <div class="brand">TACTICALPROMPT <span>· TP-IQ</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#architecture">Architecture</a>
+      <a href="#tip9">TIP-9</a>
+      <a href="#mapping">Archetype</a>
+      <a href="#assess">Assessment</a>
+      <a href="#tiers">Academy</a>
+    </div>
+    <button id="navToggle" onclick="toggleNav()" style="display:none;background:none;border:1px solid rgba(200,168,75,0.5);color:var(--gold);padding:8px 12px;cursor:pointer;font-size:18px;line-height:1">☰</button>
+  </div>
+</nav>
+<style>
+@media (max-width: 768px) {
+  #navToggle { display:block !important; }
+  #navLinks {
+    display:none; position:absolute; top:57px; left:0; right:0;
+    background:rgba(10,26,42,0.98); padding:16px 24px; flex-direction:column;
+    gap:0; border-top:1px solid rgba(200,168,75,0.2); z-index:99;
+  }
+  #navLinks.open { display:flex; }
+  #navLinks a { padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:14px; }
+  #navLinks a:last-child { border:none; }
+}
+</style>
+<script>
+function toggleNav(){
+  const nl=document.getElementById('navLinks');
+  nl.classList.toggle('open');
+}
+</script>
+
+<!-- ═══════════════ HERO (left-aligned fixed-spacing) ═══════════════ -->
+<header class="hero">
+  <div class="hero-inner" style="text-align:left;max-width:900px;margin:0 auto;padding:0 48px">
+
+    <!-- Eyebrow -->
+    <div class="eyebrow" style="font-size:11px;letter-spacing:3.5px;color:var(--gold);font-weight:700;margin-bottom:20px;text-transform:uppercase">
+      TP-IQ &nbsp;·&nbsp; TACTICAL PROMPT INTELLIGENCE QUOTIENT
+    </div>
+
+    <!-- H1 -->
+    <h1 style="font-size:58px;font-weight:800;line-height:1.1;letter-spacing:-1.5px;color:#fff;margin:0 0 36px;max-width:680px">
+      AI 아키텍처로<br>측정하는 전술지능.
+    </h1>
+
+    <!-- Quote 1 -->
+    <p style="font-size:16px;line-height:1.8;color:#E8E4DB;margin:0 0 20px;font-style:italic;max-width:640px;padding-left:16px;border-left:3px solid rgba(200,168,75,0.5)">
+      "Mensa는 일반지능을, Gardner는 다중지능을 쪼갰고,<br>
+      <strong style="color:var(--gold);font-style:normal">TP-IQ는 AI 아키텍처</strong>로 지휘관의 결정 본능을 형식화합니다."
+    </p>
+
+    <!-- Quote 2 -->
+    <p style="font-size:16px;line-height:1.8;color:#E8E4DB;margin:0 0 32px;font-style:italic;max-width:640px;padding-left:16px;border-left:3px solid rgba(200,168,75,0.25)">
+      "IQ가 '얼마나 똑똑한가'를 재고 MBTI가 '누구인가'를 재었다면,<br>
+      TP-IQ는 '마찰 속에서 당신이 어떻게 결정하는가'를 측정한다."
+    </p>
+
+    <!-- Subline -->
+    <p style="font-size:15px;line-height:1.75;color:#B8C8D8;margin:0 0 10px;letter-spacing:0.1px">
+      세계 최초의 AI 아키텍처 기반 전술지능 프레임워크
+      &nbsp;—&nbsp; 60문항 · 3분 · 12가지 지휘관 아키타입.
+    </p>
+
+    <!-- Academic ref -->
+    <p style="font-size:12.5px;color:rgba(200,168,75,0.9);letter-spacing:0.4px;margin:0 0 36px">
+      ▸ 학술 원전:&nbsp;
+      <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6539078" target="_blank"
+         style="color:var(--gold);text-decoration:underline;text-underline-offset:3px">
+        SSRN 6539078 · Architecture of Command
+      </a>
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-ctas" style="justify-content:flex-start;gap:14px">
+      <a href="#assess" class="btn-primary" style="letter-spacing:0.8px">TP-IQ 진단 시작 &nbsp;·&nbsp; 3 MIN</a>
+      <a href="#mapping" class="btn-ghost">지휘관 타입 매핑 ▾</a>
+    </div>
+
+    <!-- Cite -->
+    <p style="margin-top:28px;font-size:11px;color:rgba(184,200,216,0.55);letter-spacing:0.5px">
+      — TP-IQ Founding Premise &nbsp;·&nbsp;
+      <a href="https://tacticalprompt.com/" target="_blank" style="color:rgba(200,168,75,0.6);text-decoration:none">tacticalprompt.com</a>
+    </p>
+
+  </div>
+</header>
+
+
+<!-- ═══════════════ STEP NAVIGATION ═══════════════ -->
+<div style="max-width:1180px;margin:40px auto 0;padding:0 32px;">
+  <div class="step-nav">
+    <div class="step active"><span class="num">1</span>TP-IQ 진단</div>
+    <div class="step"><span class="num">2</span>지휘관 타입 매핑</div>
+    <div class="step"><span class="num">3</span>Seed Case · 이순신</div>
+    <div class="step"><span class="num">4</span>Framework</div>
+    <div class="step"><span class="num">5</span>Architecture</div>
+  </div>
+</div>
+
+<!-- ═══════════════ ASSESSMENT ═══════════════ -->
+<section class="block" id="assess">
+  <div class="eyebrow-block">Step 1 · TP-IQ Self-Diagnostic</div>
+  <h2 class="section-title">60문항 · 3분.<br>당신의 TP-IQ를 측정합니다.</h2>
+  <p class="section-lead">
+    TP-IQ는 정답을 묻지 않습니다. 60문항은 당신의 결정 본능을 9개 요인에 매핑하는 행동 증거 질문입니다. 응답은 브라우저에만 저장되며, 서버로 전송되지 않습니다.
+  </p>
+
+  <div class="assess-wrap">
+    <div id="assessQuiz">
+      <div class="assess-header">
+        <h3>Tactical Intelligence Profile — TIP-9</h3>
+        <p>당신의 결정 본능을 9개의 축에 매핑합니다.</p>
+        <div class="progress-wrap">
+          <span>지휘관, Q <span id="qNum">1</span> / 60</span>
+          <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+          <span id="qDim">TRI</span>
+        </div>
+      </div>
+      <div class="question-panel">
+        <div class="q-meta" id="qMeta">DIMENSION · TRI · TERRAIN READING</div>
+        <div class="q-text" id="qText">—</div>
+        <div class="likert" id="likert">
+          <button data-v="1"><span class="num">1</span>전혀 아니다</button>
+          <button data-v="2"><span class="num">2</span>아니다</button>
+          <button data-v="3"><span class="num">3</span>중립</button>
+          <button data-v="4"><span class="num">4</span>그렇다</button>
+          <button data-v="5"><span class="num">5</span>매우 그렇다</button>
+        </div>
+      </div>
+      <div class="assess-nav">
+        <button id="prevBtn">◀ 이전</button>
+        <button id="nextBtn" class="next">다음 ▶</button>
+      </div>
+    </div>
+
+    <div id="assessResults">
+      <h3>당신의 TP-IQ 프로파일입니다.</h3>
+      <p class="sub">정답은 없습니다. 오직 당신의 결정 패턴만 있을 뿐입니다 — 노란 실선은 당신, 회색 점선은 전체 평균, 파란 점선은 Seed Case 이순신입니다.</p>
+      <div class="radar-wrap"><canvas id="radarChart"></canvas></div>
+      <div class="result-scores" id="resultScores"></div>
+      <div class="twin-panel">
+        <h4>당신과 가장 닮은 세 명의 지휘관</h4>
+        <p id="twinText">— 분석 중 —</p>
+      </div>
+
+      <!-- ═══════ TACTICAL PROMPT BOARD ═══════ -->
+      <div class="prompt-board">
+        <div class="pb-eyebrow">Tactical Prompt Generator</div>
+        <h4>당신의 9차원에 맞춘 전술 프롬프트</h4>
+        <p class="pb-lead">
+          당신의 TIP-9 결과값을 기반으로 LLM(Claude · GPT · Gemini)에 직접 붙여넣을 수 있는 전술 프롬프트를 생성합니다. 사용 시나리오를 선택하고, 필요 시 상황 컨텍스트를 추가하십시오.
+        </p>
+        <div class="prompt-options" id="promptOptions">
+          <button data-mode="decision" class="active">⚔ 결정 코칭<br><small>현재 직면한 결정에 TIP-9 강점·약점 적용</small></button>
+          <button data-mode="redteam">🎯 적군 시뮬레이션<br><small>당신의 약점을 노리는 가상 적의 수 예측</small></button>
+          <button data-mode="growth">📈 성장 로드맵<br><small>최저점 차원 보강 90일 트레이닝 플랜</small></button>
+          <button data-mode="negotiation">🤝 협상 전술<br><small>당신 프로파일에 최적화된 협상 스크립트</small></button>
+          <button data-mode="leadership">⚓ 리더십 진단<br><small>조직 운영에서 드러날 패턴과 사각지대</small></button>
+          <button data-mode="historical">📜 역사적 트윈 대화<br><small>닮은 지휘관에게 직접 자문 받는 시뮬레이션</small></button>
+        </div>
+        <div class="prompt-context">
+          <label>상황 컨텍스트 (선택)</label>
+          <textarea id="promptContext" placeholder="예: 신제품 출시를 앞두고 자원이 부족한 상태에서 경쟁사 3곳과 동시 대치 중. 6개월 내 시장 점유율 15% 확보가 목표."></textarea>
+        </div>
+        <div class="pb-actions">
+          <button id="generatePromptBtn">▶ 전술 프롬프트 생성</button>
+          <button class="btn-copy" id="copyPromptBtn">⧉ 클립보드 복사</button>
+        </div>
+        <div id="promptOutput"></div>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <button onclick="restartQuiz()" class="btn-ghost" style="color:var(--navy);border-color:var(--navy)">다시 진단</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ COMMANDER TYPE MAPPING WHEEL ═══════════════ -->
+<section class="block cream" id="mapping">
+  <div class="inner">
+    <div class="eyebrow-block">Commander Type Mapping · TLC Color Wheel</div>
+    <h2 class="section-title">12가지 지휘관 유형,<br>5개의 TLC 색상 코드.</h2>
+    <p class="section-lead">
+      TP-IQ 9요인 패턴은 12가지 지휘관 아키타입으로 수렴합니다. 각 유형은 Tactical Lesson Code(TLC) 색상으로 분류되며, 아래 원형 매핑에서 <strong>원하는 유형 이름을 클릭</strong>하면 소개 페이지가 열립니다. 진단을 완료하면 당신이 어느 코드에 속하는지도 확인할 수 있습니다.
+    </p>
+
+    <div class="tlc-legend">
+      <div class="chip"><span class="dot" style="background:#C62828"></span>TLC-R · 공세형 (Attack)</div>
+      <div class="chip"><span class="dot" style="background:#C8A84B"></span>TLC-G · 균형형 (Balance)</div>
+      <div class="chip"><span class="dot" style="background:#1565C0"></span>TLC-B · 지속형 (Sustain)</div>
+      <div class="chip"><span class="dot" style="background:#6A1B9A"></span>TLC-P · 두뇌형 (Mind)</div>
+      <div class="chip"><span class="dot" style="background:#2E7D32"></span>TLC-V · 학습형 (Vector)</div>
+    </div>
+
+    <!-- ═══ CIRCULAR MAPPING WHEEL ═══ -->
+    <div id="tlcWheelWrap" style="position:relative;width:100%;max-width:720px;margin:32px auto 20px;aspect-ratio:1/1">
+      <!-- axis labels -->
+      <div style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:3px;color:#8A9DB0;font-weight:700">OFFENSIVE · 공세</div>
+      <div style="position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:3px;color:#8A9DB0;font-weight:700">SUSTAINING · 지속</div>
+      <div style="position:absolute;top:50%;left:-4px;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;font-size:11px;letter-spacing:3px;color:#8A9DB0;font-weight:700">INDIVIDUAL · 개별</div>
+      <div style="position:absolute;top:50%;right:-4px;transform:translateY(-50%) rotate(90deg);transform-origin:right center;font-size:11px;letter-spacing:3px;color:#8A9DB0;font-weight:700">COLLECTIVE · 집단</div>
+
+      <!-- concentric guides and quadrant lines -->
+      <svg viewBox="0 0 720 720" style="position:absolute;inset:0;width:100%;height:100%">
+        <circle cx="360" cy="360" r="340" fill="none" stroke="#CFC9BE" stroke-width="1"/>
+        <circle cx="360" cy="360" r="240" fill="none" stroke="#CFC9BE" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="360" cy="360" r="130" fill="none" stroke="#CFC9BE" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="20" y1="360" x2="700" y2="360" stroke="#CFC9BE" stroke-width="1"/>
+        <line x1="360" y1="20" x2="360" y2="700" stroke="#CFC9BE" stroke-width="1"/>
+        <!-- quadrant labels -->
+        <text x="540" y="170" text-anchor="middle" font-size="13" fill="#8A9DB0" font-weight="700" letter-spacing="2">ATTACK</text>
+        <text x="540" y="560" text-anchor="middle" font-size="13" fill="#8A9DB0" font-weight="700" letter-spacing="2">SUSTAIN</text>
+        <text x="180" y="560" text-anchor="middle" font-size="13" fill="#8A9DB0" font-weight="700" letter-spacing="2">MIND</text>
+        <text x="180" y="170" text-anchor="middle" font-size="13" fill="#8A9DB0" font-weight="700" letter-spacing="2">VECTOR</text>
+        <!-- center label -->
+        <text x="360" y="355" text-anchor="middle" font-size="14" fill="#17243A" font-weight="800" letter-spacing="1">TP-IQ</text>
+        <text x="360" y="372" text-anchor="middle" font-size="10" fill="#17243A" font-weight="600" letter-spacing="1.5">TLC WHEEL</text>
+      </svg>
+
+      <!-- 12 nodes positioned around the circle (top=0°, clockwise) -->
+      <!-- style helper: circles are ~96px; we place by top/left via inline -->
+      <style>
+        .tlc-node { position:absolute;width:108px;height:108px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.15);transition:transform .2s ease,box-shadow .2s ease;border:3px solid #fff;transform:translate(-50%,-50%);padding:10px}
+        .tlc-node:hover { transform:translate(-50%,-50%) scale(1.08); box-shadow:0 10px 28px rgba(0,0,0,0.28); z-index:5}
+        .tlc-node .tlc-name { font-size:11px;font-weight:700;color:#fff;line-height:1.25;letter-spacing:0.2px}
+        .tlc-node .tlc-code-mini { font-size:9px;color:rgba(255,255,255,0.85);letter-spacing:1px;margin-bottom:4px;font-weight:700}
+        .tlc-red1 { background:#C62828 }
+        .tlc-red2 { background:#D84343 }
+        .tlc-red3 { background:#B71C1C }
+        .tlc-gold1 { background:#C8A84B; color:#17243A }
+        .tlc-gold2 { background:#D4B968; color:#17243A }
+        .tlc-gold3 { background:#B8962B; color:#17243A }
+        .tlc-blue1 { background:#1565C0 }
+        .tlc-blue2 { background:#0D47A1 }
+        .tlc-purple1 { background:#6A1B9A }
+        .tlc-purple2 { background:#8E24AA }
+        .tlc-green1 { background:#2E7D32 }
+        .tlc-green2 { background:#388E3C }
+      </style>
+
+      <!-- Placement: 12 nodes at 30° intervals around radius ~43% from center -->
+      <!-- 0° top: G·01 Balanced Strategist -->
+      <div class="tlc-node tlc-gold1" style="left:50%;top:8%" onclick="showArche('G01')">
+        <div class="tlc-code-mini">TLC-G·01</div><div class="tlc-name">균형형<br>전략지휘관</div>
+      </div>
+      <!-- 30°: R·03 Blitz Commander -->
+      <div class="tlc-node tlc-red3" style="left:71%;top:14%" onclick="showArche('R03')">
+        <div class="tlc-code-mini">TLC-R·03</div><div class="tlc-name">기동형<br>돌파 지휘관</div>
+      </div>
+      <!-- 60°: G·03 Coalition Orchestrator -->
+      <div class="tlc-node tlc-gold2" style="left:86%;top:29%" onclick="showArche('G03')">
+        <div class="tlc-code-mini">TLC-G·03</div><div class="tlc-name">연합형<br>외교 사령관</div>
+      </div>
+      <!-- 90°: P·02 Narrative War Leader -->
+      <div class="tlc-node tlc-purple2" style="left:92%;top:50%" onclick="showArche('P02')">
+        <div class="tlc-code-mini">TLC-P·02</div><div class="tlc-name">서사형<br>총력전 사령관</div>
+      </div>
+      <!-- 120°: B·01 Sustainment Commander -->
+      <div class="tlc-node tlc-blue1" style="left:86%;top:71%" onclick="showArche('B01')">
+        <div class="tlc-code-mini">TLC-B·01</div><div class="tlc-name">지속형<br>운영 사령관</div>
+      </div>
+      <!-- 150°: V·02 Innovator Pioneer -->
+      <div class="tlc-node tlc-green2" style="left:71%;top:86%" onclick="showArche('V02')">
+        <div class="tlc-code-mini">TLC-V·02</div><div class="tlc-name">혁신형<br>기술 선구자</div>
+      </div>
+      <!-- 180°: G·02 Adaptive Composite -->
+      <div class="tlc-node tlc-gold3" style="left:50%;top:92%" onclick="showArche('G02')">
+        <div class="tlc-code-mini">TLC-G·02</div><div class="tlc-name">복합형<br>적응 지휘관</div>
+      </div>
+      <!-- 210°: B·02 Defensive Guardian -->
+      <div class="tlc-node tlc-blue2" style="left:29%;top:86%" onclick="showArche('B02')">
+        <div class="tlc-code-mini">TLC-B·02</div><div class="tlc-name">수호형<br>방어 지휘관</div>
+      </div>
+      <!-- 240°: V·01 Cadet Observer -->
+      <div class="tlc-node tlc-green1" style="left:14%;top:71%" onclick="showArche('V01')">
+        <div class="tlc-code-mini">TLC-V·01</div><div class="tlc-name">관찰형<br>학습 사관후보생</div>
+      </div>
+      <!-- 270°: P·01 Shadow Strategist -->
+      <div class="tlc-node tlc-purple1" style="left:8%;top:50%" onclick="showArche('P01')">
+        <div class="tlc-code-mini">TLC-P·01</div><div class="tlc-name">기만형<br>그림자 전략가</div>
+      </div>
+      <!-- 300°: R·02 Asymmetric Guerrilla -->
+      <div class="tlc-node tlc-red2" style="left:14%;top:29%" onclick="showArche('R02')">
+        <div class="tlc-code-mini">TLC-R·02</div><div class="tlc-name">비대칭<br>게릴라 사령관</div>
+      </div>
+      <!-- 330°: R·01 Lone Tactician -->
+      <div class="tlc-node tlc-red1" style="left:29%;top:14%" onclick="showArche('R01')">
+        <div class="tlc-code-mini">TLC-R·01</div><div class="tlc-name">독립형<br>전술 천재</div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:12px;color:#8A9DB0;margin:6px 0 24px">▸ 원형 위의 유형 이름을 클릭하면 상세 소개가 아래에 펼쳐집니다.</p>
+
+    <!-- ═══ DETAIL PANEL (shown on click) ═══ -->
+    <div id="archeDetail" style="max-width:860px;margin:0 auto;padding:36px 40px;background:#fff;border:2px solid var(--gold);border-radius:4px;box-shadow:0 12px 40px rgba(0,0,0,0.1);min-height:220px">
+      <div id="archeDetailInner" style="color:#17243A">
+        <div style="font-size:11px;letter-spacing:2px;color:#8A9DB0;font-weight:700;margin-bottom:8px">▶ SELECT AN ARCHETYPE ON THE WHEEL ABOVE</div>
+        <h3 style="margin:0 0 12px;font-size:22px;color:#17243A">원형 매핑에서 유형을 선택하세요.</h3>
+        <p style="margin:0;font-size:14px;line-height:1.75;color:#5A6B80">
+          12가지 지휘관 유형 중 하나의 이름(원)을 클릭하면 이곳에 상세 소개 페이지가 표시됩니다. 각 유형별로 핵심 차원, 역사적 트윈, 강점, 약점, 추천 개발 프로토콜을 확인할 수 있습니다.
+        </p>
+      </div>
+    </div>
+
+    <script>
+    // ── Archetype detail database ──
+    const ARCHE_DB = {
+      R01: { code:'TLC-R·01', name:'독립형 전술 천재', en:'Lone Tactician', cluster:'Attack · 공세형', color:'#C62828',
+        dims:'TRI · WMI · TCI 극단적 고점 / HEI 저점',
+        twins:'이순신 · Hannibal · Patton',
+        strength:'전장에서는 압도적. 전술·지형·기술 차원이 극단적으로 높고, 임무 단위의 자원 최적화와 OODA 속도가 동시대 최상위.',
+        weakness:'상하 공감(HEI)과 정치적 내러티브 관리가 상대적 결핍. 정치의 늪에서 고립되기 쉽다.',
+        protocol:'HEI 강화 프로토콜 — 상급자/동료 의도 예측 훈련, SNI 서사 브리핑 연습(§5, §12 개발 개입).'
+      },
+      R02: { code:'TLC-R·02', name:'비대칭 게릴라 사령관', en:'Asymmetric Guerrilla', cluster:'Attack · 공세형', color:'#D84343',
+        dims:'RAI · UCI · HEI 고점',
+        twins:'Vo Nguyen Giap · Mao · T.E. Lawrence',
+        strength:'정면 대결로 이길 수 없는 상황에서 빛난다. 자원 부족을 출발점으로 삼는 상대적 우위 판단력. 불확실성 보정 능력 최상위.',
+        weakness:'정규 대규모 기동의 지휘 경험이 부족할 수 있음. 평시 조직의 표준 운용과 충돌.',
+        protocol:'LSI 계층적 계획 훈련 — 정규 대부대 지휘 연습(§11), 평시 관료 조직 적응 코칭.'
+      },
+      R03: { code:'TLC-R·03', name:'기동형 돌파 지휘관', en:'Blitz Commander', cluster:'Attack · 공세형', color:'#B71C1C',
+        dims:'TCI · WMI 극단적 고점',
+        twins:'Guderian · Rommel · Boyd',
+        strength:'시간 압축과 무기 체득 양축이 극단적. 적의 OODA 주기를 한 박자 앞서 붕괴시키는 속도의 미학.',
+        weakness:'소모전·정치전에서의 인내 부족. 후방 군수 및 장기 전략 내러티브 관리 취약.',
+        protocol:'RAI + UCI 강화 — 장기 소모전 시나리오 드릴(§6, §9), 전략 서사 작성 연습.'
+      },
+      G01: { code:'TLC-G·01', name:'균형형 전략지휘관', en:'Balanced Strategist', cluster:'Balance · 균형형', color:'#C8A84B',
+        dims:'9요인 모두 60점 이상 (SBOH 근접형)',
+        twins:'Napoleon · Wellington · Marlborough',
+        strength:'전술과 정치를 동시에 운용할 수 있는 드문 균형. 단일 뇌 오케스트레이션(SBOH)의 가장 가까운 구현체.',
+        weakness:'과신 — "모두 평균 이상"이 약점이 되는 순간이 온다. 한 차원의 극단적 열세를 가진 비정형 상대에게 취약.',
+        protocol:'약점 차원 식별 후 집중 개입 — 매 분기 최저점 차원 2개 선정, 해당 장(§4-12)의 루브릭 임계값까지 집중 훈련.'
+      },
+      G02: { code:'TLC-G·02', name:'복합형 적응 지휘관', en:'Adaptive Composite', cluster:'Balance · 균형형', color:'#B8962B',
+        dims:'차원 간 표준편차 극소형 (flat profile)',
+        twins:'Alexander · Caesar · MacArthur',
+        strength:'특정 요인에 고정되지 않은 유연한 패턴. 적이 당신을 분류하지 못한다는 것 자체가 강점. Multi-domain 운용에 강함.',
+        weakness:'전문성의 결여로 인식될 수 있음. "무엇에 강한가"를 설득하기 어렵다.',
+        protocol:'시그니처 차원 2개 선정 훈련 — 본인의 자연스러운 강점 상위 2개를 브랜딩.'
+      },
+      G03: { code:'TLC-G·03', name:'연합형 외교 사령관', en:'Coalition Orchestrator', cluster:'Balance · 균형형 (v2.1 신규)', color:'#D4B968',
+        dims:'HEI · SNI 양축 지배형',
+        twins:'George Marshall · Washington · 서희 · Moltke (원로)',
+        strength:'다국 동맹·다부처 조율의 최고 지휘관. Adversarial Network처럼 이해관계자 내부 상태를 동시 시뮬레이션하면서 한 문장의 공동 서사로 결속시킴.',
+        weakness:'순수 전술·기동 결정에서는 상대적으로 느릴 수 있음. 전장 즉응보다 정치적 타이밍을 우선.',
+        protocol:'TCI OODA 사이클 드릴 — 전술 판단 속도 훈련(§5), 개별 전투 사례 분석.'
+      },
+      B01: { code:'TLC-B·01', name:'지속형 운영 사령관', en:'Sustainment Commander', cluster:'Sustain · 지속형', color:'#1565C0',
+        dims:'LSI · HEI · DII 고점',
+        twins:'Eisenhower · Grant · 諸葛亮',
+        strength:'화려하지 않지만 무너뜨릴 수 없는 유형. 병참과 상하 공감 양축 지배. 승리는 90일·6개월·1년 후에 온다.',
+        weakness:'단기 전술 결단에서 머뭇거림. 기동 기회가 왔을 때 놓치는 위험.',
+        protocol:'TCI 가속 훈련 — 결정 시간 제약 드릴, OODA-AI 시뮬레이터(§5).'
+      },
+      B02: { code:'TLC-B·02', name:'수호형 방어 지휘관', en:'Defensive Guardian', cluster:'Sustain · 지속형', color:'#0D47A1',
+        dims:'TRI · WMI · RAI 고점',
+        twins:'Kutuzov · Fabius Maximus · 李牧',
+        strength:'공격이 아닌 보존의 미학. 지형과 병참을 결합한 소모전 마스터. 적이 스스로 지치기를 기다린다.',
+        weakness:'정치권의 "공세 압력"에 취약. 수세적 접근의 정당화 언어(SNI) 부족.',
+        protocol:'SNI 내러티브 강화 — 상부 설득 브리핑 연습, 장기 전략 내러티브 작성(§12).'
+      },
+      P01: { code:'TLC-P·01', name:'기만형 그림자 전략가', en:'Shadow Strategist', cluster:'Mind · 두뇌형', color:'#6A1B9A',
+        dims:'DII · HEI · SNI 고점',
+        twins:'Sun Tzu · 한신 · Chanakya',
+        strength:'당신의 무기는 보이지 않는 곳에 있다. 정보·기만 축이 극단적. 적이 알아채는 순간 게임은 끝나 있다.',
+        weakness:'직접 전투 지휘 경험 부족 시 부하의 신뢰 확보가 어려움. 복잡한 작전의 설명 책임(accountability) 압박.',
+        protocol:'LSI 하위 제대 지휘 훈련, 의사결정 투명성 드릴(§11).'
+      },
+      P02: { code:'TLC-P·02', name:'서사형 총력전 사령관', en:'Narrative War Leader', cluster:'Mind · 두뇌형', color:'#8E24AA',
+        dims:'SNI · HEI · LSI 고점',
+        twins:'Churchill · 호치민 · Zelensky',
+        strength:'한 번의 전투가 아니라 한 세대의 전쟁을 설계. 전략 서사로 중립자까지 설득. 단기 전술보다 장기 내러티브가 주무기.',
+        weakness:'단기 전술 미세 조정이 약함. 지도 위 순간 결단에서 참모에 의존적.',
+        protocol:'TRI·TCI 전술 드릴 — 시뮬레이터 기반 미세 결정 훈련(§4, §5).'
+      },
+      V01: { code:'TLC-V·01', name:'관찰형 학습 사관후보생', en:'Cadet Observer', cluster:'Vector · 학습형', color:'#2E7D32',
+        dims:'9요인 발달 단계 (under-formed)',
+        twins:'Cadet 단계 · Early-career',
+        strength:'아직 결정 본능이 형성되는 단계. 방향성 자체가 최대 자산. 개발 여지가 가장 넓은 유형.',
+        weakness:'어느 차원부터 기를지에 대한 전략적 선택이 향후 5년 궤적을 결정. 잘못 선택하면 정체.',
+        protocol:'TP-IQ 재평가 90일 주기, 멘토 지정, §4-12 차원별 개발 개입 중 상위 3개 우선 적용. 사관학교 Academy Program 권장.'
+      },
+      V02: { code:'TLC-V·02', name:'혁신형 기술 선구자', en:'Innovator Pioneer', cluster:'Vector · 학습형 (v2.1 신규)', color:'#388E3C',
+        dims:'WMI · TCI 양축 지배',
+        twins:'Gustavus Adolphus · Hyman Rickover · 세종(神機箭) · Billy Mitchell',
+        strength:'신무기·신교리의 결합 지점을 발견하는 패턴 센서. 동시대가 이해하지 못하는 체계를 선제 구축.',
+        weakness:'기존 체계와의 정치적 마찰. 동시대 설득 실패 시 고립.',
+        protocol:'SNI · HEI 강화 — 기술 서사 번역 훈련, 이해관계자 공감 드릴(§8, §12).'
+      },
+    };
+
+    function showArche(key) {
+      const a = ARCHE_DB[key]; if (!a) return;
+      const el = document.getElementById('archeDetailInner');
+      el.innerHTML = `
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <span style="display:inline-block;width:48px;height:48px;border-radius:50%;background:${a.color};border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.18)"></span>
+          <div>
+            <div style="font-size:11px;letter-spacing:2px;color:#8A9DB0;font-weight:700">${a.code} · ${a.cluster}</div>
+            <h3 style="margin:4px 0 0;font-size:24px;color:#17243A">${a.name} <span style="font-size:14px;color:#8A9DB0;font-weight:400">${a.en}</span></h3>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;font-size:13px;line-height:1.75;color:#3A4B5F">
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;color:${a.color};font-weight:700;margin-bottom:4px">CORE DIMENSIONS</div>
+            <p style="margin:0 0 14px">${a.dims}</p>
+            <div style="font-size:10px;letter-spacing:2px;color:${a.color};font-weight:700;margin-bottom:4px">HISTORICAL TWINS</div>
+            <p style="margin:0 0 14px">★ ${a.twins}</p>
+            <div style="font-size:10px;letter-spacing:2px;color:${a.color};font-weight:700;margin-bottom:4px">STRENGTH</div>
+            <p style="margin:0">${a.strength}</p>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;color:${a.color};font-weight:700;margin-bottom:4px">WEAKNESS</div>
+            <p style="margin:0 0 14px">${a.weakness}</p>
+            <div style="font-size:10px;letter-spacing:2px;color:${a.color};font-weight:700;margin-bottom:4px">DEVELOPMENT PROTOCOL</div>
+            <p style="margin:0 0 14px">${a.protocol}</p>
+            <a href="#assess" style="display:inline-block;padding:9px 18px;background:${a.color};color:#fff;text-decoration:none;font-size:12px;letter-spacing:1px;font-weight:700;border-radius:3px">▸ TP-IQ 진단으로 확인하기</a>
+          </div>
+        </div>
+      `;
+      document.getElementById('archeDetail').scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    </script>
+
+  </div>
+</section>
+
+<!-- ═══════════════ YI SUN-SIN DOSSIER ═══════════════ -->
+<section class="block dark" id="dossier">
+  <div class="inner">
+    <div class="eyebrow-block">Seed Profile · Case Zero</div>
+    <h2 class="section-title">이순신 전술지능 프로파일.</h2>
+    <p class="section-lead">
+      모든 프레임워크는 첫 번째 사례로 검증됩니다. 아래는 이순신(李舜臣, 1545~1598)의 TIP-9 풀 프로파일이며, tacticalprompt.com 플랫폼의 seed 데이터 #001입니다.
+    </p>
+
+    <div class="dossier">
+      <div class="dossier-left">
+        <div class="era">Joseon Dynasty · 1545 — 1598</div>
+        <h3>李舜臣</h3>
+        <div class="romanized">Yi Sun-sin · Admiral of the Three Provinces</div>
+
+        <div class="dossier-composite">
+          <div class="score-num">91.4</div>
+          <div class="score-label">TIS · Tactical Intelligence Score</div>
+          <div class="profile-type">Profile Type: TRI · SNI · RAI Dominant<br><span style="font-size:12px;color:#B8C8D8;font-weight:400">(자원·서사·위험 삼위일체형 — e-book canonical)</span></div>
+          <div class="critical-gap">Meta Gap: Political Navigation — TIP-9 범위 외 사각 (e-book §24.3)</div>
+        </div>
+
+        <p style="font-size:13px;color:#B8C8D8;line-height:1.7">
+          <strong style="color:var(--gold)">Historical Twin:</strong> Hannibal Barca (cosine sim 0.91)<br>
+          두 인물 모두 TRI·SNI·RAI 90+ 로 동일 프로파일. 군사적 천재이자 정치적 비극이라는 동일 궤적. 정치 생존은 TIP-9의 9차원으로 포착되지 않는 별도 메타층이며, 이는 전자책 제24장에서 "TIP-9의 의도된 경계"로 논의됩니다.
+          <br><br>
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6539078" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)">▸ SSRN Preprint · Architecture of Command (6539078)</a>
+        </p>
+      </div>
+
+      <div class="dossier-right">
+        <div class="score-bars" id="yiScoreBars"></div>
+      </div>
+    </div>
+
+    <div class="evidence-grid" id="yiEvidenceGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ TIP-9 9 DIMENSIONS ═══════════════ -->
+<section class="block cream" id="tip9">
+  <div class="inner">
+    <div class="eyebrow-block">TP-IQ · 9 Factor Framework · AI Architecture Aligned</div>
+    <h2 class="section-title">TP-IQ 9요인,<br>9개의 AI 아키텍처.</h2>
+    <p class="section-lead">
+      Gardner의 다중지능(MI)이 지능을 언어·논리·공간으로 쪼갰다면, TP-IQ는 전술지능을 <strong>9개의 현대 AI 아키텍처</strong>(Multi-Agent Systems · OODA-Loop AI · RAG · Reinforcement Learning · Transformer · Sensor Fusion · Adversarial Networks · Hierarchical Planning · NDM)에 1:1 대응시킵니다. 각 요인은 Klein NDM·Endsley SA·Boyd OODA·Clausewitz Coup d'œil 4개 전술학파의 인지 원리를 해당 AI 아키텍처로 형식화한 결과이며, 0~100점 정량화가 가능합니다. ▸ 학술 정의: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6539078" target="_blank" style="color:var(--gold-dark)">SSRN 6539078</a>
+    </p>
+
+    <div class="tip9-grid" id="tip9Grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ AI ARCHITECTURE MAPPING (NEW v2.1) ═══════════════ -->
+<section class="block dark" id="ai-mapping">
+  <div class="inner">
+    <div class="eyebrow-block">AI Architecture × TIP-9 · E-book Core Thesis</div>
+    <h2 class="section-title">9개의 AI 아키텍처,<br>9개의 전술지능 차원.</h2>
+    <p class="section-lead">
+      「Architecture of Command」(SSRN 6539078)의 핵심 논제는 단순합니다 — <strong>현대 AI 시스템 설계의 9가지 아키텍처가 각각 전술지능의 한 차원에 직접 대응한다.</strong> 이것은 은유가 아니라 <em>형식적 매핑</em>입니다. Klein의 NDM이 RAI에 대응하는 이유, Transformer의 attention mechanism이 SNI의 서사 구조와 동형인 이유, Multi-Agent Systems가 이순신의 12척 자원 분배와 동형인 이유를 각 챕터는 수식·실험·역사 사례로 증명합니다.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px">
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₁ · TRI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Multi-Agent Systems</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">분산 에이전트 간 자원 할당·조정. 이순신의 12척을 지형·화력·기동 3 에이전트로 분해한 결정 구조와 동형.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₂ · TCI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">OODA-Loop AI</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">Observe-Orient-Decide-Act의 컴퓨팅 구현. Boyd의 OODA를 폐루프 제어 시스템으로 형식화.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₃ · RAI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">NDM / RPD (Klein)</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">Naturalistic Decision Making의 Recognition-Primed Decision 모델. 고불확실·시간압박 하의 전문가 직관을 형식화.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₄ · WMI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Sensor Fusion</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">다중 센서 데이터의 칼만 필터·베이지안 융합. 지형·조류·화력·적 배치를 단일 전장 모델로 통합.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₅ · HEI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Adversarial / GAN Networks</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">Generator-Discriminator 쌍의 상호 모델링. 적·동맹·부하의 내부 상태를 "내가 그의 입장이라면"의 형식으로 시뮬레이션.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₆ · UCI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Reinforcement Learning</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">보상 신호 기반 정책 업데이트. 희소·지연 보상 하에서 신념·전술을 점진적으로 보정하는 베이지안 업데이팅.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₇ · DII</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Retrieval-Augmented Generation</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">외부 지식 베이스에서 관련 정보를 인출하여 생성에 주입. 도메인 전문성·병서·정보망을 결정의 실시간 컨텍스트로 활용.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₈ · LSI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Hierarchical Planning AI</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">Goal-Task-Action 3계층 분해. 전략-작전-전술을 하나의 계층적 계획 트리로 통합하여 병참·리더십을 일원화.</div>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border-left:3px solid var(--gold);padding:20px">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700">A₉ · SNI</div>
+        <div style="color:#fff;font-size:15px;font-weight:700;margin:6px 0 8px">Transformer / LLM</div>
+        <div style="font-size:12px;color:#B8C8D8;line-height:1.6">Self-attention 기반 장문 서사 생성. Churchill의 "피와 땀과 눈물", 난중일기의 자기 서사 구조와 동형.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:50px;padding:30px;background:rgba(255,255,255,0.04);border-left:4px solid var(--gold)">
+      <div style="font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:10px">SBOH · Single-Brain Orchestration Hypothesis</div>
+      <p style="font-size:14px;color:#E8F0F7;line-height:1.7;margin:0">
+        탁월한 지휘관은 이 9개 AI 아키텍처를 <strong>하나의 두뇌에서 동시 오케스트레이션</strong>합니다. 현대 AI는 각 아키텍처를 개별 시스템으로 구현하지만, 이순신·Eisenhower·Napoleon은 생물학적 단일 인지 자원에서 9개 아키텍처를 병렬 실행했습니다. TIP-9은 이 "단일 두뇌 오케스트레이션 능력"을 9차원 벡터로 측정하는 최초의 프레임워크입니다.
+        <br><br>
+        <span style="color:var(--gold);font-size:12px">▸ 상세 증명: e-book §3 (SBOH), §22~23 (HCB calibration), §13~21 (TIP-9 rubric)</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ARCHITECTURE ═══════════════ -->
+<section class="block" id="architecture">
+  <div class="eyebrow-block">Unified Architecture · WLEP 6-Layer × AI Architecture Primitives</div>
+  <h2 class="section-title">5-Layer 기술 스택 위에<br>AI 아키텍처로 사고한다.</h2>
+  <p class="section-lead">
+    WLEP의 객관적 전투 데이터(Bilateral TLC) 5개 층 위에, 9개의 AI 아키텍처(Multi-Agent · OODA · RAG · RL · Transformer · Sensor Fusion · Adversarial · Hierarchical Planning · NDM)로 구성된 TIP-9 지휘관 인지 프로파일을 Layer 6으로 결합합니다. 각 AI 아키텍처는 TIP-9의 한 차원에 직접 대응하며, 이 매핑이 전자책 「Architecture of Command」(SSRN 6539078)의 핵심 논제입니다.
+  </p>
+
+  <div class="layer-stack">
+    <div class="layer">
+      <div class="layer-num">L1</div>
+      <div class="layer-name">Corpus Construction<span class="en">전사·회고록·지도 수집</span></div>
+      <div class="layer-desc">공개 군사기록물과 1차 사료에서 전투 텍스트·지도·인물 기록을 수집하여 통합 코퍼스 구축</div>
+      <div class="layer-tech">S3 · Airflow · OCR</div>
+    </div>
+    <div class="layer">
+      <div class="layer-num">L2</div>
+      <div class="layer-name">Tactical Vector Space<span class="en">전술 임베딩 공간</span></div>
+      <div class="layer-desc">전투·결정·교훈을 고차원 벡터로 임베딩하여 의미 기반 검색 및 유사도 계산 수행</div>
+      <div class="layer-tech">pgvector · OpenAI embed</div>
+    </div>
+    <div class="layer">
+      <div class="layer-num">L3</div>
+      <div class="layer-name">KSE Knowledge Extraction<span class="en">결정 노드 추출</span></div>
+      <div class="layer-desc">LDA 토픽 모델링 + Pearl 인과 DAG로 [Condition → Decision → Action → Outcome] 4-노드 구조 자동 추출</div>
+      <div class="layer-tech">LDA · Pearl DAG</div>
+    </div>
+    <div class="layer">
+      <div class="layer-num">L4</div>
+      <div class="layer-name">IPB Fusion<span class="en">V/L-TLC 이원 융합</span></div>
+      <div class="layer-desc">승자(V-TLC)·패자(L-TLC) 이원 지식 그래프를 결합하여 Strategic Perception Gap(SPG) 산출</div>
+      <div class="layer-tech">GraphQL · Neo4j</div>
+    </div>
+    <div class="layer">
+      <div class="layer-num">L5</div>
+      <div class="layer-name">TLC Output<span class="en">4노드 교훈 코드</span></div>
+      <div class="layer-desc">표준화된 Tactical Lesson Code 형식으로 출력하여 API·문서·학습 자료로 재활용 가능</div>
+      <div class="layer-tech">JSON Schema · REST</div>
+    </div>
+    <div class="layer l6">
+      <div class="layer-num">L6</div>
+      <div class="layer-name">TIP-9 × 9-AI Architecture<span class="en">9개 AI 아키텍처로 재해석된 지휘관 두뇌</span></div>
+      <div class="layer-desc">Multi-Agent(TRI)·OODA(TCI)·NDM(RAI)·Sensor Fusion(WMI)·Adversarial(HEI)·RL(UCI)·RAG(DII)·Hierarchical Planning(LSI)·Transformer(SNI) — 9개 AI 아키텍처를 9차원 지휘관 벡터로 재해석. SBOH 가설·HCB 코사인 매칭 엔진 내장.</div>
+      <div class="layer-tech">IRT · pgvector(9) · SBOH</div>
+    </div>
+  </div>
+
+  <div class="integration-eq">
+<span class="comment">// tacticalprompt.com Integration Equation v2.1 — E-book Cross-Referenced</span><br>
+Decision(<span class="c">D</span>) = f( Situation(<span class="c">S</span>), Commander_TIP9(<span class="c">C</span>), Doctrine(<span class="c">K</span>) )<br>
+<br>
+  where:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">S</span> = Bilateral TLC Node&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// L1~L5 객관 전장 상황 (WLEP)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">C</span> = Σ<sub>i=1..9</sub> w<sub>i</sub> · A<sub>i</sub>(ctx)&nbsp;&nbsp;<span class="comment">// L6: 9 AI 아키텍처 가중합</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// A₁=MAS, A₂=OODA-AI, ..., A₉=Transformer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// w<sub>i</sub> = 지휘관별 인지 가중치 (e-book §18 루브릭)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">K</span> = Doctrine Lineage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Sun Tzu → Mao → Giap → ...</span><br>
+<br>
+→ Outcome(<span class="c">O</span>) = g(<span class="c">D</span>, Enemy_D') · Friction(<span class="c">F</span>)&nbsp;&nbsp;<span class="comment">// Clausewitz</span><br>
+<br>
+<span class="comment">// Academic Justification (backward links to e-book):</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">• w<sub>i</sub> 측정 루브릭 → e-book §13~21 (TIP-9 rubric)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">• A<sub>i</sub> → 차원 대응 증명 → e-book §4~12 (AI Architecture chapters)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">• HCB 코사인 유사도 매칭 → e-book §22~23 (Yi Sun-sin calibration)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">• SBOH (Single-Brain Orchestration) → e-book §3 (central hypothesis)</span>
+  </div>
+</section>
+
+
+
+
+<!-- ═══════════════ ARCHETYPE FULLSCREEN REVEAL ═══════════════ -->
+<div id="archetypeReveal">
+  <div class="reveal-inner">
+    <div class="reveal-eyebrow">Your Tactical Archetype</div>
+    <div class="reveal-prefix">당신은 —</div>
+    <div class="reveal-archetype" id="revealArchetype">균형형 전략지휘관<br><span class="gold">(이순신 유형)</span></div>
+    <div class="reveal-twin" id="revealTwin">Composite TIP-9 Index <strong>—</strong></div>
+    <div class="reveal-tagline" id="revealTagline">9개의 축이 한 인물의 결정 본능을 그려냈습니다. 이제 당신의 전체 9차원 좌표를 확인할 시간입니다.</div>
+    <button class="reveal-cta" onclick="dismissReveal()">전체 결과 확인 ▶</button>
+  </div>
+</div>
+
+<!-- ═══════════════ TIERS ═══════════════ -->
+<section class="block cream" id="tiers">
+  <div class="inner">
+    <div class="eyebrow-block">Access Tiers</div>
+    <h2 class="section-title">4단계 접근 구조.</h2>
+    <p class="section-lead">
+      일반 대중부터 군 교육기관까지. 각 Tier는 TIP-9의 어느 깊이까지 열어줄 것인가로 구분됩니다.
+    </p>
+
+    <!-- ───── Academy Program · GLOBAL PROMOTION 2026 ───── -->
+    <div style="max-width:980px;margin:0 auto 40px;background:linear-gradient(135deg,#0F1A2C 0%,#17243A 100%);color:#F2EFE6;border-radius:4px;overflow:hidden;box-shadow:0 14px 46px rgba(0,0,0,0.22)">
+
+      <!-- Header bar -->
+      <div style="background:rgba(166,138,47,0.18);border-bottom:1px solid rgba(166,138,47,0.35);padding:14px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <span style="font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;border:1px solid var(--gold);padding:4px 10px">⚔ ACADEMY PROGRAM</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#F2EFE6;text-transform:uppercase">GLOBAL PROMOTION · 2026</span>
+        <span style="font-size:10px;color:#A68A2F;letter-spacing:1px;margin-left:auto">tacticalprompt.com/academy</span>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:28px 32px">
+
+        <!-- Headline -->
+        <h3 style="font-size:22px;font-weight:800;line-height:1.35;margin:0 0 8px;color:#F2EFE6">
+          사관생도 · 사관후보생 전원 <span style="color:var(--gold)">12개월 무료</span>
+        </h3>
+        <p style="font-size:13px;line-height:1.7;color:#8A9DB0;margin:0 0 20px">
+          정규 사관학교 재학 중인 생도 및 공식 사관후보생 과정 입교자에 한해 TP-IQ 풀 서비스를 무상 제공합니다.<br>
+          <em style="color:#CFC9BE">군 장교 · 부사관 · 군 관련 일반 관계자는 Tier 1–3 유료 요금제가 적용됩니다.</em>
+        </p>
+
+        <!-- Feature chips -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px">
+          <span style="font-size:11px;padding:5px 10px;background:rgba(166,138,47,0.12);border:1px solid rgba(166,138,47,0.35);color:var(--gold)">✓ 풀 진단 60문항 무제한</span>
+          <span style="font-size:11px;padding:5px 10px;background:rgba(166,138,47,0.12);border:1px solid rgba(166,138,47,0.35);color:var(--gold)">✓ 교관 Cohort Dashboard</span>
+          <span style="font-size:11px;padding:5px 10px;background:rgba(166,138,47,0.12);border:1px solid rgba(166,138,47,0.35);color:var(--gold)">✓ 이순신 Seed Case 교재</span>
+          <span style="font-size:11px;padding:5px 10px;background:rgba(166,138,47,0.12);border:1px solid rgba(166,138,47,0.35);color:var(--gold)">✓ Architecture of Command e-Book</span>
+        </div>
+
+        <!-- CTA row -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:20px">
+          <button onclick="openAcademyApply()" style="font-family:inherit;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 26px;background:var(--gold);color:#0F1A2C;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(166,138,47,0.35)">
+            ▸ 참가신청 (Apply Now)
+          </button>
+          <span style="font-size:12px;color:#8A9DB0">기관 이메일 입력 → <strong style="color:var(--gold)">자동 자격 판정</strong> → 24시간 내 승인 회신</span>
+        </div>
+
+        <!-- Qualification table -->
+        <div class="academy-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:11.5px;line-height:1.65;margin-bottom:16px">
+          <div style="background:rgba(0,0,0,0.2);padding:14px 16px;border-top:2px solid var(--gold)">
+            <div style="font-weight:700;color:#F2EFE6;margin-bottom:4px">🎓 무료 대상</div>
+            <div style="color:#A68A2F;font-family:monospace;font-size:10.5px;margin-bottom:6px">*.ac.kr · *.edu · *.mil.ac.*</div>
+            <div style="color:#CFC9BE">사관생도 / 사관후보생</div>
+            <div style="color:var(--gold);font-weight:700;margin-top:4px">→ Cadet Free 자동 부여</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);padding:14px 16px;border-top:2px solid #4A6E8A">
+            <div style="font-weight:700;color:#F2EFE6;margin-bottom:4px">💳 유료 대상</div>
+            <div style="color:#5A8AAA;font-family:monospace;font-size:10.5px;margin-bottom:6px">*.mil · *.army.* · *.navy.*</div>
+            <div style="color:#CFC9BE">현역 장교 · 부사관 · 군 관계자</div>
+            <div style="color:#6AABE0;font-weight:700;margin-top:4px">→ Tier 1–3 요금제 적용</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);padding:14px 16px;border-top:2px solid #546E7A">
+            <div style="font-weight:700;color:#F2EFE6;margin-bottom:4px">📋 일반 신청</div>
+            <div style="color:#7A9DB0;font-family:monospace;font-size:10.5px;margin-bottom:6px">그 외 도메인</div>
+            <div style="color:#CFC9BE">학술 연구자 · 민간</div>
+            <div style="color:#8A9DB0;font-weight:700;margin-top:4px">→ 수동 검토 후 안내</div>
+          </div>
+        </div>
+
+        <p style="font-size:11px;line-height:1.65;color:#5A6F85">
+          대상 기관: KMA · KNDA · KAFA · USMA · USNA · USAFA · RMA Sandhurst · Saint-Cyr · 방위대학교 외 전 세계 정규 사관학교.&nbsp;
+          문의: <a href="mailto:ceo@uamkt.com" style="color:rgba(200,168,75,0.7)">ceo@uamkt.com</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Academy Apply Modal ── -->
+    <div id="academyApplyModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.78);align-items:center;justify-content:center;padding:16px">
+      <div style="max-width:500px;width:100%;background:#17243A;border:2px solid var(--gold);padding:30px;color:#F2EFE6;box-shadow:0 20px 60px rgba(0,0,0,0.6);max-height:92vh;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold)">⚔ ACADEMY PROGRAM · APPLY</span>
+          <button onclick="closeAcademyApply()" style="background:none;border:none;color:#8A9DB0;font-size:24px;cursor:pointer;line-height:1;padding:0">×</button>
+        </div>
+        <h4 style="margin:0 0 6px;font-size:19px;color:#F2EFE6">참가신청</h4>
+        <p style="margin:0 0 6px;font-size:12px;line-height:1.6;color:#8A9DB0">
+          사관학교 기관 이메일로 신청하시면 <strong style="color:var(--gold)">사관생도/후보생 자격이 자동으로 무료 인정</strong>됩니다.
+        </p>
+        <p style="margin:0 0 18px;font-size:11px;color:#5A7088;line-height:1.5">
+          ※ 군 장교·부사관 등 현역 복무자는 유료 요금제(Tier 1–3)가 적용됩니다.
+        </p>
+        <form onsubmit="submitAcademyApply(event)">
+          <label style="display:block;font-size:11px;letter-spacing:1px;color:#CFC9BE;margin-bottom:5px">성명 · NAME</label>
+          <input type="text" required placeholder="홍길동 / John Doe" style="width:100%;padding:10px 13px;background:#0F1A2C;border:1px solid #2A3A55;color:#F2EFE6;font-family:inherit;font-size:14px;margin-bottom:12px;box-sizing:border-box">
+
+          <label style="display:block;font-size:11px;letter-spacing:1px;color:#CFC9BE;margin-bottom:5px">소속 기관 · INSTITUTION</label>
+          <input type="text" required placeholder="Korea Military Academy / 육군사관학교" style="width:100%;padding:10px 13px;background:#0F1A2C;border:1px solid #2A3A55;color:#F2EFE6;font-family:inherit;font-size:14px;margin-bottom:12px;box-sizing:border-box">
+
+          <label style="display:block;font-size:11px;letter-spacing:1px;color:#CFC9BE;margin-bottom:5px">
+            기관 이메일 · INSTITUTIONAL EMAIL &nbsp;<span style="color:var(--gold)">★ 자동 자격 분류</span>
+          </label>
+          <input id="applyEmail" type="email" required placeholder="name@kma.ac.kr / name@usma.edu" style="width:100%;padding:10px 13px;background:#0F1A2C;border:1px solid var(--gold);color:#F2EFE6;font-family:inherit;font-size:14px;margin-bottom:18px;box-sizing:border-box">
+
+          <button type="submit" style="width:100%;padding:14px;background:var(--gold);color:#0F1A2C;border:none;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">
+            ▸ 신청 제출 · SUBMIT
+          </button>
+        </form>
+        <div id="applyResult" style="display:none;margin-top:16px;padding:14px;background:rgba(166,138,47,0.1);border-left:3px solid var(--gold);font-size:12px;line-height:1.7;color:#CFC9BE"></div>
+      </div>
+    </div>
+
+    <script>
+      function openAcademyApply(){ document.getElementById('academyApplyModal').style.display='flex'; }
+      function closeAcademyApply(){
+        document.getElementById('academyApplyModal').style.display='none';
+        document.getElementById('applyResult').style.display='none';
+      }
+      function submitAcademyApply(e){
+        e.preventDefault();
+        const email = document.getElementById('applyEmail').value.toLowerCase().trim();
+        let tier='', label='', icon='', free=false;
+        // 사관생도/후보생: .ac.kr, .edu, .edu.XX (학교 도메인)
+        if(/\.(ac\.kr|edu(\.[a-z]{2})?)$/.test(email)){
+          tier='Cadet Free · 무료'; label='사관생도 / 사관후보생 자격 — 12개월 전액 무료 승인'; icon='🎓'; free=true;
+        // 현역 군인: .mil 계열 → 유료
+        } else if(/\.(mil|mil\.[a-z]{2,3}|army\.[a-z]+|navy\.[a-z]+|forces\.[a-z]+)$/.test(email)){
+          tier='Officer · 유료 (Tier 1–3)'; label='현역 장교/부사관 — 유료 요금제 안내 후 활성화'; icon='💳'; free=false;
+        } else {
+          tier='General · 검토 대기'; label='일반 신청 — 담당자 확인 후 개별 안내'; icon='📋'; free=false;
+        }
+        const box=document.getElementById('applyResult');
+        box.style.display='block';
+        box.innerHTML='<div style="font-size:13px;color:#F2EFE6;font-weight:700;margin-bottom:8px">'+icon+' 신청 접수 완료</div>'
+          +'<div>자동 분류 결과: <strong style="color:'+(free?'var(--gold)':'#6AABE0')+'">'+tier+'</strong></div>'
+          +'<div style="margin-top:4px;font-size:11.5px">'+label+'</div>'
+          +'<div style="margin-top:10px;font-size:11px;color:#8A9DB0">승인 결과는 24시간 이내 <strong>'+email+'</strong> 로 회신됩니다.</div>';
+      }
+    </script>
+
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-no">Tier 0</div>
+        <h4>Public</h4>
+        <div class="audience">일반 대중</div>
+        <div class="price">무료</div>
+        <ul>
+          <li>블로그 · 검색</li>
+          <li>TLC 샘플 5건</li>
+          <li>TIP-9 라이트 진단 (15문항)</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-no">Tier 1</div>
+        <h4>Academic</h4>
+        <div class="audience">이메일 인증 학술</div>
+        <div class="price">무료 <small>(교육용)</small></div>
+        <ul>
+          <li>전체 TLC 데이터베이스</li>
+          <li>논문 RAG 검색</li>
+          <li>TIP-9 풀 진단 60문항</li>
+          <li>Twin Matcher</li>
+        </ul>
+      </div>
+      <div class="tier-card featured">
+        <div class="tier-no">Tier 2 · Featured</div>
+        <h4>Commander</h4>
+        <div class="audience">현역 장교 · 전략 분석가</div>
+        <div class="price">$29 <small>/ month</small></div>
+        <ul>
+          <li>Bilateral TLC × TIP-9 교차</li>
+          <li>Counterfactual Simulator</li>
+          <li>Adversarial Red Team</li>
+          <li>Cadet Journal + AI 태깅</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-no">Tier 3</div>
+        <h4>Institutional</h4>
+        <div class="audience">군 교육기관 · 기관</div>
+        <div class="price">$990 <small>/ month~</small></div>
+        <ul>
+          <li>API + SSO</li>
+          <li>Cohort Dashboard</li>
+          <li>생도 코호트 TIP-9 리포트</li>
+          <li>전용 자문</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <a href="https://tacticalprompt.com/" style="text-decoration:none">
+    <div class="brand-foot">⚔ TACTICALPROMPT <span style="font-weight:400;font-size:13px;letter-spacing:1px;color:#8A9DB0">.com</span></div>
+  </a>
+  <p class="tagline">
+    "전략은 계획이 아니다. 전략은 마찰 속에서의 결정이다."<br>
+    <span style="font-size:11px;letter-spacing:1px;color:var(--gold)">— Carl von Clausewitz</span>
+  </p>
+  <p style="font-size:11px;color:#8A9DB0;max-width:680px;margin:0 auto 16px;line-height:1.7">
+    <strong style="color:var(--gold)">학술 원전:</strong> Park, J. (2026). <em>The Architecture of Command: Decoding Tactical Intelligence Through AI System Design</em>. SSRN Working Paper No. 6539078.<br>
+    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6539078" target="_blank" style="color:var(--gold);text-decoration:none">papers.ssrn.com · SSRN 6539078</a>
+  </p>
+  <div style="font-size:11px;color:#3A5068;margin-bottom:10px">
+    <a href="https://tacticalprompt.com/" style="color:#4A7090;text-decoration:none">tacticalprompt.com</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:ceo@uamkt.com" style="color:#4A7090;text-decoration:none">ceo@uamkt.com</a>
+  </div>
+  <div class="copy">UAM Korea Tech · WLEP 6-Layer × TIP-9 Framework · v2.2 · 2026.04</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// TIP-9 9 DIMENSIONS DATA
+// ═══════════════════════════════════════════════════════════════════════
+// v2.1 — E-book canonical naming (Architecture of Command, SSRN 6539078)
+// 각 차원은 고유의 AI 아키텍처에 직접 대응 (Option B: 학술·AI 정합성 우선)
+const TIP9_DIMENSIONS = [
+  { code:'TRI', name:'전술 자원 지능', en:'Tactical Resource Intelligence',
+    ai:'Multi-Agent Systems', cluster:'cb',
+    question:'한정 자원을 다중 에이전트처럼 최적 할당할 수 있는가?',
+    exemplar:'이순신(12척 최적화), 한니발(트라시메노), Stonewall Jackson' },
+  { code:'TCI', name:'시간 인지 지능', en:'Temporal Cognition Index',
+    ai:'OODA-Loop AI', cluster:'cb',
+    question:'적의 OODA 주기보다 한 박자 빠르게 결정할 수 있는가?',
+    exemplar:'Guderian(전격전), Patton, John Boyd' },
+  { code:'RAI', name:'위험 평가 지능', en:'Risk Assessment Intelligence',
+    ai:'NDM / RPD (Klein)', cluster:'cb',
+    question:'재인식 기반(Recognition-Primed)으로 고위험 결정을 어떻게 보정할 것인가?',
+    exemplar:'Liddell Hart, Mao, 이순신(12 vs 133)' },
+  { code:'WMI', name:'전쟁 모델링 지능', en:'Warfare Modeling Intelligence',
+    ai:'Sensor Fusion', cluster:'cb',
+    question:'다중 센서·정보원을 단일 전장 모델로 융합할 수 있는가?',
+    exemplar:'이순신(거북선·지형·조류 융합), Napoleon, IDF' },
+  { code:'HEI', name:'인간 공감 지능', en:'Human Empathy Intelligence',
+    ai:'Adversarial / GAN Networks', cluster:'ho',
+    question:'적·동맹·부하의 내부 상태를 어떻게 시뮬레이션할 것인가?',
+    exemplar:'Wellington, Eisenhower, 이순신(난중일기 부하 추모)' },
+  { code:'UCI', name:'불확실성 보정 지능', en:'Uncertainty Calibration Intelligence',
+    ai:'Reinforcement Learning', cluster:'ho',
+    question:'희소·지연된 보상 신호에서 신념을 어떻게 업데이트할 것인가?',
+    exemplar:'Napoleon, Rommel, 이순신(명량 조류 대응)' },
+  { code:'DII', name:'영역 지능 지수', en:'Domain Intelligence Index',
+    ai:'Retrieval-Augmented Generation (RAG)', cluster:'ho',
+    question:'도메인 지식 베이스에서 필요 정보를 얼마나 정밀 인출할 수 있는가?',
+    exemplar:'Sun Tzu, Fortitude(D-Day), 한신(背水陣)' },
+  { code:'LSI', name:'리더십 종합 지능', en:'Leadership Synthesis Intelligence',
+    ai:'Hierarchical Planning AI', cluster:'sn',
+    question:'전략·작전·전술 3계층을 하나의 계층적 계획으로 통합할 수 있는가?',
+    exemplar:'Eisenhower, 諸葛亮, Grant(빅스버그)' },
+  { code:'SNI', name:'전략 서사 지능', en:'Strategic Narrative Intelligence',
+    ai:'Transformer / LLM', cluster:'sn',
+    question:'왜 이 전쟁이 정의로운가, 왜 우리가 이길 수밖에 없는가?',
+    exemplar:'Churchill, 호치민, Zelensky(2022)' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// GLOBAL AVERAGE BASELINE (사용자 vs 전체 비교용)
+// 데모 단계: 각 차원 50점 기준 ± 가중치. 운영 단계에서는 누적 응답 평균으로 대체.
+// ═══════════════════════════════════════════════════════════════════════
+const GLOBAL_AVERAGE = {
+  TRI: 52, TCI: 56, RAI: 50, WMI: 54,
+  HEI: 58, UCI: 60, DII: 48, LSI: 55, SNI: 51
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+// YI SUN-SIN SEED JSON (Case Zero)
+// ═══════════════════════════════════════════════════════════════════════
+// v2.1 — TIS recalculated under e-book canonical dimension semantics
+// 주의: HEI = Human Empathy (not Hierarchical Empathy). 이순신은 부하에 대한 인간 공감 HIGH
+// 정치적 생존 결핍은 TIP-9 스코프 외 "메타인지 사각"으로 별도 기록 (e-book §24.3)
+const YI_SUN_SIN = {
+  commander_id: 'CMD-001',
+  name_ko: '이순신',
+  name_en: 'Yi Sun-sin',
+  name_cc: '李舜臣',
+  era: 'Joseon Dynasty (1545–1598)',
+  nation: 'Korea',
+  rank: '삼도수군통제사 (Admiral of the Three Provinces)',
+  tip9: {
+    TRI: 98, TCI: 85, RAI: 95, WMI: 92,
+    HEI: 78, UCI: 94, DII: 90,
+    LSI: 92, SNI: 98
+  },
+  composite: 91.4,  // TIS (Tactical Intelligence Score) — e-book canonical
+  profile_type: 'TRI-SNI-RAI Dominant (Resource·Narrative·Risk 삼위일체)',
+  meta_gap: 'Political Navigation (TIP-9 범위 외 메타 사각)',
+  historical_twin: { id:'CMD-002', name:'Hannibal Barca', similarity: 0.91 },
+  ssrn: 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6539078',
+  evidence: [
+    { dim:'TRI', score:98, title:'12척 자원의 다중 에이전트 최적 할당',
+      body:'Multi-Agent System 관점: 제한 자원(판옥선 12척)을 지형·조류·화력 3에이전트로 분해하여 공간·시간·화력 3축에서 동시 최적화. 현대 MAS 이론의 전술적 원형.',
+      source:'난중일기 정유년 9월 16일, 이민웅(2014) 《임진왜란 해전사》' },
+    { dim:'TCI', score:85, title:'울돌목 6시간 조류 주기 OODA 활용',
+      body:'명량해협 역조류→순조류 전환 시점을 OODA 루프에 내재화. 적의 Orient 단계 완료 전 Decide·Act로 전이하여 템포 우위 확보.',
+      source:'난중일기 정유년 9월 16일 조(條)' },
+    { dim:'RAI', score:95, title:'12:133 NDM 재인식 기반 고위험 결정',
+      body:'Klein의 Recognition-Primed Decision 모델 전형. 판옥선 12척 vs 133척(1:11) 비대칭을 지형·조류·화력 우위로 보정하여 기대효용을 역전.',
+      source:'난중일기, 선조실록 30년(1597) 9월 조' },
+    { dim:'WMI', score:92, title:'거북선·판옥선·천자총통 Sensor Fusion',
+      body:'"충돌·포격·기동" 3기능 통합 체계. 다중 무기 시스템을 단일 전장 모델로 융합하는 Sensor Fusion의 16세기 전술적 구현.',
+      source:'이민웅(2014), 제장명(2011) 《이순신 파워인맥》' },
+    { dim:'HEI', score:78, title:'난중일기 부하 추모 — GAN적 내부 상태 모델링',
+      body:'전 7권에 전사 부하의 이름을 호명 추모. 부하 각인의 심리·사기 상태를 Adversarial Network처럼 내부 모델로 보유. ※ 궁정 정치 공감은 별도 사각.',
+      source:'난중일기 전편(1592~1598)' },
+    { dim:'UCI', score:94, title:'유동적 조류·기상 RL 적응 학습',
+      body:'한산도·명량·노량 해전 전반에서 사전 계획 대비 실시간 보정 능력. 희소 보상(승리)·지연 보상(장기 전쟁) 하에서 Reinforcement Learning의 전형.',
+      source:'난중일기, 이민웅(2014)' },
+    { dim:'DII', score:90, title:'조선 수군 도메인 지식 RAG 인출',
+      body:'해류·지형·선박 성능·적 함대 구성의 도메인 지식 베이스를 실시간 인출하여 결정에 활용. Retrieval-Augmented Generation의 16세기 원형.',
+      source:'난중일기 전편, 조선왕조실록' },
+    { dim:'LSI', score:92, title:'둔전·염장·소금 자급 계층적 계획',
+      body:'한산도 기지에서 둔전 공동 운영, 청어 염장, 소금 자급. 전략(자립)-작전(기지)-전술(해전) 3계층을 Hierarchical Planning으로 통합.',
+      source:'난중일기 전편, 제장명(2011)' },
+    { dim:'SNI', score:98, title:'난중일기 = Transformer 수준 자기 서사',
+      body:'사후 400년간 지속되는 문화적 영향력. "정당한 전쟁·부패한 조정·고독한 지휘관" 3축의 자기 서사 구조는 현대 LLM이 생성하는 장문 서사의 구조적 원형.',
+      source:'난중일기 전편, 김시덕(2015) 《이순신을 찾아서》' },
+  ]
+};
+
+// ═══════════════════════════════════════════════════════════════════════
+// TIP-9 60 QUESTIONS DRAFT
+// ═══════════════════════════════════════════════════════════════════════
+const QUESTIONS = [
+  // TRI · Terrain Reading (1-6)
+  { dim:'TRI', text:'낯선 지도를 처음 볼 때, 나는 "이 지형이 적을 어디로 몰 수 있는가"부터 생각한다.' },
+  { dim:'TRI', text:'나는 장소의 물리적 제약(병목·고지·수원)을 대화보다 먼저 파악한다.' },
+  { dim:'TRI', text:'여행 중에도 나는 "이곳이 방어에 유리한가"를 무의식적으로 계산한다.' },
+  { dim:'TRI', text:'건물·도시·지형의 숨겨진 경로를 찾아내는 데 강점이 있다.' },
+  { dim:'TRI', text:'날씨·조류·계절 같은 환경 변수의 주기를 패턴으로 기억한다.' },
+  { dim:'TRI', text:'회의실·협상 테이블에서도 "누가 어디 앉았는가"의 공간적 의미를 읽는다.' },
+  // TCI · Tempo Compression (7-12)
+  { dim:'TCI', text:'결정이 늦어지는 것보다 불완전한 결정을 빠르게 내리는 쪽을 택한다.' },
+  { dim:'TCI', text:'상대가 아직 반응하기 전에 다음 수를 이미 준비해 두는 편이다.' },
+  { dim:'TCI', text:'나는 "생각할 시간을 달라"는 요청을 거의 하지 않는다.' },
+  { dim:'TCI', text:'혼란스러운 상황일수록 내 의사결정 속도는 오히려 빨라진다.' },
+  { dim:'TCI', text:'계획 세우는 시간보다 실행 중 재조정에 더 많은 에너지를 쓴다.' },
+  { dim:'TCI', text:'나는 "지금 결정하지 않음"이 곧 "잘못된 결정"임을 안다.' },
+  // RAI · Relative Advantage (13-19)
+  { dim:'RAI', text:'나보다 강한 상대를 만나면 "어디가 그의 약점인가"를 먼저 찾는다.' },
+  { dim:'RAI', text:'나는 내 약점을 숨기기보다 그것을 무기로 바꾸는 방법을 고민한다.' },
+  { dim:'RAI', text:'정면 경쟁보다 상대가 예상하지 못하는 측면 공격을 선호한다.' },
+  { dim:'RAI', text:'나는 "규칙대로 싸우면 이길 수 없는" 상황에서 오히려 활기를 느낀다.' },
+  { dim:'RAI', text:'자원이 부족할수록 창의적 해법이 나온다는 것을 경험으로 안다.' },
+  { dim:'RAI', text:'상대의 강점 그 자체가 상대의 약점이 되는 지점을 찾는 데 능하다.' },
+  { dim:'RAI', text:'나는 "공정한 싸움"이라는 말에 본능적인 거부감을 느낀다.' },
+  // WMI · Weapon Mastery (20-26)
+  { dim:'WMI', text:'새로운 도구·기술을 단순 사용에 그치지 않고 내 방식으로 재정의한다.' },
+  { dim:'WMI', text:'나는 이미 알려진 방법을 답습하기보다 도구의 한계 밖을 시험한다.' },
+  { dim:'WMI', text:'기술과 교리(doctrine)의 관계를 구조적으로 이해한다.' },
+  { dim:'WMI', text:'새 장비·소프트웨어의 매뉴얼을 읽기 전에 직접 망가뜨려 본다.' },
+  { dim:'WMI', text:'나는 여러 도구를 결합해 "제3의 무기"를 만드는 데서 쾌감을 느낀다.' },
+  { dim:'WMI', text:'주변 사람들은 내가 새로운 도구를 가장 먼저 마스터한다고 말한다.' },
+  { dim:'WMI', text:'나는 도구의 표준 사용법과 "숨겨진 사용법"을 구분한다.' },
+  // HEI · Hierarchical Empathy (27-33)
+  { dim:'HEI', text:'나는 상관·정치권의 심기를 고려하여 내 결정을 조율할 수 있다.' },
+  { dim:'HEI', text:'옳은 주장이라도 말하는 방식과 시점을 조심스럽게 고른다.' },
+  { dim:'HEI', text:'나는 "체면 있는 후퇴"를 동료에게 열어주는 데 능하다.' },
+  { dim:'HEI', text:'권력 구조 안에서 나는 어디에 서야 하는지를 본능적으로 안다.' },
+  { dim:'HEI', text:'나는 신념을 꺾지 않으면서도 상급자의 신뢰를 유지하는 법을 안다.' },
+  { dim:'HEI', text:'내가 옳다고 확신할수록, 나는 더 신중하게 소통한다.' },
+  { dim:'HEI', text:'나는 "정당성"과 "정치적 생존" 사이의 긴장을 자주 의식한다.' },
+  // UCI · Unit Cohesion (34-40)
+  { dim:'UCI', text:'부하·동료들은 내가 그들의 이름과 상황을 기억한다고 느낀다.' },
+  { dim:'UCI', text:'나는 팀원의 사적 어려움을 조용히 돌보는 편이다.' },
+  { dim:'UCI', text:'나는 내 팀에게 위험한 일을 지시할 때, 그 위험을 먼저 공유한다.' },
+  { dim:'UCI', text:'나는 실수한 부하에게 공개적 모욕 대신 사적 교정(correction)을 한다.' },
+  { dim:'UCI', text:'나를 따르는 사람들은 "왜 따르는가"를 논리가 아닌 신뢰로 답한다.' },
+  { dim:'UCI', text:'내가 떠난 뒤에도 조직이 스스로 작동하도록 미리 설계한다.' },
+  { dim:'UCI', text:'나는 "부대의 사기"를 측정 가능한 지표로 본다.' },
+  // DII · Deception & Intel (41-47)
+  { dim:'DII', text:'나는 정보를 얻는 것보다 상대가 무엇을 모르게 할지를 먼저 설계한다.' },
+  { dim:'DII', text:'나는 진실을 말하면서도 핵심은 드러내지 않는 법을 안다.' },
+  { dim:'DII', text:'상대의 관찰 패턴을 역이용하여 기만 신호를 심는 데 능하다.' },
+  { dim:'DII', text:'나는 "침묵 자체"가 정보가 될 수 있음을 안다.' },
+  { dim:'DII', text:'나는 제3자의 무심한 말에서 중요한 정보를 자주 건진다.' },
+  { dim:'DII', text:'내가 접수하는 정보의 절반 이상이 "발신자의 왜곡"임을 전제한다.' },
+  { dim:'DII', text:'나는 거짓말 자체보다 "진실의 생략"을 전술적으로 쓴다.' },
+  // LSI · Logistics Sustainment (48-53)
+  { dim:'LSI', text:'나는 프로젝트를 시작하기 전에 "90일 후에도 가능한가"를 묻는다.' },
+  { dim:'LSI', text:'자원·예산 계산을 내가 직접 한 번은 검산한다.' },
+  { dim:'LSI', text:'나는 "화려한 첫 승"보다 "지속 가능한 소모전"을 더 신뢰한다.' },
+  { dim:'LSI', text:'나는 공급선·자금줄·인력 파이프라인의 이중 백업을 확보한다.' },
+  { dim:'LSI', text:'나는 "승리"보다 "붕괴 방지"가 먼저라고 생각한다.' },
+  { dim:'LSI', text:'나는 팀이 지칠 시점을 미리 계산하고 교대를 준비한다.' },
+  // SNI · Strategic Narrative (54-60)
+  { dim:'SNI', text:'나는 어떤 싸움도 "왜 정당한가"의 서사를 먼저 정립한다.' },
+  { dim:'SNI', text:'나는 팀이 공유할 수 있는 한 문장의 사명을 만들어낸다.' },
+  { dim:'SNI', text:'나는 기록을 남긴다. 그것이 역사의 해석에 영향을 줄 것이라 믿는다.' },
+  { dim:'SNI', text:'내 말은 현재의 팀뿐 아니라 미래의 청중에게도 향한다.' },
+  { dim:'SNI', text:'나는 "승리의 의미"를 승리 자체보다 먼저 설계한다.' },
+  { dim:'SNI', text:'나는 위기 속에서 사람들이 기억할 상징적 장면을 만들 줄 안다.' },
+  { dim:'SNI', text:'내 서사는 내 편뿐 아니라 중립자까지 설득할 수 있다.' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER TIP-9 CARDS
+// ═══════════════════════════════════════════════════════════════════════
+const grid = document.getElementById('tip9Grid');
+TIP9_DIMENSIONS.forEach(d => {
+  const card = document.createElement('div');
+  card.className = 'tip9-card cluster-' + d.cluster;
+  card.innerHTML = `
+    <div class="code">${d.code}</div>
+    <div class="name">${d.name}</div>
+    <div class="en">${d.en}</div>
+    <div style="font-size:11px;color:#A68A2F;font-weight:700;margin-bottom:10px;letter-spacing:0.3px">⚙ AI: ${d.ai}</div>
+    <div class="question">Q. ${d.question}</div>
+    <div class="exemplar"><strong>★★★ 대표:</strong> ${d.exemplar}</div>
+  `;
+  grid.appendChild(card);
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// YI SUN-SIN SCORE BARS
+// ═══════════════════════════════════════════════════════════════════════
+const bars = document.getElementById('yiScoreBars');
+TIP9_DIMENSIONS.forEach(d => {
+  const s = YI_SUN_SIN.tip9[d.code];
+  const cls = s >= 80 ? 'high' : s >= 50 ? 'mid' : 'low';
+  const el = document.createElement('div');
+  el.innerHTML = `
+    <div class="score-bar-label">
+      <span class="dim">${d.code} · ${d.name}</span>
+      <span class="val">${s}</span>
+    </div>
+    <div class="score-bar-track"><div class="score-bar-fill ${cls}" style="width:0%" data-w="${s}"></div></div>
+  `;
+  bars.appendChild(el);
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      bars.querySelectorAll('.score-bar-fill').forEach(f => {
+        f.style.width = f.dataset.w + '%';
+      });
+      obs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+obs.observe(bars);
+
+// Evidence cards
+const evGrid = document.getElementById('yiEvidenceGrid');
+YI_SUN_SIN.evidence.slice(0, 6).forEach(e => {
+  const c = document.createElement('div');
+  c.className = 'evidence-card';
+  c.innerHTML = `
+    <div class="dim-code">${e.dim} · ${e.score}</div>
+    <div class="ev-title">${e.title}</div>
+    <div class="ev-body">${e.body}</div>
+    <div class="ev-source">Source: ${e.source}</div>
+  `;
+  evGrid.appendChild(c);
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// ASSESSMENT QUIZ LOGIC
+// ═══════════════════════════════════════════════════════════════════════
+let currentQ = 0;
+let lastScores = null;
+let lastArchetype = null;
+const answers = new Array(QUESTIONS.length).fill(null);
+
+function renderQ() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('qNum').textContent = currentQ + 1;
+  document.getElementById('qDim').textContent = q.dim;
+  document.getElementById('qMeta').textContent = `DIMENSION · ${q.dim} · ${TIP9_DIMENSIONS.find(d=>d.code===q.dim).en.toUpperCase()}`;
+  document.getElementById('qText').textContent = 'Q' + (currentQ+1) + '. ' + q.text;
+  document.getElementById('progFill').style.width = ((currentQ+1)/QUESTIONS.length*100) + '%';
+
+  document.querySelectorAll('#likert button').forEach(b => {
+    b.classList.toggle('selected', answers[currentQ] === parseInt(b.dataset.v));
+  });
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('nextBtn').textContent = currentQ === QUESTIONS.length - 1 ? '결과 보기 ▶' : '다음 ▶';
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// IMPROVEMENT #1 — AUTO-ADVANCE ON LIKERT SELECTION (300ms)
+// 16personalities-style: 선택 즉시 0.3초 후 다음 문항 자동 이동
+// ═══════════════════════════════════════════════════════════════════════
+document.querySelectorAll('#likert button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    answers[currentQ] = parseInt(btn.dataset.v);
+    document.querySelectorAll('#likert button').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    setTimeout(() => {
+      if (currentQ < QUESTIONS.length - 1) { currentQ++; renderQ(); }
+      else { showResults(); }
+    }, 300);
+  });
+});
+document.getElementById('prevBtn').onclick = () => { if (currentQ > 0) { currentQ--; renderQ(); } };
+document.getElementById('nextBtn').onclick = () => {
+  if (currentQ < QUESTIONS.length - 1) { currentQ++; renderQ(); }
+  else { showResults(); }
+};
+
+function computeScores() {
+  const scores = {};
+  TIP9_DIMENSIONS.forEach(d => {
+    const qs = QUESTIONS.map((q,i)=>({q,i})).filter(x => x.q.dim === d.code);
+    const vals = qs.map(x => answers[x.i] || 3);
+    const raw = vals.reduce((a,b)=>a+b,0) / vals.length;
+    scores[d.code] = Math.round((raw - 1) / 4 * 100);
+  });
+  return scores;
+}
+
+function findTwins(scores) {
+  const cohort = [
+    { name:'이순신 (Yi Sun-sin)', vec: YI_SUN_SIN.tip9 },
+    { name:'Hannibal Barca', vec: {TRI:96,TCI:78,RAI:94,WMI:82,HEI:18,UCI:85,DII:80,LSI:68,SNI:82} },
+    { name:'Napoleon Bonaparte', vec: {TRI:88,TCI:95,RAI:84,WMI:92,HEI:52,UCI:96,DII:78,LSI:70,SNI:94} },
+    { name:'Wellington (Arthur Wellesley)', vec: {TRI:82,TCI:72,RAI:78,WMI:80,HEI:92,UCI:74,DII:76,LSI:88,SNI:70} },
+    { name:'George S. Patton', vec: {TRI:75,TCI:96,RAI:82,WMI:85,HEI:25,UCI:88,DII:68,LSI:72,SNI:86} },
+    { name:'Erwin Rommel', vec: {TRI:88,TCI:92,RAI:86,WMI:78,HEI:30,UCI:90,DII:85,LSI:55,SNI:68} },
+    { name:'Dwight D. Eisenhower', vec: {TRI:70,TCI:72,RAI:72,WMI:75,HEI:95,UCI:88,DII:78,LSI:96,SNI:82} },
+    { name:'Sun Tzu (孫子)', vec: {TRI:88,TCI:85,RAI:92,WMI:72,HEI:70,UCI:82,DII:98,LSI:85,SNI:90} },
+    { name:'Vo Nguyen Giap', vec: {TRI:90,TCI:80,RAI:94,WMI:75,HEI:80,UCI:88,DII:85,LSI:92,SNI:94} },
+    { name:'Winston Churchill', vec: {TRI:60,TCI:72,RAI:78,WMI:65,HEI:82,UCI:80,DII:82,LSI:78,SNI:99} },
+  ];
+  const dims = Object.keys(scores);
+  const distances = cohort.map(c => {
+    let ss=0, sa=0, sb=0;
+    dims.forEach(k => { const a=scores[k], b=c.vec[k]; ss+=a*b; sa+=a*a; sb+=b*b; });
+    const sim = ss / (Math.sqrt(sa)*Math.sqrt(sb) || 1);
+    return { name: c.name, sim: sim };
+  });
+  distances.sort((a,b)=>b.sim-a.sim);
+  return distances.slice(0,3);
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// IMPROVEMENT #3 — ARCHETYPE CLASSIFICATION
+// 9차원 패턴을 8개 아키타입으로 분류
+// ═══════════════════════════════════════════════════════════════════════
+function classifyArchetype(scores) {
+  const cb = (scores.TRI + scores.TCI + scores.RAI + scores.WMI) / 4;
+  const ho = (scores.HEI + scores.UCI + scores.DII) / 3;
+  const sn = (scores.LSI + scores.SNI) / 2;
+  const composite = Math.round((cb*4 + ho*3 + sn*2) / 9);
+
+  const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const top = sorted[0];
+  const bottom = sorted[sorted.length - 1];
+
+  let archetype, twin, tagline, tlc, color;
+
+  if (composite < 45) {
+    archetype = '관찰형 학습 사관후보생'; twin = 'Cadet Observer · Early-career';
+    tagline = '아직 결정 본능이 형성되는 단계입니다. 9요인 중 어느 축을 먼저 기를지가 향후 5년의 궤적을 결정합니다.';
+    tlc = 'TLC-V·01'; color = '#2E7D32';
+  } else if (scores.TCI >= 75 && scores.WMI >= 75) {
+    archetype = '기동형 돌파 지휘관'; twin = 'Guderian · Rommel · John Boyd';
+    tagline = '시간 압축(TCI)과 무기 체득(WMI) 두 축이 극단적. 적의 OODA 주기를 한 박자 앞서 붕괴시키는 속도의 미학이 당신의 언어입니다.';
+    tlc = 'TLC-R·03'; color = '#C62828';
+  } else if (scores.RAI >= 75 && cb >= 60 && ho < 65) {
+    archetype = '비대칭 게릴라 사령관'; twin = 'Vo Nguyen Giap · Mao · T.E. Lawrence';
+    tagline = '정면 대결로는 절대 이길 수 없는 상황에서 빛나는 유형. 자원 부족이 곧 당신의 출발점입니다.';
+    tlc = 'TLC-R·02'; color = '#C62828';
+  } else if (cb >= 70 && ho < 50) {
+    archetype = '독립형 전술 천재'; twin = '이순신 · Hannibal · Patton';
+    tagline = '전장에서는 압도적입니다. 그러나 정치의 늪에서는 고립될 수 있습니다. 당신의 가장 큰 적은 적군이 아니라 같은 편에 있을 것입니다.';
+    tlc = 'TLC-R·01'; color = '#C62828';
+  } else if (cb >= 68 && ho >= 65 && sn >= 60) {
+    archetype = '균형형 전략지휘관'; twin = 'Napoleon · Wellington · Marlborough';
+    tagline = '전술과 정치를 동시에 운용할 수 있는 드문 균형. 위험은 과신입니다 — 모든 영역에서 평균 이상이라는 사실이 가장 큰 약점이 되는 순간이 옵니다.';
+    tlc = 'TLC-G·01'; color = '#C8A84B';
+  } else if (scores.DII >= 75) {
+    archetype = '기만형 그림자 전략가'; twin = 'Sun Tzu · 한신 · Chanakya';
+    tagline = '당신의 무기는 보이지 않는 곳에 있습니다. 적이 당신을 알아채는 순간 이미 게임은 끝나 있습니다.';
+    tlc = 'TLC-P·01'; color = '#6A1B9A';
+  } else if (scores.SNI >= 75 && cb < 65) {
+    archetype = '서사형 총력전 사령관'; twin = 'Churchill · 호치민 · Zelensky';
+    tagline = '당신은 한 번의 전투가 아니라 한 세대의 전쟁을 설계합니다. 단기 전술보다 장기 서사가 당신의 주무기입니다.';
+    tlc = 'TLC-P·02'; color = '#6A1B9A';
+  } else if (scores.LSI >= 75 && scores.HEI >= 65) {
+    archetype = '지속형 운영 사령관'; twin = 'Eisenhower · Grant · 諸葛亮';
+    tagline = '화려하지 않지만 무너뜨릴 수 없는 유형. 당신의 승리는 90일 후, 6개월 후, 1년 후에 옵니다.';
+    tlc = 'TLC-B·01'; color = '#1565C0';
+  } else if (scores.TRI >= 70 && scores.LSI >= 65) {
+    archetype = '수호형 방어 지휘관'; twin = 'Kutuzov · Fabius Maximus · 李牧';
+    tagline = '공격이 아닌 보존의 미학. 지형과 병참을 결합한 소모전 마스터. 적이 스스로 지치기를 기다리는 전략가입니다.';
+    tlc = 'TLC-B·02'; color = '#1565C0';
+  } else {
+    archetype = '복합형 적응 지휘관'; twin = 'Alexander · Caesar · MacArthur';
+    tagline = '특정 요인에 고정되지 않은 유연한 패턴. 당신의 강점은 적이 당신을 분류하지 못한다는 점입니다.';
+    tlc = 'TLC-G·02'; color = '#C8A84B';
+  }
+
+  return { archetype, twin, tagline, tlc, color, composite, top: top[0], bottom: bottom[0], topScore: top[1], bottomScore: bottom[1] };
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// IMPROVEMENT #3 — FULLSCREEN ARCHETYPE REVEAL MOMENT
+// 점수 표 노출 전, 아키타입 한 줄을 풀스크린으로 먼저 보여줌
+// ═══════════════════════════════════════════════════════════════════════
+function showArchetypeReveal(arche) {
+  document.getElementById('revealArchetype').innerHTML =
+    `${arche.archetype}<br><span class="gold">(${arche.twin})</span>`;
+  document.getElementById('revealTwin').innerHTML =
+    `<span style="color:${arche.color};font-weight:700;letter-spacing:2px">${arche.tlc}</span> &nbsp;·&nbsp; TP-IQ Composite <strong>${arche.composite}</strong>`;
+  document.getElementById('revealTagline').textContent = arche.tagline;
+  const reveal = document.getElementById('archetypeReveal');
+  reveal.style.borderTop = `6px solid ${arche.color}`;
+  reveal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function dismissReveal() {
+  const reveal = document.getElementById('archetypeReveal');
+  reveal.classList.remove('active');
+  document.body.style.overflow = '';
+  document.getElementById('assessResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showResults() {
+  document.getElementById('assessQuiz').style.display = 'none';
+  const rs = document.getElementById('assessResults');
+  rs.style.display = 'block';
+
+  const scores = computeScores();
+  lastScores = scores;
+  lastArchetype = classifyArchetype(scores);
+
+  const rsEl = document.getElementById('resultScores');
+  rsEl.innerHTML = '';
+  TIP9_DIMENSIONS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'rs';
+    el.innerHTML = `
+      <div class="rs-code">${d.code}</div>
+      <div class="rs-name">${d.name}</div>
+      <div class="rs-score">${scores[d.code]}</div>
+    `;
+    rsEl.appendChild(el);
+  });
+
+  // Twin matching
+  const twins = findTwins(scores);
+  const hei = scores.HEI;
+  let twinText = twins.map((t,i) => `<strong>${i+1}위 — ${t.name}</strong> (유사도 ${(t.sim*100).toFixed(1)}%)`).join('<br>');
+  if (hei < 35) {
+    twinText += `<br><br><em style="color:var(--red)">※ 이순신이 당신과 같은 약점을 가지고 있었습니다. HEI ${hei}점은 정치적 단절 리스크를 시사합니다.</em>`;
+  }
+  document.getElementById('twinText').innerHTML = twinText;
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // IMPROVEMENT #2 — RADAR CHART WITH GLOBAL AVERAGE BASELINE OVERLAY
+  // 사용자 점수(노란 실선) + 전체 평균(회색 점선) + 이순신(파란 점선) 3개 데이터셋
+  // ═══════════════════════════════════════════════════════════════════════
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  if (window._radarInstance) { window._radarInstance.destroy(); }
+  window._radarInstance = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: TIP9_DIMENSIONS.map(d=>d.code),
+      datasets: [
+        {
+          label: '당신 (You)',
+          data: TIP9_DIMENSIONS.map(d=>scores[d.code]),
+          backgroundColor: 'rgba(200,168,75,0.22)',
+          borderColor: '#C8A84B',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#C8A84B',
+          pointBorderColor: '#1A3A5C',
+          pointBorderWidth: 1.5,
+          pointRadius: 4.5,
+          order: 1
+        },
+        {
+          label: '전체 평균 (Global Avg)',
+          data: TIP9_DIMENSIONS.map(d=>GLOBAL_AVERAGE[d.code]),
+          backgroundColor: 'rgba(138,157,176,0.04)',
+          borderColor: 'rgba(138,157,176,0.85)',
+          borderWidth: 1.5,
+          borderDash: [4,4],
+          pointBackgroundColor: 'rgba(138,157,176,0.6)',
+          pointRadius: 2.5,
+          pointHoverRadius: 4,
+          order: 2
+        },
+        {
+          label: '이순신 (Reference)',
+          data: TIP9_DIMENSIONS.map(d=>YI_SUN_SIN.tip9[d.code]),
+          backgroundColor: 'rgba(26,58,92,0.05)',
+          borderColor: 'rgba(74,110,138,0.7)',
+          borderWidth: 1.2,
+          borderDash: [2,3],
+          pointRadius: 1.5,
+          order: 3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, color: '#8A9DB0', backdropColor: 'transparent', font:{size:9} },
+          grid: { color: '#D6DEE7' },
+          angleLines: { color: '#D6DEE7' },
+          pointLabels: { color: '#1A3A5C', font: { size: 12, weight: '600' } }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: {size:11, weight:'600'}, color:'#1A3A5C', padding: 12, boxWidth: 16 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(c) {
+              const dim = TIP9_DIMENSIONS[c.dataIndex];
+              return `${c.dataset.label}: ${c.parsed.r}점 (${dim.name})`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // 풀스크린 reveal 먼저 띄우기
+  setTimeout(() => showArchetypeReveal(lastArchetype), 400);
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  for (let i=0;i<answers.length;i++) answers[i]=null;
+  document.getElementById('assessResults').style.display = 'none';
+  document.getElementById('assessQuiz').style.display = 'block';
+  document.getElementById('promptOutput').classList.remove('active');
+  document.getElementById('promptOutput').textContent = '';
+  renderQ();
+  document.getElementById('assess').scrollIntoView({ behavior:'smooth' });
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// IMPROVEMENT #4 — TACTICAL PROMPT GENERATION BOARD
+// 9차원 결과값 기반 LLM 프롬프트 자동 생성
+// ═══════════════════════════════════════════════════════════════════════
+let currentPromptMode = 'decision';
+document.querySelectorAll('#promptOptions button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#promptOptions button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPromptMode = btn.dataset.mode;
+  });
+});
+
+const PROMPT_TEMPLATES = {
+  decision: (s, a, ctx) => `# 전술 결정 코칭 요청 (TIP-9 기반)
+
+## 내 9차원 프로파일
+- TRI 지형 인식: ${s.TRI}  | TCI 시간 압축: ${s.TCI}  | RAI 상대적 우위: ${s.RAI}
+- WMI 무기·기술: ${s.WMI}  | HEI 상하 공감: ${s.HEI}  | UCI 부하 결속: ${s.UCI}
+- DII 정보·기만: ${s.DII}  | LSI 병참·지속: ${s.LSI}  | SNI 전략 서사: ${s.SNI}
+- Composite Index: ${a.composite}
+- 아키타입: ${a.archetype} (${a.twin})
+- 최강 차원: ${a.top} (${a.topScore}점) / 최약 차원: ${a.bottom} (${a.bottomScore}점)
+
+## 상황
+${ctx || '(상황을 구체적으로 기술하시오)'}
+
+## 요청
+당신은 Klein NDM · Boyd OODA · Clausewitz 교리에 정통한 전략 자문관입니다. 위 9차원 프로파일을 가진 의사결정자가 직면한 상황을 분석하고, 다음 4단계로 코칭하십시오:
+
+1. **상황 진단** — 이 상황의 본질적 마찰(Friction)은 무엇인가?
+2. **프로파일 적용** — 내 강점 차원(${a.top})을 어떻게 활용하고, 약점 차원(${a.bottom})을 어떻게 보완해야 하는가?
+3. **3가지 결정 옵션** — 각 옵션의 trade-off를 명시하시오.
+4. **권고 결정** — 내 프로파일에 가장 적합한 1개를 선택하고, "왜 이것이 다른 옵션보다 나은가"를 설명하시오.
+
+답변 형식: 한국어, 평어체. 결론 우선 → 근거 → 행동 항목 순서.`,
+
+  redteam: (s, a, ctx) => `# 적군 시뮬레이션 요청 (Red Team Adversarial)
+
+## 표적 프로파일 (당신이 공격해야 할 대상 = 나)
+- TIP-9: TRI ${s.TRI} · TCI ${s.TCI} · RAI ${s.RAI} · WMI ${s.WMI} · HEI ${s.HEI} · UCI ${s.UCI} · DII ${s.DII} · LSI ${s.LSI} · SNI ${s.SNI}
+- 아키타입: ${a.archetype}
+- **결정적 약점:** ${a.bottom} (${a.bottomScore}점)
+
+## 상황 컨텍스트
+${ctx || '(가상 적대 상황을 기술하시오)'}
+
+## 요청
+당신은 적성 정보분석관(Adversarial Intelligence Officer)입니다. 위 프로파일을 가진 표적의 약점을 군사적 정밀도로 공격하기 위한 시나리오를 작성하시오.
+
+1. **표적 행동 예측** — 이 프로파일은 위기 상황에서 어떻게 반응할 것인가? (강점에 의존하여 약점을 더 노출시키는 패턴)
+2. **약점 활용 5수 시나리오** — ${a.bottom} 차원의 결핍을 어떻게 노릴 것인가? 5단계 공격 전개를 기술하시오.
+3. **표적이 알아채지 못할 신호** — 이 표적이 절대 의심하지 못할 기만(deception) 벡터는 무엇인가?
+4. **반격 차단** — 표적의 강점 차원(${a.top})을 무력화할 사전 조치는?
+
+답변은 한국어, 차가운 군사 분석 톤으로 작성하시오.`,
+
+  growth: (s, a, ctx) => `# 90일 성장 로드맵 요청 (TIP-9 약점 보강)
+
+## 현재 9차원 프로파일
+${TIP9_DIMENSIONS.map(d=>`- ${d.code} ${d.name}: ${s[d.code]}`).join('\n')}
+
+## 진단
+- 아키타입: ${a.archetype}
+- 우선 보강 차원: **${a.bottom} (${a.bottomScore}점)** — ${TIP9_DIMENSIONS.find(d=>d.code===a.bottom).en}
+- 추가 컨텍스트: ${ctx || '(없음)'}
+
+## 요청
+당신은 군사학·인지심리학·조직행동학을 융합한 전술지능 코치입니다. 위 프로파일의 ${a.bottom} 차원을 +20점 끌어올리는 90일 트레이닝 플랜을 작성하시오.
+
+1. **현재 점수의 의미** — ${a.bottomScore}점이 실제 의사결정 현장에서 어떻게 드러나는가? (구체적 행동 예시 3개)
+2. **30·60·90일 마일스톤** — 각 30일마다 측정 가능한 행동 목표
+3. **일일 루틴 5개** — 매일 15분 이내 실행 가능한 마이크로 훈련
+4. **추천 자료** — 도서·영상·시뮬레이션 게임 각 2개씩 (실제 존재하는 자료)
+5. **함정** — 이 차원을 키우려다 흔히 망가지는 다른 차원과 그 방어책
+
+답변: 한국어, 코치 톤. 추상이 아닌 실행 가능한 구체적 항목만.`,
+
+  negotiation: (s, a, ctx) => `# 협상 전술 스크립트 요청
+
+## 협상가 프로파일 (= 나)
+- 강점: ${a.top} (${a.topScore}) · 약점: ${a.bottom} (${a.bottomScore})
+- HEI(상하 공감): ${s.HEI} · DII(정보·기만): ${s.DII} · SNI(서사): ${s.SNI}
+- 아키타입: ${a.archetype}
+
+## 협상 컨텍스트
+${ctx || '(상대·쟁점·BATNA·시간제약을 기술하시오)'}
+
+## 요청
+당신은 Harvard PON · Chris Voss 협상 전문가입니다. 위 9차원 프로파일을 가진 협상가를 위한 맞춤 스크립트를 작성하시오:
+
+1. **나의 협상 스타일 진단** — 9차원 패턴이 협상 테이블에서 드러내는 강점·약점
+2. **오프닝 3문장** — 내 프로파일에 자연스럽고 상대를 무장해제시킬 첫 발언
+3. **3가지 핵심 질문** — DII ${s.DII}점에 맞는 정보 추출 질문
+4. **양보 시나리오** — 무엇을 먼저 줄 것인가, 무엇은 절대 양보하지 않을 것인가
+5. **결렬 시 후퇴 라인** — 내 HEI ${s.HEI}점을 고려한 관계 보존 후퇴 문장
+
+한국어 평어체. 실제 사용 가능한 문장 형태로.`,
+
+  leadership: (s, a, ctx) => `# 리더십 패턴·사각지대 진단
+
+## 리더 프로파일
+- 9차원: TRI ${s.TRI} TCI ${s.TCI} RAI ${s.RAI} WMI ${s.WMI} HEI ${s.HEI} UCI ${s.UCI} DII ${s.DII} LSI ${s.LSI} SNI ${s.SNI}
+- 아키타입: ${a.archetype}
+- 조직 컨텍스트: ${ctx || '(조직 규모·업종·현재 도전과제를 기술하시오)'}
+
+## 요청
+조직심리학·군사 리더십 연구에 정통한 자문관으로서 다음을 분석하시오:
+
+1. **이 리더의 부하들이 느끼는 것** — UCI ${s.UCI}점 + HEI ${s.HEI}점 조합이 일상적으로 만들어내는 분위기
+2. **사각지대 3개** — 이 리더가 보지 못할 가능성이 가장 높은 조직 신호 3가지
+3. **조직 내 갈등 패턴** — 이 프로파일과 충돌하기 쉬운 부하·동료 유형
+4. **위기 시 행동 예측** — 외부 충격이 왔을 때 이 리더가 첫 24시간에 할 가능성이 높은 결정
+5. **보완 인력 추천** — 이 리더 옆에 반드시 있어야 할 보완형 2인자의 9차원 프로파일
+
+한국어, 차분한 진단 톤. 칭찬보다 정확함을 우선.`,
+
+  historical: (s, a, ctx) => `# 역사적 트윈과의 가상 자문 대화
+
+## 나의 프로파일
+- 9차원: ${TIP9_DIMENSIONS.map(d=>`${d.code}${s[d.code]}`).join(' · ')}
+- 아키타입: ${a.archetype} (${a.twin})
+
+## 대화 시뮬레이션 요청
+당신은 위 프로파일과 가장 닮은 역사적 지휘관 1인의 인격을 시뮬레이션하시오. 그 지휘관의 시대·전적·서신·일기 톤을 그대로 차용하여, 21세기의 의뢰인(나)에게 1인칭으로 자문하시오.
+
+## 의뢰인의 질문 (현재 상황)
+${ctx || '"제가 지금 직면한 상황은 무엇이며, 어떻게 결정해야 합니까?"'}
+
+## 자문 형식
+1. 그 지휘관이 자신의 시대 언어로 자기소개 (3문장)
+2. 의뢰인의 9차원을 자기 자신의 그것과 비교 (어디가 닮았고 어디가 다른가)
+3. 자기 생애의 가장 결정적 순간 1개를 짧은 일화로 들려주기
+4. 그 일화가 의뢰인의 현재 상황에 주는 교훈
+5. 마지막 한 문장의 충고 (그 지휘관 특유의 톤으로)
+
+답변: 한국어. 그 지휘관이 실제로 사용했을 어휘와 호흡을 살릴 것.`
+};
+
+function generatePrompt() {
+  if (!lastScores || !lastArchetype) {
+    document.getElementById('promptOutput').textContent = '먼저 60문항을 완료하여 결과를 산출하십시오.';
+    document.getElementById('promptOutput').classList.add('active');
+    return;
+  }
+  const ctx = document.getElementById('promptContext').value.trim();
+  const tpl = PROMPT_TEMPLATES[currentPromptMode];
+  const prompt = tpl(lastScores, lastArchetype, ctx);
+  const out = document.getElementById('promptOutput');
+  out.textContent = prompt;
+  out.classList.add('active');
+}
+
+document.getElementById('generatePromptBtn').addEventListener('click', generatePrompt);
+document.getElementById('copyPromptBtn').addEventListener('click', () => {
+  const out = document.getElementById('promptOutput');
+  if (!out.textContent) { generatePrompt(); }
+  navigator.clipboard.writeText(out.textContent).then(() => {
+    const btn = document.getElementById('copyPromptBtn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ 복사 완료';
+    setTimeout(() => btn.textContent = orig, 1800);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = out.textContent;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+  });
+});
+
+// Initial render
+renderQ();
+</script>
+
+</body>
+</html>
